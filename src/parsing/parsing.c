@@ -6,11 +6,11 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/10 17:53:41 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/10 22:45:59 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../include/cub3d.h"
 
 static int	sorted_condition(char *file, int value)
 {
@@ -29,11 +29,10 @@ static int	sorted_condition(char *file, int value)
 	return (FALSE);
 }
 
-static int	is_sorted(t_cube *cube, char **file)
+static int	is_sorted(char **file)
 {
 	int	value;
 	int	i;
-	int	j;
 
 	i = -1;
 	value = 0;
@@ -41,20 +40,24 @@ static int	is_sorted(t_cube *cube, char **file)
 	{
 		while (file[i][0] == '\n')
 			i++;
+		if (!file[i])
+			break ;
 		if (sorted_condition(file[i], value) == TRUE)
 			value++;
 		else
 			break ;
 	}
 	if (value != 5)
-		return (FALSE, ft_printf_fd(2, "Error, texture files not sorted\n"));
+		return (ft_printf_fd(2, "Error, texture files not sorted\n", FALSE));
 	return (TRUE);
 }
 
-int	parsing(t_cube *cube, int argc, char **argv) 
+int	parsing(t_cube *cube, char **argv)
 {
-	if (is_sorted(cube, file) == FALSE)
+	(void)argv;
+	if (is_sorted(file) == FALSE)
 		return (ERROR_SORT);
 	if (init_texture(cube, file) == FALSE)
 		return (ERROR_TEXTURE);
+	return (TRUE);
 }
