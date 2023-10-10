@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 00:34:00 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 00:56:19 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_close_window(void)
 	exit(0);
 }
 
-void	cube_manager(void)
+void	cube_manager(t_pars *pars)
 {
 	t_cube	cub;
 	int		len;

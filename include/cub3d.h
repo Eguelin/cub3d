@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 00:44:25 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 01:23:16 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@ typedef enum e_error
 	ERROR_PARAM,
 	ERROR_SORT,
 	ERROR_TEXTURE,
+	ERR_COLOR,
 	ERROR_MALLOC,
 }	t_error;
+
+typedef enum e_pars
+{
+	FLOOR,
+	CEILING,
+}	t_pars;
 
 typedef struct s_pars
 {
@@ -35,8 +42,8 @@ typedef struct s_pars
 	char	*SO_texture;
 	char	*WE_texture;
 	char	*EA_texture;
-	char	*F_colors;
-	char	*C_colors;
+	int		F_colors[3];
+	int		C_colors[3];
 }	t_pars;
 
 typedef struct s_cube

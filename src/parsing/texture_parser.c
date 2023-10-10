@@ -6,70 +6,72 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 00:40:40 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 01:34:40 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	check_colors_range(t_pars *pars, char *file, int start)
+static int	check_colors_range(t_pars *pars, char *str, int value, int view)
 {
 	char	*range;
 	int		len;
 
 	len = 0;
-	while (file[start] && file[start++] != ',')
+	while (str[len] && str[len++] != ',')
 		len++;
-	if (!file[start])
+	if (!str[len])
 		return (FALSE);
-	range = ft_strndup(&file[start], len);
+	range = ft_strndup(str, len);
 	if (!range)
 		ft_free_exit(pars, ERROR_MALLOC);
 	len = ft_atoi(range);
 	free(range);
 	if (len >= 0 && len <= 255)
 		return (FALSE);
+	if (view == FLOOR)
+		pars->F_colors[value] = len;
+	else
+		pars->C_colors[value] = len;
 	return (TRUE);
 }
 
-static char	*get_colors(t_pars *pars, char *str, int i)
+static int	*get_colors(t_pars *pars, char *str, int i, int view)
 {
 	int		value;
 	char	*colors;
 	
+	value = 0;
 	while (str[++i] && ft_isdigit(str[i]))
 		if (ft_isalpha(str[i]))
-			return (ft_printf_fd(2, "Error, wrong format colors\n"), NULL);
+			return (ft_printf_fd(2, "Error, wrong format colors\n"), ERR_COLOR);
 	if (!str[i])
 		return (NULL);
 	while(str[i] && value != 3)
 	{
 		if (str[i] == ',' && str[i + 1] && ft_isdigit(str[i + 1]))
 		{
-			if (check_colors_range(pars, str, i) == FALSE)
-				return (ft_printf_fd(2, "Error, wrong range colors\n"), NULL);
+			if (check_colors_range(pars, str, value, view) == FALSE)
+				return (ft_printf_fd(2, "Error, wrong range colors\n"), ERR_COLOR);
 			value++;
 		}
 		i++;
 	}
 	if (value != 3)
-		return (ft_printf_fd(2, "Error, wrong format colors\n"), NULL);
-	colors = ft_strdup(&str[i]);
-	if (!colors)
-		ft_free_exit(pars, ERROR_MALLOC);
+		return (ft_printf_fd(2, "Error, wrong format colors\n"), ERR_COLOR);
 	return (colors);
 }
 
-static char	*get_texture(char *file, int start)
+static char	*get_texture(char *str, int start)
 {
 	int		fd;
 	char	*texture_path;
 	
-	while (file[start] && file[start] != '.')
+	while (str[start] && str[start] != '.')
 		start++;
-	if (!file[start])
+	if (!str[start])
 		return (NULL);
-	texture_path = ft_strdup(&file[start]);
+	texture_path = ft_strdup(&str[start]);
 	if (!texture_path)
 		return (ft_printf_fd(2, "Malloc error\n"), NULL);
 	fd = open(texture_path, 0);
@@ -83,7 +85,7 @@ static char *check_texture(t_pars *pars, char **file, char *to_find, char c)
 {
 	int	i;
 	int	j;
-	
+
 	i = -1;
 	while (file[++i])
 	{
@@ -92,8 +94,10 @@ static char *check_texture(t_pars *pars, char **file, char *to_find, char c)
 		{
 			if (file[i][j] == c)
 			{
-				if (ft_strlen(to_find) == 1)
-					return (get_colors(pars, file[i], j));
+				if (ft_strlen(to_find) == 1 && c == 'F')
+					return (get_colors(pars, &file[i][j], j, FLOOR), "error");
+				if (ft_strlen(to_find) == 1 && c == 'C')
+					return (get_colors(pars, &file[i][j], j, CEILING), "error");
 				if (ft_strncmp(&file[i][j], to_find, ft_strlen(to_find)))
 					return (get_texture(file[i], j));
 			}
@@ -105,6 +109,14 @@ static char *check_texture(t_pars *pars, char **file, char *to_find, char c)
 
 int	init_texture(t_pars *pars, char **file)
 {
+	int	i;
+
+	i = 0;
+	while(i < 3)
+	{
+		pars->F_colors[i] = -1;
+		pars->C_colors[i++] = -1;
+	}
 	pars->NO_texture = check_texture(pars, file, "NO", 'N');
 	if (!pars->NO_texture)
 		return (FALSE);
@@ -117,11 +129,9 @@ int	init_texture(t_pars *pars, char **file)
 	pars->EA_texture = check_texture(pars, file, "EA", 'E');
 	if (!pars->EA_texture)
 		return (FALSE);
-	pars->F_colors = check_texture(pars, file, "F", 'F');
-	if (!pars->F_colors)
+	if (ft_strcmp(check_texture(pars, file, "F", 'F'), "error"));
 		return (FALSE);
-	pars->C_colors = check_texture(pars, file, "C", 'C');
-	if (!pars->C_colors)
+	if (ft_strcmp(check_texture(pars, file, "C", 'C'), "error"));
 		return (FALSE);
 	return (TRUE);
 }
