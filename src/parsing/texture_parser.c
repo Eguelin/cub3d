@@ -6,13 +6,13 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/10 23:49:29 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 00:40:40 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	check_colors_range(t_cube *cube, char *file, int start)
+static int	check_colors_range(t_pars *pars, char *file, int start)
 {
 	char	*range;
 	int		len;
@@ -21,18 +21,18 @@ static int	check_colors_range(t_cube *cube, char *file, int start)
 	while (file[start] && file[start++] != ',')
 		len++;
 	if (!file[start])
-		return (NULL);
+		return (FALSE);
 	range = ft_strndup(&file[start], len);
 	if (!range)
-		ft_free_exit(cube, ERROR_MALLOC);
+		ft_free_exit(pars, ERROR_MALLOC);
 	len = ft_atoi(range);
 	free(range);
-	if (len < 0 && len > 255)
+	if (len >= 0 && len <= 255)
 		return (FALSE);
 	return (TRUE);
 }
 
-static char	*get_colors(t_cube *cube, char *str, int i)
+static char	*get_colors(t_pars *pars, char *str, int i)
 {
 	int		value;
 	char	*colors;
@@ -46,7 +46,7 @@ static char	*get_colors(t_cube *cube, char *str, int i)
 	{
 		if (str[i] == ',' && str[i + 1] && ft_isdigit(str[i + 1]))
 		{
-			if (check_colors_range(cube, str, i) == FALSE)
+			if (check_colors_range(pars, str, i) == FALSE)
 				return (ft_printf_fd(2, "Error, wrong range colors\n"), NULL);
 			value++;
 		}
@@ -54,13 +54,13 @@ static char	*get_colors(t_cube *cube, char *str, int i)
 	}
 	if (value != 3)
 		return (ft_printf_fd(2, "Error, wrong format colors\n"), NULL);
-	colors = ft_strdup(str[i]);
+	colors = ft_strdup(&str[i]);
 	if (!colors)
-		ft_free_exit(cube, ERROR_MALLOC);
+		ft_free_exit(pars, ERROR_MALLOC);
 	return (colors);
 }
 
-static char	*get_texture(t_cube *cube, char *file, int start)
+static char	*get_texture(char *file, int start)
 {
 	int		fd;
 	char	*texture_path;
@@ -69,24 +69,22 @@ static char	*get_texture(t_cube *cube, char *file, int start)
 		start++;
 	if (!file[start])
 		return (NULL);
-	texture_path = ft_strdup(file[start]);
+	texture_path = ft_strdup(&file[start]);
 	if (!texture_path)
-		return (NULL, ft_printf_fd(2, "Malloc error\n"));
+		return (ft_printf_fd(2, "Malloc error\n"), NULL);
 	fd = open(texture_path, 0);
 	if (fd == -1)
-		return (NULL, ft_printf_fd(2, "Error, texture file can't be opened\n"));
-	close(texture_path);
+		return (ft_printf_fd(2, "Error, texture file can't be opened\n"), NULL);
+	close(fd);
 	return (texture_path);
 }
 
-static char *check_texture(t_cube *cube, char **file, char *to_find, char c)
+static char *check_texture(t_pars *pars, char **file, char *to_find, char c)
 {
 	int	i;
 	int	j;
-	int	flag;
 	
 	i = -1;
-	flag = FALSE;
 	while (file[++i])
 	{
 		j = -1;
@@ -95,9 +93,9 @@ static char *check_texture(t_cube *cube, char **file, char *to_find, char c)
 			if (file[i][j] == c)
 			{
 				if (ft_strlen(to_find) == 1)
-					return (get_colors(cube, file[i], j));
-				if (ft_strncmp(file[i][j], to_find, ft_strlen(to_find)))
-					return (get_texture(cube, file[i], j));
+					return (get_colors(pars, file[i], j));
+				if (ft_strncmp(&file[i][j], to_find, ft_strlen(to_find)))
+					return (get_texture(file[i], j));
 			}
 		}
 	}
@@ -105,25 +103,25 @@ static char *check_texture(t_cube *cube, char **file, char *to_find, char c)
 	return (NULL);
 } 
 
-int	init_texture(t_cube *cube, char **file)
+int	init_texture(t_pars *pars, char **file)
 {
-	cube->NO_texture = check_texture(cube, file, "NO", 'N');
-	if (!cube->NO_texture)
+	pars->NO_texture = check_texture(pars, file, "NO", 'N');
+	if (!pars->NO_texture)
 		return (FALSE);
-	cube->SO_texture = check_texture(cube, file, "SO", 'S');
-	if (!cube->SO_texture)
+	pars->SO_texture = check_texture(pars, file, "SO", 'S');
+	if (!pars->SO_texture)
 		return (FALSE);
-	cube->WE_texture = check_texture(cube, file, "WE", 'W');
-	if (!cube->WE_texture)
+	pars->WE_texture = check_texture(pars, file, "WE", 'W');
+	if (!pars->WE_texture)
 		return (FALSE);
-	cube->EA_texture = check_texture(cube, file, "EA", 'E');
-	if (!cube->EA_texture)
+	pars->EA_texture = check_texture(pars, file, "EA", 'E');
+	if (!pars->EA_texture)
 		return (FALSE);
-	cube->F_colors = check_texture(cube, file, "F", 'F');
-	if (!cube->F_colors)
+	pars->F_colors = check_texture(pars, file, "F", 'F');
+	if (!pars->F_colors)
 		return (FALSE);
-	cube->C_colors = check_texture(cube, file, "C", 'C');
-	if (!cube->C_colors)
+	pars->C_colors = check_texture(pars, file, "C", 'C');
+	if (!pars->C_colors)
 		return (FALSE);
 	return (TRUE);
 }

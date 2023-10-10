@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/10 22:45:59 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 00:36:10 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ static int	is_sorted(char **file)
 	return (TRUE);
 }
 
-int	parsing(t_cube *cube, char **argv)
+int	parsing(t_pars *pars, char **argv)
 {
+	char	**file;
+	
 	(void)argv;
+	file = NULL;
 	if (is_sorted(file) == FALSE)
 		return (ERROR_SORT);
-	if (init_texture(cube, file) == FALSE)
+	if (init_texture(pars, file) == FALSE)
 		return (ERROR_TEXTURE);
 	return (TRUE);
 }

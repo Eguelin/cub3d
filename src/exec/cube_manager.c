@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   cube_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:46:29 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 00:41:50 by acarlott         ###   ########lyon.fr   */
+/*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
+/*   Updated: 2023/10/11 00:34:00 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void	ft_free_pars(t_pars *pars)
+static int	ft_close_window(void)
 {
-	if (pars->NO_texture)
-		free(pars->NO_texture);
-	if (pars->SO_texture)
-		free(pars->SO_texture);
-	if (pars->WE_texture)
-		free(pars->WE_texture);
-	if (pars->EA_texture)
-		free(pars->EA_texture);
-	if (pars->F_colors)
-		free(pars->F_colors);
-	if (pars->F_colors)
-		free(pars->F_colors);
+	exit(0);
 }
-void	ft_free_exit(t_pars *pars, int error)
+
+void	cube_manager(void)
 {
-	ft_free_pars(pars);
-	exit(error);
+	t_cube	cub;
+	int		len;
+	int		width;
+
+	len = 10;
+	width = 10;
+	cub.x = 0;
+	cub.mlx = mlx_init();
+	cub.mlx_win = mlx_new_window(cub.mlx, (len * 64), (width * 64), "Cub3d");
+	mlx_hook(cub.mlx_win, 17, 0, ft_close_window, &cub);
+	mlx_loop(cub.mlx);
 }
