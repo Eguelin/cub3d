@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 14:25:35 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/10 17:43:06 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 # define CUB3D_H
 # include "mylib.h"
 # include "mlx.h"
+#include <fcntl.h>
 
-# define TRUE 0
-# define FALSE -1
+# define FALSE 0
+# define TRUE 1
 
 typedef enum e_error
 {
-	SUCCESS;
-	TRUE;
-	FALSE;
+	SUCCESS,
 	EMPTY_ENV,
 	ERROR_PARAM,
+	ERROR_SORT,
+	ERROR_TEXTURE,
+	ERROR_MALLOC,
 }	t_error;
 
 typedef struct e_cube 
@@ -34,9 +36,10 @@ typedef struct e_cube
 	char	*WE_texture;
 	char	*EA_texture;
 	char	*F_colors;
-	char	*c_colors;
+	char	*C_colors;
 }	t_cube;
 
-int	parsing(int argc, char **argv);
+int	parsing(t_cube *cube, int argc, char **argv);
+int	init_texture(t_cube *cube, char **file);
 
 #endif

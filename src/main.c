@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 14:13:53 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/10 17:41:58 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static int	check_init(int argc, char **argv, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	int	i;
+	int		i;
+	t_cube	cube;
 	
 	i = check_init(argc, argv, env);
 	if (i != SUCCESS)
 		return (i);
-	i = parsing(argc, argv);
+	i = parsing(&cube, argc, argv);
 	if (i != SUCCESS)
 		return (i);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
