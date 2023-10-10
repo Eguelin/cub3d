@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/08 17:18:24 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/10 18:56:32 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,9 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 #Sources
 ALL_FILES = main.c
 
-# ..._DIR			= /
-# ..._FILES		= .c
-# ALL_FILES		+= $(addprefix $(..._DIR), $(..._FILES))
+UTILS_DIR		= utils/
+UTILS_FILES		= ft_perror.c
+ALL_FILES		+= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 INC_FILES		= $(NAME).h
 
