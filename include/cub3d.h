@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 19:19:43 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/10 19:49:19 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum e_error
 	WRONG_FORMAT_BIS,
 	WRONG_ARGUMENTS,
 	OPEN_ERROR,
-	MALLOC_ERROR
+	MALLOC_ERROR,
 	ENV_ERROR
 }	t_error;
 
