@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_check_file_name.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 20:01:23 by eguelin          ###   ########lyon.fr   */
+/*   Created: 2023/10/10 20:00:38 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/10 20:02:34 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include "mylib.h"
-# include "mlx.h"
+#include "cub3d.h"
 
-typedef enum e_error
+int	ft_check_file_name(char *name)
 {
-	WRONG_FORMAT,
-	WRONG_FORMAT_BIS,
-	WRONG_ARGUMENTS,
-	OPEN_ERROR,
-	MALLOC_ERROR,
-	ENV_ERROR
-}	t_error;
-
-/////// [parsing] ///////
-int	ft_check_file_name(char *name);
-
-/////// [utils] ///////
-int	ft_perror(const char *s, int error);
-
-#endif
+	if (ft_strncmp(name + ft_strlen(name) - 4, ".cub", 5))
+	{
+		ft_perror(name, WRONG_ARGUMENTS);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
