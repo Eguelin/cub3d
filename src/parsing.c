@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 14:25:35 by acarlott         ###   ########lyon.fr   */
+/*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
+/*   Updated: 2023/10/10 14:28:38 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include "mylib.h"
-# include "mlx.h"
+#include "../include/cub3d.h"
 
-# define TRUE 0
-# define FALSE -1
-
-typedef enum e_error
+int	parsing(int argc, char **argv) 
 {
-	SUCCESS;
-	TRUE;
-	FALSE;
-	EMPTY_ENV,
-	ERROR_PARAM,
-}	t_error;
-
-typedef struct e_cube 
-{
-	char	*NO_texture;
-	char	*SO_texture;
-	char	*WE_texture;
-	char	*EA_texture;
-	char	*F_colors;
-	char	*c_colors;
-}	t_cube;
-
-int	parsing(int argc, char **argv);
-
-#endif
+	
+}
