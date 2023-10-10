@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 18:48:05 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/10 19:16:26 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ typedef enum e_error
 	MALLOC_ERROR
 	ENV_ERROR
 }	t_error;
+
+/////// [utils] ///////
+int	ft_perror(const char *s, int error);
 
 #endif
