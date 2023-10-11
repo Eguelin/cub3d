@@ -6,82 +6,50 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 01:34:40 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:06:03 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
-static int	check_colors_range(t_pars *pars, char *str, int value, int view)
+static int	set_texture_to_img(t_cube *cub, char *str, t_texture *texture)
 {
-	char	*range;
-	int		len;
-
-	len = 0;
-	while (str[len] && str[len++] != ',')
-		len++;
-	if (!str[len])
-		return (FALSE);
-	range = ft_strndup(str, len);
-	if (!range)
-		ft_free_exit(pars, ERROR_MALLOC);
-	len = ft_atoi(range);
-	free(range);
-	if (len >= 0 && len <= 255)
-		return (FALSE);
-	if (view == FLOOR)
-		pars->F_colors[value] = len;
-	else
-		pars->C_colors[value] = len;
-	return (TRUE);
+	texture->img = mlx_xpm_file_to_image(cub->mlx, str, \
+		&texture->w, &texture->h);
+	if (texture->img == NULL)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-static int	*get_colors(t_pars *pars, char *str, int i, int view)
+static int	get_texture(t_cube *cub, char *str, char *to_find)
 {
-	int		value;
-	char	*colors;
-	
-	value = 0;
-	while (str[++i] && ft_isdigit(str[i]))
-		if (ft_isalpha(str[i]))
-			return (ft_printf_fd(2, "Error, wrong format colors\n"), ERR_COLOR);
-	if (!str[i])
-		return (NULL);
-	while(str[i] && value != 3)
-	{
-		if (str[i] == ',' && str[i + 1] && ft_isdigit(str[i + 1]))
-		{
-			if (check_colors_range(pars, str, value, view) == FALSE)
-				return (ft_printf_fd(2, "Error, wrong range colors\n"), ERR_COLOR);
-			value++;
-		}
-		i++;
-	}
-	if (value != 3)
-		return (ft_printf_fd(2, "Error, wrong format colors\n"), ERR_COLOR);
-	return (colors);
-}
-
-static char	*get_texture(char *str, int start)
-{
-	int		fd;
+	int		i;
 	char	*texture_path;
-	
-	while (str[start] && str[start] != '.')
-		start++;
-	if (!str[start])
-		return (NULL);
-	texture_path = ft_strdup(&str[start]);
+
+	i = 0;
+	while (str[i] && str[i] != '.')
+		i++;
+	if (!str[i])
+		return (EXIT_FAILURE);
+	texture_path = ft_strdup(&str[i]);
 	if (!texture_path)
-		return (ft_printf_fd(2, "Malloc error\n"), NULL);
-	fd = open(texture_path, 0);
-	if (fd == -1)
-		return (ft_printf_fd(2, "Error, texture file can't be opened\n"), NULL);
-	close(fd);
-	return (texture_path);
+		ft_free_exit(cub, ERROR_MALLOC);
+	if (ft_strncmp(to_find, "NO", 2))
+		if (set_texture_to_img(cub, str, cub->texture[0]) == EXIT_FAILURE)
+			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_FAILURE);
+	if (ft_strncmp(to_find, "SO", 2))
+		if (set_texture_to_img(cub, str, cub->texture[1]) == EXIT_FAILURE)
+			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_FAILURE);
+	if (ft_strncmp(to_find, "WE", 2))
+		if (set_texture_to_img(cub, str, cub->texture[2]) == EXIT_FAILURE)
+			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_FAILURE);
+	if (ft_strncmp(to_find, "EA", 2))
+		if (set_texture_to_img(cub, str, cub->texture[3]) == EXIT_FAILURE)
+			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
-static char *check_texture(t_pars *pars, char **file, char *to_find, char c)
+static int	check_texture(t_cube *cub, char **file, char *to_find, char c)
 {
 	int	i;
 	int	j;
@@ -95,43 +63,31 @@ static char *check_texture(t_pars *pars, char **file, char *to_find, char c)
 			if (file[i][j] == c)
 			{
 				if (ft_strlen(to_find) == 1 && c == 'F')
-					return (get_colors(pars, &file[i][j], j, FLOOR), "error");
+					return (get_colors(cub, &file[i][j], j, FLOOR));
 				if (ft_strlen(to_find) == 1 && c == 'C')
-					return (get_colors(pars, &file[i][j], j, CEILING), "error");
+					return (get_colors(cub, &file[i][j], j, CEILING));
 				if (ft_strncmp(&file[i][j], to_find, ft_strlen(to_find)))
-					return (get_texture(file[i], j));
+					return (get_texture(cub, &file[i][j], to_find));
 			}
 		}
 	}
 	ft_printf_fd(2, "Error, Missing texture files\n");
-	return (NULL);
-} 
+	return (EXIT_FAILURE);
+}
 
-int	init_texture(t_pars *pars, char **file)
+int	init_texture(t_cube *cub, char **file)
 {
-	int	i;
-
-	i = 0;
-	while(i < 3)
-	{
-		pars->F_colors[i] = -1;
-		pars->C_colors[i++] = -1;
-	}
-	pars->NO_texture = check_texture(pars, file, "NO", 'N');
-	if (!pars->NO_texture)
-		return (FALSE);
-	pars->SO_texture = check_texture(pars, file, "SO", 'S');
-	if (!pars->SO_texture)
-		return (FALSE);
-	pars->WE_texture = check_texture(pars, file, "WE", 'W');
-	if (!pars->WE_texture)
-		return (FALSE);
-	pars->EA_texture = check_texture(pars, file, "EA", 'E');
-	if (!pars->EA_texture)
-		return (FALSE);
-	if (ft_strcmp(check_texture(pars, file, "F", 'F'), "error"));
-		return (FALSE);
-	if (ft_strcmp(check_texture(pars, file, "C", 'C'), "error"));
-		return (FALSE);
-	return (TRUE);
+	if (check_texture(cub, file, "NO", 'N') == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_texture(cub, file, "SO", 'S') == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_texture(cub, file, "WE", 'W') == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_texture(cub, file, "EA", 'E') == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_texture(cub, file, "F", 'F') == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_texture(cub, file, "C", 'C') == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

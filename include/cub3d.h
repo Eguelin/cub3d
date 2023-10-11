@@ -6,13 +6,13 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 01:23:16 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:06:01 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "../lib/mylib/include/mylib.h"
+# include "mylib.h"
 # include "mlx.h"
 # include <fcntl.h>
 
@@ -21,7 +21,6 @@
 
 typedef enum e_error
 {
-	SUCCESS,
 	EMPTY_ENV,
 	ERROR_PARAM,
 	ERROR_SORT,
@@ -30,35 +29,42 @@ typedef enum e_error
 	ERROR_MALLOC,
 }	t_error;
 
-typedef enum e_pars
+typedef enum e_view
 {
 	FLOOR,
 	CEILING,
-}	t_pars;
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+}	t_view;
 
-typedef struct s_pars
+typedef struct s_texture
 {
-	char	*NO_texture;
-	char	*SO_texture;
-	char	*WE_texture;
-	char	*EA_texture;
-	int		F_colors[3];
-	int		C_colors[3];
-}	t_pars;
+	void	*img;
+	int		w;
+	int		h;
+}	t_texture;
 
 typedef struct s_cube
 {
-	void	*mlx;
-	void	*mlx_win;
-	int		x;
-	int		y;
-	t_pars	*pars;
+	t_texture	*texture[4];
+	int			f_colors;
+	int			c_colors;
+	void		*mlx_win;
+	void		*mlx;
+	int			x;
+	int			y;
 }	t_cube;
 
-int		parsing(t_pars *pars, char **argv);
-int		init_texture(t_pars *pars, char **file);
+
+//////PARSING///////
+int		parsing(t_cube *cub, char **argv);
+int		init_texture(t_cube *cub, char **file);
+int		get_colors(t_cube *cub, char *str, int i, int view);
+//////UTILS/////////
 char	*ft_strndup(const char *s, int len);
-void	ft_free_exit(t_pars *pars, int error);
-void	cube_manager(t_pars *pars);
+void	ft_free_exit(t_cube *cub, int error);
+void	cube_manager(t_cube *cub);
 
 #endif

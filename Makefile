@@ -6,7 +6,7 @@
 #    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/11 00:10:57 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/11 15:37:09 by acarlott         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,12 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 #Sources
 ALL_FILES = main.c
 
-PARS_DIR		= exec/
-PARS_FILES		= cube_manager.c
-ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
+EXEC_DIR		= exec/
+EXEC_FILES		= cube_manager.c
+ALL_FILES		+= $(addprefix $(EXEC_DIR), $(EXEC_FILES))
 
 PARS_DIR		= parsing/
-PARS_FILES		= parsing.c texture_parser.c
+PARS_FILES		= parsing.c texture_parser.c colors_parser.c
 ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
 
 UTILS_DIR		= utils/

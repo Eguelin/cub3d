@@ -6,27 +6,27 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 00:36:10 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 15:40:18 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 static int	sorted_condition(char *file, int value)
 {
 	if (value == 0 && ft_strncmp(file, "NO", 2))
-		return (TRUE);
+		return (EXIT_SUCCESS);
 	else if (value == 1 && ft_strncmp(file, "SO", 2))
-		return (TRUE);
+		return (EXIT_SUCCESS);
 	else if (value == 2 && ft_strncmp(file, "WE", 2))
-		return (TRUE);
+		return (EXIT_SUCCESS);
 	else if (value == 3 && ft_strncmp(file, "EA", 2))
-		return (TRUE);
+		return (EXIT_SUCCESS);
 	else if (value == 4 && ft_strncmp(file, "F", 1))
-		return (TRUE);
+		return (EXIT_SUCCESS);
 	else if (value == 5 && ft_strncmp(file, "C", 1))
-		return (TRUE);
-	return (FALSE);
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 static int	is_sorted(char **file)
@@ -48,19 +48,19 @@ static int	is_sorted(char **file)
 			break ;
 	}
 	if (value != 5)
-		return (ft_printf_fd(2, "Error, texture files not sorted\n", FALSE));
+		return (ft_printf_fd(2, "Error, texture not sorted\n", EXIT_FAILURE));
 	return (TRUE);
 }
 
-int	parsing(t_pars *pars, char **argv)
+int	parsing(t_cube *cub, char **argv)
 {
 	char	**file;
-	
+
 	(void)argv;
 	file = NULL;
-	if (is_sorted(file) == FALSE)
+	if (is_sorted(file) == EXIT_FAILURE)
 		return (ERROR_SORT);
-	if (init_texture(pars, file) == FALSE)
+	if (init_texture(cub, file) == EXIT_FAILURE)
 		return (ERROR_TEXTURE);
-	return (TRUE);
+	return (EXIT_SUCCESS);
 }
