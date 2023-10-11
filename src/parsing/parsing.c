@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 15:40:18 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:32:53 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_sorted(char **file)
 			break ;
 	}
 	if (value != 5)
-		return (ft_printf_fd(2, "Error, texture not sorted\n", EXIT_FAILURE));
+		return (EXIT_FAILURE);
 	return (TRUE);
 }
 
@@ -59,8 +59,8 @@ int	parsing(t_cube *cub, char **argv)
 	(void)argv;
 	file = NULL;
 	if (is_sorted(file) == EXIT_FAILURE)
-		return (ERROR_SORT);
+		return (ft_perror(NULL, SORT_ERROR));
 	if (init_texture(cub, file) == EXIT_FAILURE)
-		return (ERROR_TEXTURE);
+		return (ft_perror(NULL, SORT_ERROR));
 	return (EXIT_SUCCESS);
 }

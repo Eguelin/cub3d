@@ -6,13 +6,13 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:36:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 15:39:47 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:48:05 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_colors_range(t_cube *cub, char *str)
+static int	check_colors_range(char *str)
 {
 	char	*range;
 	int		len;
@@ -24,7 +24,7 @@ static int	check_colors_range(t_cube *cub, char *str)
 		return (-1);
 	range = ft_strndup(str, len);
 	if (!range)
-		ft_free_exit(cub, ERROR_MALLOC);
+		exit(ft_perror(NULL, MALLOC_ERROR));
 	len = ft_atoi(range);
 	free(range);
 	if (len >= 0 && len <= 255)
@@ -48,16 +48,16 @@ static int	set_colors(t_cube *cub, char *str, int *val, int view)
 {
 	if (view == FLOOR)
 	{
-		cub->f_colors += check_colors_range(cub, str);
+		cub->f_colors += check_colors_range(str);
 		if (cub->f_colors == EXIT_FAILURE)
-			return (ft_printf_fd(2, "Error, wrong range colors\n"), ERR_COLOR);
+			return (ft_perror("range", COLORS_ERROR));
 		cub->f_colors += create_rgb(cub->f_colors, *val);
 	}
 	else
 	{
-		cub->c_colors += check_colors_range(cub, str);
+		cub->c_colors += check_colors_range(str);
 		if (cub->c_colors == EXIT_FAILURE)
-			return (ft_printf_fd(2, "Error, wrong range colors\n"), ERR_COLOR);
+			return (ft_perror("range", COLORS_ERROR));
 		cub->c_colors += create_rgb(cub->c_colors, *val);
 	}
 	*val += 1;
@@ -73,7 +73,7 @@ int	get_colors(t_cube *cub, char *str, int i, int view)
 	cub->c_colors = 0;
 	while (str[++i] && ft_isdigit(str[i]))
 		if (ft_isalpha(str[i]))
-			return (ft_printf_fd(2, "Error, wrong format colors\n"), ERR_COLOR);
+			return (ft_perror("format", COLORS_ERROR));
 	if (!str[i])
 		return (EXIT_FAILURE);
 	while (str[i] && value != 3)
@@ -83,6 +83,6 @@ int	get_colors(t_cube *cub, char *str, int i, int view)
 		i++;
 	}
 	if (value != 3)
-		return (ft_printf_fd(2, "Error, wrong format colors\n"), ERR_COLOR);
+		return (ft_perror("format", COLORS_ERROR));
 	return (EXIT_SUCCESS);
 }

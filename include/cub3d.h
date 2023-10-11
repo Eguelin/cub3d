@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 16:06:01 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:52:14 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 
 typedef enum e_error
 {
-	EMPTY_ENV,
-	ERROR_PARAM,
-	ERROR_SORT,
-	ERROR_TEXTURE,
-	ERR_COLOR,
-	ERROR_MALLOC,
+	WRONG_FORMAT,
+	WRONG_FORMAT_BIS,
+	WRONG_ARGUMENTS,
+	OPEN_ERROR,
+	MALLOC_ERROR,
+	ENV_ERROR,
+	SORT_ERROR,
+	COLORS_ERROR
 }	t_error;
 
 typedef enum e_view
@@ -57,14 +59,17 @@ typedef struct s_cube
 	int			y;
 }	t_cube;
 
-
-//////PARSING///////
+/////// [parsing] ///////
 int		parsing(t_cube *cub, char **argv);
 int		init_texture(t_cube *cub, char **file);
 int		get_colors(t_cube *cub, char *str, int i, int view);
-//////UTILS/////////
+int		ft_check_file_name(char *name);
+char	**ft_open_file(char const *file);
+/////// [utils] ///////
+int		ft_perror(const char *s, int error);
 char	*ft_strndup(const char *s, int len);
 void	ft_free_exit(t_cube *cub, int error);
+void	ft_free_bat(void **tab, size_t size);
 void	cube_manager(t_cube *cub);
 
 #endif

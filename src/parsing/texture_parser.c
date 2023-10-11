@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 16:06:03 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:46:17 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_texture(t_cube *cub, char *str, char *to_find)
 		return (EXIT_FAILURE);
 	texture_path = ft_strdup(&str[i]);
 	if (!texture_path)
-		ft_free_exit(cub, ERROR_MALLOC);
+		ft_free_exit(cub, MALLOC_ERROR);
 	if (ft_strncmp(to_find, "NO", 2))
 		if (set_texture_to_img(cub, str, cub->texture[0]) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_FAILURE);
@@ -71,7 +71,6 @@ static int	check_texture(t_cube *cub, char **file, char *to_find, char c)
 			}
 		}
 	}
-	ft_printf_fd(2, "Error, Missing texture files\n");
 	return (EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 15:39:21 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:26:14 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 static int	check_init(int argc, char **env)
 {
 	if (!env)
-		return (ft_printf_fd(STDERR_FILENO, "empty env !\n"), EMPTY_ENV);
+		return (ft_printf_fd(STDERR_FILENO, "empty env !\n"), ENV_ERROR);
 	if (argc != 1)
 	{
-		ft_printf_fd(STDERR_FILENO, "wrong number of parameters, 1 expected\n");
-		return (ERROR_PARAM);
+		if (argc > 1)
+			return (ft_perror(NULL, WRONG_FORMAT));
+		else
+			return (ft_perror(NULL, WRONG_FORMAT_BIS));
+		return (WRONG_FORMAT);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -31,8 +34,7 @@ int	main(int argc, char **argv, char **env)
 
 	i = check_init(argc, env);
 	if (i != EXIT_SUCCESS)
-		return (i);
-	(void)argv;
+		return (EXIT_FAILURE);
 	parsing(&cub, argv);
 	if (i != EXIT_SUCCESS)
 		return (i);

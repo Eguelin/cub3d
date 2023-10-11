@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/08 16:21:02 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/11 16:02:52 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ FILES_MEM = ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
 FILES_ALL += $(addprefix $(MEM_DIR), $(FILES_MEM))
 
 OTHER_DIR = other/
-FILES_OTHER = ft_atoi.c ft_bzero.c ft_calloc.c ft_free_split.c ft_itoa.c ft_split.c ft_tolower.c ft_toupper.c
+FILES_OTHER = ft_atoi.c ft_bzero.c ft_calloc.c ft_free_bat.c ft_free_split.c ft_itoa.c ft_split.c ft_tolower.c ft_toupper.c
 FILES_ALL += $(addprefix $(OTHER_DIR), $(FILES_OTHER))
 
 PRINT_DIR = print/
@@ -89,7 +89,7 @@ $(NAME): $(OUT_DIR) $(OBJS)
 	@echo $(COMP_MSG)
 	@norminette | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
-$(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS) Makefile
+$(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
