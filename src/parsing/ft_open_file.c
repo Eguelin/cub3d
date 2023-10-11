@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 16:09:04 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 17:15:27 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ char	**ft_open_file(char const *file)
 	while (line[i])
 		line[++i] = get_next_line(fd);
 	close(fd);
-	if (i != n_line - 1)
-	{
-		ft_free_bat((void **)line, n_line);
-		return (ft_perror(NULL, MALLOC_ERROR), NULL);
-	}
+	// if (i != n_line - 1)
+	// {
+	// 	ft_free_bat((void **)line, n_line);
+	// 	return (ft_perror(NULL, MALLOC_ERROR), NULL);
+	// }
 	return (line);
 }
 
