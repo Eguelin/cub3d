@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:36:37 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/10 19:45:28 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 17:15:45 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_perror(const char *s, int error)
 		ft_printf_fd(STDERR_FILENO, "%s: bad extension, "\
 		"cub3d only takes file.cub\n", s);
 	else if (error == OPEN_ERROR)
-		ft_printf_fd(STDERR_FILENO, "%s: do not open", s);
+		ft_printf_fd(STDERR_FILENO, "%s: do not open\n", s);
 	else if (error == MALLOC_ERROR)
 		write(STDERR_FILENO, "allocation failure\n", 19);
 	else if (error == ENV_ERROR)

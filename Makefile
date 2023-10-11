@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/11 16:10:05 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/11 17:04:16 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 ALL_FILES = main.c
 
 PARS_DIR		= parsing/
-PARS_FILES		= ft_check_file_name.c ft_open_file.c
+PARS_FILES		= ft_open_file.c
 ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
 
 UTILS_DIR		= utils/
