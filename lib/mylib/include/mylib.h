@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mylib.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: naterrie <naterrie@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:54:43 by eguelin           #+#    #+#             */
-/*   Updated: 2023/06/22 13:54:27 by naterrie         ###   ########lyon.fr   */
+/*   Updated: 2023/10/11 16:02:20 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	*ft_memset(void *b, int c, size_t len);
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
+void	ft_free_bat(void **tab, size_t size);
 void	ft_free_split(char **tab);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
