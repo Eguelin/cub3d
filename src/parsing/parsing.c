@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/11 22:58:15 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 11:33:48 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ int	parsing(t_cube *cub, char **argv)
 		return (ft_free_split(file), ft_perror(NULL, SORT_ERROR));
 	check = init_texture(cub, file);
 	if (check == EXIT_FAILURE)
-		return (ft_free_split(file), ft_perror(NULL, SORT_ERROR));
-	else if (check == MALLOC_ERROR)
-	{
-		ft_free_split(file);
-		exit (ft_perror(NULL, MALLOC_ERROR));
-	}
 	ft_free_split(file);
 	return (EXIT_SUCCESS);
 }

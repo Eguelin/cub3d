@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 00:27:17 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 11:32:37 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	is_valid_path(char *str)
 	int	fd;
 
 	fd = open(str, 0);
+	ft_printf_fd(2, "%s\n", str);
 	if (fd == -1)
 		return (EXIT_FAILURE);
 	close(fd);
@@ -28,13 +29,10 @@ static int	set_texture_to_img(t_cube *cub, char *str, t_texture *texture)
 	if (is_valid_path(str) == EXIT_SUCCESS)
 	{
 		cub->mlx = mlx_init();
-		ft_printf_fd(2, "%s\n", str);
 		texture->img = mlx_xpm_file_to_image(cub->mlx, str, \
 			&texture->w, &texture->h);
 		if (texture->img == NULL)
-		{
 			return (EXIT_FAILURE);
-		}
 		return (EXIT_SUCCESS);
 	}
 	else
@@ -44,27 +42,23 @@ static int	set_texture_to_img(t_cube *cub, char *str, t_texture *texture)
 static int	get_texture(t_cube *cub, char *str, char *to_find)
 {
 	int		i;
-	char	*texture_path;
 
 	i = 0;
-	while (str[i] && str[i] != '.')
+	while (str[i] && str[i] == ' ')
 		i++;
 	if (!str[i])
 		return (EXIT_FAILURE);
-	texture_path = ft_strdup(&str[i]);
-	if (!texture_path)
-		ft_free_exit(cub, MALLOC_ERROR);
 	if (!ft_strncmp(to_find, "NO", 2))
-		if (set_texture_to_img(cub, str, cub->texture[0]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], cub->texture[0]) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	if (!ft_strncmp(to_find, "SO", 2))
-		if (set_texture_to_img(cub, str, cub->texture[1]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], cub->texture[1]) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	if (!ft_strncmp(to_find, "WE", 2))
-		if (set_texture_to_img(cub, str, cub->texture[2]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], cub->texture[2]) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	if (!ft_strncmp(to_find, "EA", 2))
-		if (set_texture_to_img(cub, str, cub->texture[3]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], cub->texture[3]) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
@@ -112,12 +106,8 @@ int	init_texture(t_cube *cub, char **file)
 	check = check_texture(cub, file, "F", 'F');
 	if (check == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	else if (check == MALLOC_ERROR)
-		return (MALLOC_ERROR);
 	check = check_texture(cub, file, "C", 'C');
 	if (check == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	else if (check == MALLOC_ERROR)
-		return (MALLOC_ERROR);
 	return (EXIT_SUCCESS);
 }
