@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 17:24:55 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 16:59:04 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int		ft_check_file_name(char const *name);
 static size_t	ft_count_line(char const *file);
 static int		ft_open(char const *file, int flag);
-static size_t	ft_char_occurrences(char const c, char const *str);
+static size_t	ft_char_occurrences(char const c, char const *str, size_t size);
 
 char	**ft_open_file(char const *file)
 {
@@ -58,7 +58,7 @@ static int	ft_check_file_name(char const *name)
 
 static size_t	ft_count_line(char const *file)
 {
-	char	buf[65];
+	char	buf[64];
 	int		fd;
 	size_t	count;
 	size_t	n_char;
@@ -68,16 +68,13 @@ static size_t	ft_count_line(char const *file)
 	fd = ft_open(file, O_RDONLY);
 	if (fd == -1)
 		return (count);
-	ft_memset(buf, 0, 65);
+	n_char = read(fd, buf, 64);
 	while (n_char)
 	{
-		n_char = read(fd, buf, 64);
-		if (!(n_char + 1))
-			return (close(fd), 0);
-		count += ft_char_occurrences('\n', buf);
+		count += ft_char_occurrences('\n', buf, n_char);
 		if (n_char && n_char != 64 && buf[n_char - 1] != '\n')
 			count++;
-		ft_memset(buf, 0, 65);
+		n_char = read(fd, buf, 64);
 	}
 	close(fd);
 	return (count);
@@ -96,18 +93,17 @@ static int	ft_open(char const *file, int flag)
 	return (fd);
 }
 
-static size_t	ft_char_occurrences(char const c, char const *str)
+static size_t	ft_char_occurrences(char const c, char const *str, size_t size)
 {
-	size_t	i;
 	size_t	count;
 
-	i = 0;
 	count = 0;
-	while (str && str[i])
+	size--;
+	while (str && size + 1)
 	{
-		if (str[i] == c)
+		if (str[size] == c)
 			count++;
-		i++;
+		size--;
 	}
 	return (count);
 }

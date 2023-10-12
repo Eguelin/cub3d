@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 17:04:21 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 19:52:08 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum e_error
 }	t_error;
 
 /////// [parsing] ///////
+char	**ft_get_map(char **file);
 char	**ft_open_file(char const *file);
 
 /////// [utils] ///////
