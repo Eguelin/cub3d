@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 11:32:37 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 14:35:05 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static int	is_valid_path(char *str)
 {
 	int	fd;
 
-	fd = open(str, 0);
-	ft_printf_fd(2, "%s\n", str);
+	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		return (EXIT_FAILURE);
 	close(fd);
@@ -26,10 +25,16 @@ static int	is_valid_path(char *str)
 
 static int	set_texture_to_img(t_cube *cub, char *str, t_texture *texture)
 {
+	int	len;
+
+	len = ft_strlen(str);
+	if (len > 0 && str[len - 1] == '\n')
+		str[len -1] = '\0';
 	if (is_valid_path(str) == EXIT_SUCCESS)
 	{
+		ft_printf_fd(2, "%s\n", str);
 		cub->mlx = mlx_init();
-		texture->img = mlx_xpm_file_to_image(cub->mlx, str, \
+		texture->img = mlx_xpm_file_to_image(cub->mlx, "./ressource/Metal-Box.xpm", \
 			&texture->w, &texture->h);
 		if (texture->img == NULL)
 			return (EXIT_FAILURE);
@@ -83,7 +88,7 @@ static int	check_texture(t_cube *cub, char **file, char *to_find, char c)
 				if (ft_strlen(to_find) == 1 && c == 'C')
 					return (get_colors(cub, &file[i][j], j, CEILING));
 				if (!ft_strncmp(file[i], to_find, 2))
-					return (get_texture(cub, &file[i][j], to_find));
+					return (get_texture(cub, &file[i][j + 2], to_find));
 				count++;
 			}
 		}

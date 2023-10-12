@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:36:37 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 17:14:54 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 13:21:55 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	ft_perror(const char *s, int error)
 	else if (error == OPEN_ERROR)
 		ft_printf_fd(STDERR_FILENO, "%s: do not open\n", s);
 	else if (error == MALLOC_ERROR)
-		write(STDERR_FILENO, "allocation failure\n", 19);
+		write(STDERR_FILENO, "allocation failure\n", 20);
 	else if (error == ENV_ERROR)
 		write(STDERR_FILENO, "env is missing\n", 15);
 	else if (error == SORT_ERROR)
-		write(STDERR_FILENO, "texture/colors path missing or not sorted\n", 43);
+		write(STDERR_FILENO, "wrong texture/colors path\n", 27);
 	else if (error == COLORS_ERROR)
-		ft_printf_fd(STDERR_FILENO, " wrong %s colors\n", s);
+		ft_printf_fd(STDERR_FILENO, "wrong %s colors\n", s);
 	if (error == WRONG_FORMAT || error == WRONG_FORMAT_BIS)
 		write(STDERR_FILENO, "format: ./cub3d ./path_to_the_map.cub\n", 38);
 	return (1);

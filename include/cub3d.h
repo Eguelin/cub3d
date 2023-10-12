@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 16:52:14 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 12:46:27 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_cube
 int		parsing(t_cube *cub, char **argv);
 int		init_texture(t_cube *cub, char **file);
 int		get_colors(t_cube *cub, char *str, int i, int view);
-int		ft_check_file_name(char *name);
 char	**ft_open_file(char const *file);
 /////// [utils] ///////
 int		ft_perror(const char *s, int error);
