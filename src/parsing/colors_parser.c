@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:36:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 00:24:39 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 21:18:40 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@ static int	check_colors_range(char **tab)
 	int rgb[3];
 
 	i = 0;
-	while (tab[i] && i < 3)
+	while (tab[i] && i <= 2)
 	{
 		j = 0;
 		if (i == 0)
-			while (tab[i][++j] == ' ');
-		rgb[i] = ft_atoi(&tab[i][j]);
+			while (tab[i][++j] == ' ')
+				;
+		rgb[i] = ft_atouch(&tab[i][j]);
 		if (rgb[i] < 0 || rgb[i] > 255)
 			return (-1);
 		i++;
 	}
-	if (i != 3)
+	if (i != 3 || tab[i])
 		return (-2);
 	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
@@ -61,6 +62,8 @@ int	get_colors(t_cube *cub, char *str, int i, int view)
 
 	while (str[++i] == ' ')
 		;
+	if (str[i] == '\n' && !str[i + 1])
+		return (ft_perror("empty colors", COLORS_ERROR));
 	while (str[i] && str[i + 1])
 	{
 		if (!ft_isdigit(str[i]) && str[i] != ',')
@@ -70,7 +73,7 @@ int	get_colors(t_cube *cub, char *str, int i, int view)
 	tab = ft_split(str, ',');
 	if (!tab)
 		return (MALLOC_ERROR);
-	if (set_colors(cub, tab, view) == COLORS_ERROR)
+	if (set_colors(cub, tab, view) == EXIT_FAILURE)
 		return (ft_free_split(tab), EXIT_FAILURE);
 	ft_free_split(tab);
 	return (EXIT_SUCCESS);

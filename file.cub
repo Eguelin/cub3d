@@ -1,10 +1,10 @@
-NO ./ressource/metal_box.xpm
+NO a
 WE ./ressource/white_floor.xpm
-SO ./path_to_the_south_texture
+SO ./ressource/metal_box.xpm
 EA ./file.cub
 
-F 250,100,0
-C 225,30,0
+F 255,200,1
+C 233,030,2
 
 
         1111111111111111111111111

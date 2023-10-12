@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/12 16:15:06 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 21:31:07 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	if (parsing(&cub, argv) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	ft_printf_fd(2, "Try : %d\n", cub.f_colors);
-	ft_printf_fd(2, "Try : %d\n", cub.c_colors);
+	ft_printf_fd(2, "Fcolors : %d\n", cub.f_colors);
+	ft_printf_fd(2, "Ccolors : %d\n", cub.c_colors);
 	//cube_manager(&cub);
+	//mlx_destroy_image(cub.mlx, cub.texture[0].img);
+	//mlx_destroy_image(cub.mlx, cub.texture[1].img);
 	free(cub.mlx);
 	return (EXIT_SUCCESS);
 }

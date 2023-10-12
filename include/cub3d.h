@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/12 15:18:08 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 19:44:15 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char	**ft_open_file(char const *file);
 /////// [utils] ///////
 int		ft_perror(const char *s, int error);
 char	*ft_strndup(const char *s, int len);
-void	ft_free_exit(t_cube *cub, int error);
+// void	ft_free_exit(t_cube *cub, int error);
+// void	ft_free_mlx(t_cube *cub);
 void	ft_free_bat(void **tab, size_t size);
 void	cube_manager(t_cube *cub);
 
