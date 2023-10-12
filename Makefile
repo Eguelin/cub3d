@@ -6,7 +6,7 @@
 #    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/11 16:15:08 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/11 21:34:51 by acarlott         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,8 +88,8 @@ all: $(NAME)
 $(NAME): $(OUT_DIR) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $(NAME)
 	@echo $(COMP_MSG)
-	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
-	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+#	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+#	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 17:09:35 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 00:40:29 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ static int	check_init(int argc, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	int		i;
 	t_cube	cub;
 
-	i = check_init(argc, env);
-	if (i != EXIT_SUCCESS)
+	cub.f_colors = -1;
+	cub.c_colors = -1;
+	if (check_init(argc, env) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	parsing(&cub, argv);
-	if (i != EXIT_SUCCESS)
-		return (i);
+	if (parsing(&cub, argv) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	ft_printf_fd(2, "Try : %d\n", cub.f_colors);
+	ft_printf_fd(2, "Try : %d\n", cub.c_colors);
 	//cube_manager(&cub);
 	return (EXIT_SUCCESS);
 }
