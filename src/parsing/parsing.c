@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 13:22:26 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 16:13:27 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	check_content(char **file)
 
 	i = -1;
 	value = 0;
-	while (file[++i] && value != 5)
+	while (file[++i] && value != 6)
 	{
 		while (file[i][0] == '\n')
 			i++;
@@ -47,7 +47,7 @@ static int	check_content(char **file)
 		else
 			break ;
 	}
-	if (value != 5)
+	if (value != 6)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -55,15 +55,14 @@ static int	check_content(char **file)
 int	parsing(t_cube *cub, char **argv)
 {
 	char	**file;
-	int		check;
 
 	file = ft_open_file(argv[1]);
 	if (!file)
 		return (EXIT_FAILURE);
 	if (check_content(file) == EXIT_FAILURE)
 		return (ft_free_split(file), ft_perror(NULL, SORT_ERROR));
-	check = init_texture(cub, file);
-	if (check == EXIT_FAILURE)
+	if (init_texture(cub, file) == EXIT_FAILURE)
+		return (ft_free_split(file), EXIT_FAILURE);
 	ft_free_split(file);
 	return (EXIT_SUCCESS);
 }

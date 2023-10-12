@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/12 12:46:27 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 15:18:08 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_texture
 
 typedef struct s_cube
 {
-	t_texture	*texture[4];
+	t_texture	texture[4];
 	int			f_colors;
 	int			c_colors;
 	void		*mlx_win;

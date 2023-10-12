@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/12 00:40:29 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 16:15:06 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_cube	cub;
 
+	cub.mlx = mlx_init();
 	cub.f_colors = -1;
 	cub.c_colors = -1;
 	if (check_init(argc, env) != EXIT_SUCCESS)
@@ -40,5 +41,6 @@ int	main(int argc, char **argv, char **env)
 	ft_printf_fd(2, "Try : %d\n", cub.f_colors);
 	ft_printf_fd(2, "Try : %d\n", cub.c_colors);
 	//cube_manager(&cub);
+	free(cub.mlx);
 	return (EXIT_SUCCESS);
 }

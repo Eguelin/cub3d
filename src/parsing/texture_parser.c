@@ -6,42 +6,25 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 14:35:05 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/12 16:16:22 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	is_valid_path(char *str)
+static int	set_texture_to_img(t_cube *cub, char *str, int i)
 {
-	int	fd;
-
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-		return (EXIT_FAILURE);
-	close(fd);
-	return (EXIT_SUCCESS);
-}
-
-static int	set_texture_to_img(t_cube *cub, char *str, t_texture *texture)
-{
+	t_texture	txr;
 	int	len;
 
+	txr = cub->texture[i];
 	len = ft_strlen(str);
 	if (len > 0 && str[len - 1] == '\n')
 		str[len -1] = '\0';
-	if (is_valid_path(str) == EXIT_SUCCESS)
-	{
-		ft_printf_fd(2, "%s\n", str);
-		cub->mlx = mlx_init();
-		texture->img = mlx_xpm_file_to_image(cub->mlx, "./ressource/Metal-Box.xpm", \
-			&texture->w, &texture->h);
-		if (texture->img == NULL)
-			return (EXIT_FAILURE);
-		return (EXIT_SUCCESS);
-	}
-	else
+	txr.img = mlx_xpm_file_to_image(cub->mlx, str, &txr.w, &txr.h);
+	if (!txr.img)
 		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	get_texture(t_cube *cub, char *str, char *to_find)
@@ -54,16 +37,16 @@ static int	get_texture(t_cube *cub, char *str, char *to_find)
 	if (!str[i])
 		return (EXIT_FAILURE);
 	if (!ft_strncmp(to_find, "NO", 2))
-		if (set_texture_to_img(cub, &str[i], cub->texture[0]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], 0) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	if (!ft_strncmp(to_find, "SO", 2))
-		if (set_texture_to_img(cub, &str[i], cub->texture[1]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], 1) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	if (!ft_strncmp(to_find, "WE", 2))
-		if (set_texture_to_img(cub, &str[i], cub->texture[2]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], 2) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	if (!ft_strncmp(to_find, "EA", 2))
-		if (set_texture_to_img(cub, &str[i], cub->texture[3]) == EXIT_FAILURE)
+		if (set_texture_to_img(cub, &str[i], 3) == EXIT_FAILURE)
 			return (ft_printf_fd(2, "Wrong texture path\n"), EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
