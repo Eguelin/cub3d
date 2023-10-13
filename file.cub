@@ -1,10 +1,10 @@
-NO a
-WE ./ressource/white_floor.xpm
 SO ./ressource/metal_box.xpm
-EA ./file.cub
+WE ./ressource/white_floor.xpm
+EA ./ressource/light_2.xpm
+NO ./ressource/Floor1.xpm
 
 F 255,200,1
-C 233,030,2
+C 233,030,1
 
 
         1111111111111111111111111

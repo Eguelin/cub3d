@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:36:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 21:18:40 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/13 01:39:13 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ static int	set_colors(t_cube *cub, char **tab, int view)
 	return (EXIT_SUCCESS);
 }
 
-int	get_colors(t_cube *cub, char *str, int i, int view)
+int	get_colors(t_cube *cub, char *str, int view)
 {
+	int	i;
 	char	**tab;
 
-	while (str[++i] == ' ')
-		;
+	i = 1;
+	while (str[i] && str[i] == ' ')
+		i++;
 	if (str[i] == '\n' && !str[i + 1])
 		return (ft_perror("empty colors", COLORS_ERROR));
 	while (str[i] && str[i + 1])

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 21:30:28 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/13 01:52:30 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 static int	set_texture_to_img(t_cube *cub, char *str, int i)
 {
-	t_texture	txr;
 	int	len;
 
-	txr = cub->texture[i];
 	len = ft_strlen(str);
 	if (len > 0 && str[len - 1] == '\n')
 		str[len -1] = '\0';
-	txr.img = mlx_xpm_file_to_image(cub->mlx, str, &txr.w, &txr.h);
-	if (!txr.img)
+	cub->texture[i].img = mlx_xpm_file_to_image(cub->mlx, str, \
+	&cub->texture[i].w, &cub->texture[i].h);
+	if (!cub->texture[i].img)
 		return (EXIT_FAILURE);
 	ft_printf_fd(2, "%s successfully added !\n", str);
 	return (EXIT_SUCCESS);
@@ -70,10 +69,10 @@ static int	check_texture(t_cube *cub, char **file, char *to_find, char c)
 		{
 			if (file[i][j] == c)
 			{
-				if (ft_strlen(to_find) == 1 && c == 'F')
-					return (get_colors(cub, &file[i][j], j, FLOOR));
-				if (ft_strlen(to_find) == 1 && c == 'C')
-					return (get_colors(cub, &file[i][j], j, CEILING));
+				if (!ft_strncmp(file[i], to_find, 2) && c == 'F')
+					return (get_colors(cub, &file[i][j + 1], FLOOR));
+				if (!ft_strncmp(file[i], to_find, 2) && c == 'C')
+					return (get_colors(cub, &file[i][j + 1], CEILING));
 				if (!ft_strncmp(file[i], to_find, 2))
 					return (get_texture(cub, &file[i][j + 2], to_find));
 				count++;
@@ -93,9 +92,9 @@ int	init_texture(t_cube *cub, char **file)
 		return (EXIT_FAILURE);
 	if (check_texture(cub, file, "EA", 'E') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "F", 'F') == EXIT_FAILURE)
+	if (check_texture(cub, file, "F ", 'F') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "C", 'C') == EXIT_FAILURE)
+	if (check_texture(cub, file, "C ", 'C') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

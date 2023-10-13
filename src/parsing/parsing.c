@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/12 21:21:25 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/13 00:48:01 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,12 @@ static int	check_content(char **file)
 {
 	int	value;
 	int	i;
-	int	tab[6];
+	int tab[6];
 
 	value = 0;
-	i = - 1;
-	while (tab[++i])
-		tab[i] = 0;
-	i = -1;
-	while (file[++i] && value != 6)
+	i = 0;
+	ft_memset(tab, 0, sizeof(tab));
+	while (file[i] && value != 6)
 	{
 		while (file[i][0] == '\n')
 			i++;
@@ -50,6 +48,7 @@ static int	check_content(char **file)
 			value++;
 		else
 			break ;
+		i++;
 	}
 	if (value != 6)
 		return (EXIT_FAILURE);
