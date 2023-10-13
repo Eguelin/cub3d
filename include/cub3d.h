@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/13 23:15:44 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/13 23:24:50 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,6 @@ int		parsing(t_cube *cub, char **argv);
 int		init_texture(t_cube *cub, char **file);
 int		get_colors(t_cube *cub, char *str, int view);
 char	**ft_open_file(char const *file);
-/////// [MAPPING] ///////
-void	cube_manager(t_cube *cub);
-int		ft_count_map_len(char **map);
-int		ft_count_map_line(char **map);
-void	ft_minimap(t_cube *cub, char **map);
-void	my_mlx_pixel_put(t_texture *txr, int x, int y, int color);
 /////// [utils] ///////
 int		ft_perror(const char *s, int error);
 char	*ft_strndup(const char *s, int len);
