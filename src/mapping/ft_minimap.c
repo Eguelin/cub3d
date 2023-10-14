@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/13 23:12:01 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/14 11:32:41 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ static void	ft_put_player(t_cube *cub, int x, int y, int size)
 	int	j;
 	int	offset;
 
-	offset = (15 - size) / 2;;
+	offset = (15 - size) / 2;
+	cub->player.y_start = (float)y + (offset + 1.4);
+	cub->player.x_start = (float)x + (offset + 1.4);
+	x = round(cub->player.x_start);
 	i = -1;
-	cub->player.y_start = y + (offset + 1.4);
-	cub->player.x_start = x + (offset + 1.4);
-	x = cub->player.x_start;
 	while (++i <= size)
 	{
 		j = -1;
-		y = cub->player.y_start;
+		y = round(cub->player.y_start);
 		while (++j <= size)
 		{
 			my_mlx_pixel_put(&cub->windows, x, y, 0xFFF000);
@@ -55,8 +55,10 @@ static void	ft_put_player(t_cube *cub, int x, int y, int size)
 		}
 		x++;
 	}
-	cub->player.y_end = y;
-	cub->player.x_end = x;
+	cub->player.y_end = cub->player.y_start + (float)size;
+	cub->player.x_end = cub->player.x_start + (float)size;
+	// printf ("start x : %f\n", cub->player.x_start);
+	// printf ("end x : %f\n", cub->player.x_end);
 }
 
 static void	ft_mini_wall(t_cube *cub, char **map, int *x, int *y)

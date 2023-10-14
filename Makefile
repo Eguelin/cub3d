@@ -6,7 +6,7 @@
 #    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/13 22:30:24 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/14 10:31:45 by acarlott         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 ALL_FILES = main.c
 
 EXEC_DIR		= mapping/
-EXEC_FILES		= cube_manager.c mapping_utils.c ft_minimap.c
+EXEC_FILES		= cube_manager.c mapping_utils.c ft_minimap.c ft_player.c
 ALL_FILES		+= $(addprefix $(EXEC_DIR), $(EXEC_FILES))
 
 PARS_DIR		= parsing/

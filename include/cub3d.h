@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/13 23:15:44 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/14 11:12:24 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "mylib.h"
 # include "mlx.h"
 # include <fcntl.h>
+# include <stdio.h>
+# include <math.h>
 
 # define FALSE 0 
 # define TRUE 1
@@ -66,6 +68,7 @@ typedef struct s_cube
 	t_texture	texture[4];
 	t_texture	windows;
 	t_player	player;
+	char		**map;
 	int			f_colors;
 	int			c_colors;
 	void		*mlx_win;
@@ -82,12 +85,12 @@ void	cube_manager(t_cube *cub);
 int		ft_count_map_len(char **map);
 int		ft_count_map_line(char **map);
 void	ft_minimap(t_cube *cub, char **map);
+void	ft_player_move(t_cube *cub, int keycode);
 void	my_mlx_pixel_put(t_texture *txr, int x, int y, int color);
 /////// [utils] ///////
 int		ft_perror(const char *s, int error);
 char	*ft_strndup(const char *s, int len);
-// void	ft_free_exit(t_cube *cub, int error);
-// void	ft_free_mlx(t_cube *cub);
+void	ft_destroy_texture(t_cube *cub);
 void	ft_free_bat(void **tab, size_t size);
 
 #endif
