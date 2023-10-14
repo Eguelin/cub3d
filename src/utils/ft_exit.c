@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/14 19:36:53 by eguelin          ###   ########lyon.fr   */
+/*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/14 19:40:31 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_exit(char const *s, int error)
 {
-	t_cub3d	cub;
-
-	(void)argc;
-	(void)env;
-	ft_parser(&cub, argv);
-	return (0);
+	ft_perror(s, error);
+	exit(error);
 }

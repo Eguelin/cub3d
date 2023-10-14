@@ -6,54 +6,42 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/12 16:59:04 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/14 19:41:27 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_check_file_name(char const *name);
 static size_t	ft_count_line(char const *file);
-static int		ft_open(char const *file, int flag);
 static size_t	ft_char_occurrences(char const c, char const *str, size_t size);
 
-char	**ft_open_file(char const *file)
+char	**ft_open_file(char const *name)
 {
 	int		fd;
-	char	**line;
-	size_t	i;
+	char	**file;
 	size_t	n_line;
+	size_t	i;
 
-	i = 0;
-	if (ft_check_file_name(file))
-		return (NULL);
-	fd = ft_open(file, O_RDONLY);
-	if (fd == -1)
-		return (NULL);
-	n_line = ft_count_line(file) + 1;
-	line = ft_calloc(sizeof(char *), n_line);
-	if (!line)
-		return (ft_perror(NULL, MALLOC_ERROR), NULL);
-	line[i] = get_next_line(fd);
-	while (line[i])
-		line[++i] = get_next_line(fd);
-	close(fd);
-	if (i != n_line - 1)
-	{
-		ft_free_bat((void **)line, n_line);
-		return (ft_perror(NULL, MALLOC_ERROR), NULL);
-	}
-	return (line);
-}
-
-static int	ft_check_file_name(char const *name)
-{
 	if (ft_strncmp(name + ft_strlen(name) - 4, ".cub", 5))
+		ft_exit(name, WRONG_ARGUMENTS);
+	fd = open(name, O_RDONLY);
+	if (fd == -1)
+		ft_exit(name, OPEN_ERROR);
+	n_line = ft_count_line(name);
+	file = ft_calloc(sizeof(char *), n_line + 1);
+	if (!file)
+		ft_exit(NULL, MALLOC_ERROR);
+	i = 0;
+	file[i] = get_next_line(fd);
+	while (file[i])
+		file[++i] = get_next_line(fd);
+	close(fd);
+	if (i != n_line)
 	{
-		ft_perror(name, WRONG_ARGUMENTS);
-		return (EXIT_FAILURE);
+		ft_free_split(file);
+		ft_exit(NULL, MALLOC_ERROR);
 	}
-	return (EXIT_SUCCESS);
+	return (file);
 }
 
 static size_t	ft_count_line(char const *file)
@@ -65,9 +53,9 @@ static size_t	ft_count_line(char const *file)
 
 	count = 0;
 	n_char = 1;
-	fd = ft_open(file, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (count);
+		ft_exit(file, OPEN_ERROR);
 	n_char = read(fd, buf, 64);
 	while (n_char)
 	{
@@ -78,19 +66,6 @@ static size_t	ft_count_line(char const *file)
 	}
 	close(fd);
 	return (count);
-}
-
-static int	ft_open(char const *file, int flag)
-{
-	int		fd;
-
-	fd = open(file, flag);
-	if (fd == -1)
-	{
-		ft_perror(file, OPEN_ERROR);
-		return (-1);
-	}
-	return (fd);
 }
 
 static size_t	ft_char_occurrences(char const c, char const *str, size_t size)

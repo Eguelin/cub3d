@@ -6,15 +6,15 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:07:55 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/13 16:07:46 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/14 18:16:34 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static size_t	ft_get_index(char **file, int flag);
-static size_t	ft_map_len(char **file, size_t size);
-static int		ft_fill_map(char **file, char **map, size_t size);
+static int		ft_fill_map(char **file, char **map);
+static size_t	ft_map_len(char **file);
 static int		ft_is_subset_of(char const *line, char const *set);
 
 char	**ft_get_map(char **file)
@@ -23,18 +23,19 @@ char	**ft_get_map(char **file)
 	char	**map;
 
 	size = ft_get_index(file, 0);
-	ft_printf("%d\n", size);
-	if (size < 6)
+	if (!size)
 		return (NULL);
 	file = file + size;
 	size = ft_get_index(file, 1);
-	ft_printf("%d\n", size);
-	if (size < 3)
+	if (!size)
 		return (NULL);
 	map = ft_calloc((size + 1), sizeof(char *));
 	if (!map)
+	{
+		ft_perror(NULL, MALLOC_ERROR);
 		return (NULL);
-	if (ft_fill_map(file, map, size))
+	}
+	if (ft_fill_map(file, map))
 		return (NULL);
 	return (map);
 }
@@ -42,64 +43,45 @@ char	**ft_get_map(char **file)
 static size_t	ft_get_index(char **file, int flag)
 {
 	size_t	i;
-	size_t	j;
 	int		count;
 
 	i = 0;
 	count = 0;
-	while (file && file[i] && flag == ft_is_subset_of(file[i], " 10NSWE"))
+	while (file && file[i] && \
+	(file[i][0] == '\n' || flag == ft_is_subset_of(file[i], " 10NSWE")))
 	{
 		if (!flag && file[i][0] != '\n')
 			count++;
 		i++;
 	}
 	if (!flag && count != 6)
-		return (0);
-	j = i;
-	while (flag && file[j])
 	{
-		if (file[j][0] != '\n')
-			return (0);
-		j++;
+		ft_perror(NULL, MAP_ERROR);
+		return (0);
+	}
+	if (flag && file[i])
+	{
+		ft_perror(NULL, MAP_ERROR);
+		return (0);
 	}
 	return (i);
 }
 
-static size_t	ft_map_len(char **file, size_t size)
-{
-	size_t	len;
-	size_t	len_max;
-
-	len_max = 0;
-	while (size)
-	{
-		size--;
-		len = ft_strlen(file[size]) - 1;
-		while (file[size][len] == ' ')
-			len--;
-		if (file[size][len - 1] != '1')
-			return (0);
-		if (len > len_max)
-			len_max = len;
-	}
-	return (len_max);
-}
-
-static int	ft_fill_map(char **file, char **map, size_t size)
+static int	ft_fill_map(char **file, char **map)
 {
 	size_t	i;
 	size_t	j;
 	size_t	len;
 
 	i = 0;
-	len = ft_map_len(file, size);
-	ft_printf("%d\n", len);
-	while (i < size)
+	len = ft_map_len(file);
+	while (file[i])
 	{
 		map[i] = ft_calloc(len + 1, sizeof(char));
 		if (!map[i])
 		{
 			ft_free_split(map);
+			ft_perror(NULL, MALLOC_ERROR);
 			return (EXIT_FAILURE);
 		}
 		j = 0;
@@ -113,12 +95,30 @@ static int	ft_fill_map(char **file, char **map, size_t size)
 	return (EXIT_SUCCESS);
 }
 
+static size_t	ft_map_len(char **file)
+{
+	size_t	i;
+	size_t	len;
+	size_t	len_max;
+
+	i = 0;
+	len_max = 0;
+	while (file[i])
+	{
+		len = ft_strlen(file[i]) - 1;
+		while (file[i][len] == ' ')
+			len--;
+		if (len > len_max)
+			len_max = len;
+		i++;
+	}
+	return (len_max);
+}
+
 static int	ft_is_subset_of(char const *line, char const *set)
 {
 	char	set_map[256];
 
-	if (!line || *line == '\n')
-		return (0);
 	ft_memset(set_map, 0, 256);
 	while (*set)
 	{
