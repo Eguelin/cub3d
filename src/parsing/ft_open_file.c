@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/14 19:41:27 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/15 15:00:26 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ char	**ft_open_file(char const *name)
 	size_t	i;
 
 	if (ft_strncmp(name + ft_strlen(name) - 4, ".cub", 5))
-		ft_exit(name, WRONG_ARGUMENTS);
+		ft_exit(NULL, name, WRONG_ARGUMENTS);
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
-		ft_exit(name, OPEN_ERROR);
+		ft_exit(NULL, name, OPEN_ERROR);
 	n_line = ft_count_line(name);
 	file = ft_calloc(sizeof(char *), n_line + 1);
 	if (!file)
-		ft_exit(NULL, MALLOC_ERROR);
+		ft_exit(NULL, NULL, MALLOC_ERROR);
 	i = 0;
 	file[i] = get_next_line(fd);
 	while (file[i])
@@ -38,8 +38,8 @@ char	**ft_open_file(char const *name)
 	close(fd);
 	if (i != n_line)
 	{
-		ft_free_split(file);
-		ft_exit(NULL, MALLOC_ERROR);
+		ft_free_tab(file);
+		ft_exit(NULL, NULL, MALLOC_ERROR);
 	}
 	return (file);
 }
@@ -55,7 +55,7 @@ static size_t	ft_count_line(char const *file)
 	n_char = 1;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		ft_exit(file, OPEN_ERROR);
+		ft_exit(NULL, file, OPEN_ERROR);
 	n_char = read(fd, buf, 64);
 	while (n_char)
 	{

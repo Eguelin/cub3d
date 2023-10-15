@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:07:55 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/14 18:16:34 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/15 15:00:09 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,30 @@ static int		ft_fill_map(char **file, char **map);
 static size_t	ft_map_len(char **file);
 static int		ft_is_subset_of(char const *line, char const *set);
 
-char	**ft_get_map(char **file)
+void	ft_get_map(t_cub3d *cub, char **file)
 {
 	size_t	size;
-	char	**map;
 
+	cub->map = NULL;
 	size = ft_get_index(file, 0);
-	if (!size)
-		return (NULL);
 	file = file + size;
 	size = ft_get_index(file, 1);
 	if (!size)
-		return (NULL);
-	map = ft_calloc((size + 1), sizeof(char *));
-	if (!map)
 	{
-		ft_perror(NULL, MALLOC_ERROR);
-		return (NULL);
+		ft_free_tab(file);
+		ft_exit(NULL, NULL, MAP_ERROR);
 	}
-	if (ft_fill_map(file, map))
-		return (NULL);
-	return (map);
+	cub->map = ft_calloc((size + 1), sizeof(char *));
+	if (!cub->map)
+	{
+		ft_free_tab(file);
+		ft_exit(NULL, NULL, MALLOC_ERROR);
+	}
+	if (ft_fill_map(file, cub->map))
+	{
+		ft_free_tab(file);
+		ft_exit(cub, NULL, MALLOC_ERROR);
+	}
 }
 
 static size_t	ft_get_index(char **file, int flag)
@@ -55,15 +58,9 @@ static size_t	ft_get_index(char **file, int flag)
 		i++;
 	}
 	if (!flag && count != 6)
-	{
-		ft_perror(NULL, MAP_ERROR);
 		return (0);
-	}
 	if (flag && file[i])
-	{
-		ft_perror(NULL, MAP_ERROR);
 		return (0);
-	}
 	return (i);
 }
 
@@ -79,11 +76,7 @@ static int	ft_fill_map(char **file, char **map)
 	{
 		map[i] = ft_calloc(len + 1, sizeof(char));
 		if (!map[i])
-		{
-			ft_free_split(map);
-			ft_perror(NULL, MALLOC_ERROR);
 			return (EXIT_FAILURE);
-		}
 		j = 0;
 		while (file[i][j] != '\n' && j < len)
 		{
