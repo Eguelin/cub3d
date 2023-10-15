@@ -6,13 +6,12 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:03:35 by eguelin           #+#    #+#             */
-/*   Updated: 2023/02/15 17:23:32 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/15 15:02:16 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mylib.h"
 
-static void		ft_free_tab(char **tab, size_t n);
 static size_t	ft_count_word(char const *s, char c);
 static char		*ft_dup_word(char const *s, char c, size_t n);
 
@@ -32,7 +31,7 @@ char	**ft_split(char const *s, char c)
 	{
 		word = ft_dup_word(s, c, i);
 		if (!word)
-			return (ft_free_tab(tab, i), NULL);
+			return (ft_free_tab(tab), NULL);
 		tab[i++] = word;
 	}
 	tab[i] = NULL;
@@ -86,14 +85,4 @@ static char	*ft_dup_word(char const *s, char c, size_t n)
 	while (i + 1 && s[i] != c)
 		word[j--] = s[i--];
 	return (word);
-}
-
-static void	ft_free_tab(char **tab, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-		free(tab[i++]);
-	free(tab);
 }

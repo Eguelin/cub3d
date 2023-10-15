@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/13 23:24:35 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/15 15:54:51 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,11 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 ALL_FILES = main.c
 
 PARS_DIR		= parsing/
-PARS_FILES		= parsing.c texture_parser.c colors_parser.c ft_open_file.c
+PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
 ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
 
 UTILS_DIR		= utils/
-UTILS_FILES		= ft_free.c ft_strndup.c ft_perror.c
+UTILS_FILES		= ft_exit.c ft_perror.c ft_strndup.c
 ALL_FILES		+= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 INC_FILES		= $(NAME).h

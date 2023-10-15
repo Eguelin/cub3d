@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_bat.c                                      :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:00:45 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 16:51:32 by acarlott         ###   ########lyon.fr   */
+/*   Created: 2023/02/20 17:02:39 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/15 14:56:34 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mylib.h"
 
-void	ft_free_bat(void **tab, size_t size)
+void	ft_free_tab(char **tab)
 {
 	size_t	i;
 
 	i = 0;
 	if (!tab)
 		return ;
-	while (i < size)
+	while (tab[i])
 		free(tab[i++]);
 	free(tab);
 }

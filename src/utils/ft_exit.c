@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_split.c                                    :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/20 17:02:39 by eguelin           #+#    #+#             */
-/*   Updated: 2023/06/08 19:42:50 by eguelin          ###   ########lyon.fr   */
+/*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/15 15:00:47 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mylib.h"
+#include "cub3d.h"
 
-void	ft_free_split(char **tab)
+static void	ft_free_cub(t_cub3d *cub);
+
+void	ft_exit(t_cub3d *cub, char const *s, int return_value)
 {
-	size_t	i;
+	ft_free_cub(cub);
+	if (return_value)
+		ft_perror(s, return_value);
+	exit(return_value);
+}
 
-	i = 0;
-	if (!tab)
+static void	ft_free_cub(t_cub3d *cub)
+{
+	if (!cub)
 		return ;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
+	ft_free_tab(cub->map);
 }
