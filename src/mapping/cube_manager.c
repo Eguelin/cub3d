@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/14 11:30:04 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/16 21:52:01 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ static int ft_handle_keypress(int keycode, t_cube *cub)
 	ft_printf("Keycode: %d\n", keycode);
 	if (keycode == 65307)
 		ft_close_window(cub);
-	if (keycode == 122)
-		ft_player_move(cub, keycode);
+	if (keycode == 122 || keycode == 115 \
+	|| keycode == 113 || keycode == 100)
+		ft_move_direction(cub, keycode);
+	else if (keycode == 65361 || keycode == 65363)
+		ft_angle_direction(cub, keycode);
+	set_view_minimap(cub, cub->map);
 	return (EXIT_SUCCESS);
 }
 
@@ -60,9 +64,10 @@ void	cube_manager(t_cube *cub)
 	// width = 32;
 	cub->mlx = mlx_init();
 	cub->mlx_win = mlx_new_window(cub->mlx, 860, 620, "Cub3d");
-	ft_minimap(cub, cub->map);
-	mlx_key_hook(cub->mlx_win, ft_handle_keypress, cub);
+	//mlx_key_hook(cub->mlx_win, ft_handle_keypress, cub);
 	// mlx_hook(cub->mlx_win, 2, 0, ft_handle_keypress, &cub);
+	mlx_hook(cub->mlx_win, 2, 1L<<0, ft_handle_keypress, cub);
 	mlx_hook(cub->mlx_win, 17, 0, ft_close_window, &cub);
+	ft_minimap(cub, cub->map);
 	mlx_loop(cub->mlx);
 }
