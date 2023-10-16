@@ -6,12 +6,13 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/15 15:00:26 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/16 17:39:49 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static char		*ft_fill_file(int fd);
 static size_t	ft_count_line(char const *file);
 static size_t	ft_char_occurrences(char const c, char const *str, size_t size);
 
@@ -32,9 +33,9 @@ char	**ft_open_file(char const *name)
 	if (!file)
 		ft_exit(NULL, NULL, MALLOC_ERROR);
 	i = 0;
-	file[i] = get_next_line(fd);
+	file[i] = ft_fill_file(fd);
 	while (file[i])
-		file[++i] = get_next_line(fd);
+		file[++i] = ft_fill_file(fd);
 	close(fd);
 	if (i != n_line)
 	{
@@ -42,6 +43,27 @@ char	**ft_open_file(char const *name)
 		ft_exit(NULL, NULL, MALLOC_ERROR);
 	}
 	return (file);
+}
+
+static char	*ft_fill_file(int fd)
+{
+	char	*line;
+	size_t	size;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (NULL);
+	size = ft_strlen(line);
+	if (!size)
+		return (line);
+	size--;
+	while (size && line[size] == ' ')
+		size--;
+	if (line[size] == ' ')
+		line[size] = 0;
+	else
+		line[size + 1] = 0;
+	return (line);
 }
 
 static size_t	ft_count_line(char const *file)
