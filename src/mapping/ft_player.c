@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 08:54:38 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/16 21:54:26 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/17 15:13:19 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void	ft_move_direction(t_cube *cub, int keycode)
 {
 	printf("x_start : %f\n", cub->player.x_start);
 	printf("y_start : %f\n", cub->player.y_start);
-	if (keycode == 122)
+	if (keycode == KEY_W)
 	{
 		cub->player.y_start -= (cos(cub->player.angle) / 4);
 		cub->player.x_start += (sin(cub->player.angle) / 4);
 	}
-	else if (keycode == 115)
+	else if (keycode == KEY_S)
 	{
 		cub->player.y_start += (cos(cub->player.angle) / 4);
 		cub->player.x_start -= (sin(cub->player.angle) / 4);
 	}
-	else if (keycode == 113)
+	else if (keycode == KEY_A)
 	{
 		cub->player.y_start += (sin(cub->player.angle) / 4);
 		cub->player.x_start -= (cos(cub->player.angle) / 4);
 	}
-	else if (keycode == 100)
+	else if (keycode == KEY_D)
 	{
 		cub->player.y_start -= (sin(cub->player.angle) / 4);
 		cub->player.x_start += (cos(cub->player.angle) / 4);
