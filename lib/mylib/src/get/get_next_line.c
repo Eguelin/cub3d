@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 17:57:15 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/16 14:59:31 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/17 18:49:06 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*ft_join_line(char *s1, char *s2, size_t size)
 	size_t	j;
 
 	if (s2[size - 1] == '\n')
-	 	size--;
+		size--;
 	join = malloc(ft_strlen(s1) + size + 1);
 	if (!join)
 	{

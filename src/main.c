@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/16 19:14:49 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/17 18:56:31 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)env;
-	cub.map = NULL;
+	ft_init_cub3d(&cub);
 	ft_parser(&cub, argv);
 	ft_printf_tab(cub.map);
-	printf("x = %lf, y = %lf\n", cub.player.x, cub.player.y);
+	printf("x = %lf, y = %lf\n", cub.player.position.x, cub.player.position.y);
 	ft_exit(&cub, NULL, EXIT_SUCCESS);
 	return (0);
 }

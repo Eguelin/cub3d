@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/15 15:04:17 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/17 18:55:59 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c
 ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
 
 UTILS_DIR		= utils/
-UTILS_FILES		= ft_exit.c ft_perror.c
+UTILS_FILES		= ft_exit.c ft_init_cub3d.c ft_perror.c
 ALL_FILES		+= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 INC_FILES		= $(NAME).h
