@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:39:14 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/15 15:56:07 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/17 19:39:04 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_parser(t_cub3d *cub, char **argv)
 	}
 	ft_get_map(cub, file);
 	ft_free_tab(file);
-	ft_check_map(cub);
 }
 
 static int	content_condition(char *file, int *tab)
