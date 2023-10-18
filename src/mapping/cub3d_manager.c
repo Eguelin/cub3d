@@ -17,9 +17,10 @@ static int ft_handle_keypress(int keycode, t_cub3d *cub)
 	ft_printf("Keycode: %d\n", keycode);
 	if (keycode == KEY_ESC)
 		ft_exit(cub, NULL, EXIT_SUCCESS);
-	if (keycode == KEY_W || keycode == KEY_S \
-	|| keycode == KEY_A || keycode == KEY_D)
-		ft_move_direction(cub, keycode);
+	else if (keycode == KEY_W || keycode == KEY_S)
+		ft_move_north_south(cub, keycode);
+	else if (keycode == KEY_A || keycode == KEY_D)
+		ft_move_east_west(cub, keycode);
 	else if (keycode == KEY_LEFT_ARROW || keycode == KEY_RIGHT_ARROW)
 		ft_angle_direction(cub, keycode);
 	ft_put_img_to_img(cub);
@@ -34,8 +35,6 @@ void	cub3d_manager(t_cub3d *cub)
 	// len = 32;
 	// width = 32;
 	cub->mlx_win = mlx_new_window(cub->mlx, 1920, 1080, "Cub3d");
-	//mlx_key_hook(cub->mlx_win, ft_handle_keypress, cub);
-	// mlx_hook(cub->mlx_win, 2, 0, ft_handle_keypress, &cub);
 	mlx_hook(cub->mlx_win, 2, 1L<<0, ft_handle_keypress, cub);
 	mlx_hook(cub->mlx_win, 17, 0, ft_close_win, cub);
 	ft_minimap(cub, cub->map);
