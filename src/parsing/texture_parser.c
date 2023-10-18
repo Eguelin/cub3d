@@ -6,13 +6,13 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/13 01:52:30 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 14:16:40 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	set_texture_to_img(t_cube *cub, char *str, int i)
+static int	set_texture_to_img(t_cub3d *cub, char *str, int i)
 {
 	int	len;
 
@@ -23,11 +23,10 @@ static int	set_texture_to_img(t_cube *cub, char *str, int i)
 	&cub->texture[i].w, &cub->texture[i].h);
 	if (!cub->texture[i].img)
 		return (EXIT_FAILURE);
-	ft_printf_fd(2, "%s successfully added !\n", str);
 	return (EXIT_SUCCESS);
 }
 
-static int	get_texture(t_cube *cub, char *str, char *to_find)
+static int	get_texture(t_cub3d *cub, char *str, char *to_find)
 {
 	int		i;
 
@@ -54,7 +53,7 @@ static int	get_texture(t_cube *cub, char *str, char *to_find)
 	return (EXIT_SUCCESS);
 }
 
-static int	check_texture(t_cube *cub, char **file, char *to_find, char c)
+static int	check_texture(t_cub3d *cub, char **file, char *to_find, char c)
 {
 	int	i;
 	int	j;
@@ -82,7 +81,7 @@ static int	check_texture(t_cube *cub, char **file, char *to_find, char c)
 	return (EXIT_FAILURE);
 }
 
-int	init_texture(t_cube *cub, char **file)
+int	init_texture(t_cub3d *cub, char **file)
 {
 	if (check_texture(cub, file, "NO", 'N') == EXIT_FAILURE)
 		return (EXIT_FAILURE);

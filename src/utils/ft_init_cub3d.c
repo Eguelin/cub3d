@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_bat.c                                      :+:      :+:    :+:   */
+/*   ft_init_cub3d.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:00:45 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/11 16:51:32 by acarlott         ###   ########lyon.fr   */
+/*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/18 14:14:43 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mylib.h"
+#include "cub3d.h"
 
-void	ft_free_bat(void **tab, size_t size)
+void	ft_init_cub3d(t_cub3d	*cub)
 {
-	size_t	i;
-
+	int	i;
+	
+	cub->mlx = mlx_init();
+	cub->f_colors = -1;
+	cub->c_colors = -1;
+	cub->mlx_win = NULL;
+	cub->windows.img = NULL;
+	cub->minimap_img.img = NULL;
+	cub->player_img.img = NULL;
+	cub->map = NULL;
 	i = 0;
-	if (!tab)
-		return ;
-	while (i < size)
-		free(tab[i++]);
-	free(tab);
+	while (i < 4)
+	{
+		cub->texture[i].img = NULL;
+		i++;
+	}
 }

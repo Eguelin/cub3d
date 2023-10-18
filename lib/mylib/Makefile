@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 15:15:24 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/12 12:37:55 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/15 14:56:47 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ FILES_MEM = ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c
 FILES_ALL += $(addprefix $(MEM_DIR), $(FILES_MEM))
 
 OTHER_DIR = other/
-FILES_OTHER = ft_atoi.c ft_atouch.c ft_bzero.c ft_calloc.c ft_free_bat.c ft_free_split.c ft_itoa.c ft_split.c ft_tolower.c ft_toupper.c
+FILES_OTHER = ft_atoi.c ft_atouch.c ft_bzero.c ft_calloc.c ft_free_tab.c ft_itoa.c ft_split.c ft_tolower.c ft_toupper.c
 FILES_ALL += $(addprefix $(OTHER_DIR), $(FILES_OTHER))
 
 PRINT_DIR = print/

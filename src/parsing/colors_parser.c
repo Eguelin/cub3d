@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:36:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/13 01:39:13 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/15 15:56:54 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_colors_range(char **tab)
 	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
 
-static int	set_colors(t_cube *cub, char **tab, int view)
+static int	set_colors(t_cub3d *cub, char **tab, int view)
 {
 	if (view == FLOOR)
 	{
@@ -56,7 +56,7 @@ static int	set_colors(t_cube *cub, char **tab, int view)
 	return (EXIT_SUCCESS);
 }
 
-int	get_colors(t_cube *cub, char *str, int view)
+int	get_colors(t_cub3d *cub, char *str, int view)
 {
 	int	i;
 	char	**tab;
@@ -76,7 +76,7 @@ int	get_colors(t_cube *cub, char *str, int view)
 	if (!tab)
 		return (MALLOC_ERROR);
 	if (set_colors(cub, tab, view) == EXIT_FAILURE)
-		return (ft_free_split(tab), EXIT_FAILURE);
-	ft_free_split(tab);
+		return (ft_free_tab(tab), EXIT_FAILURE);
+	ft_free_tab(tab);
 	return (EXIT_SUCCESS);
 }

@@ -6,13 +6,13 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/17 17:50:56 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 14:26:31 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_put_element(t_cube *cub, float x, float y, int size)
+static void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 {
 	int	i;
 	int	j;
@@ -32,7 +32,7 @@ static void	ft_put_element(t_cube *cub, float x, float y, int size)
 		x++;
 	}
 }
-static void	get_minimap_img(t_cube *cub, char **map)
+static void	get_minimap_img(t_cub3d *cub, char **map)
 {
 	int	x;
 	int	y;
@@ -51,7 +51,7 @@ static void	get_minimap_img(t_cube *cub, char **map)
 	}
 }
 
-static void	get_player_img(t_cube *cub, int size)
+static void	get_player_img(t_cub3d *cub, int size)
 {
 	int	x;
 	int	y;
@@ -73,43 +73,16 @@ static void	get_player_img(t_cube *cub, int size)
 	}
 }
 
-
-static void	init_player_pos(t_cube *cub, char **map)
-{
-	int	x;
-	int	y;
-	
-	y = -1;
-	cub->player.angle = 0.0;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{
-			if (map[y][x] == 'N' || map[y][x] == 'S' \
-			|| map[y][x] == 'E' || map[y][x] == 'W')
-			{
-				cub->player.y_start = (float)y;
-				cub->player.x_start = (float)x;
-				printf("cub->player.y_start = %f\n", cub->player.y_start);
-				printf("cub->player.x_start = %f\n", cub->player.x_start);
-				break ;
-			}
-		}
-	}
-}
-
-void	ft_put_img_to_img(t_cube *cub)
+void	ft_put_img_to_img(t_cub3d *cub)
 {
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->minimap_img.img, 0, 0);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->player_img.img, (cub->player.x_start * 17) + 5, (cub->player.y_start * 17) + 5);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
 }
 
-void	ft_minimap(t_cube *cub, char **map)
+void	ft_minimap(t_cub3d *cub, char **map)
 {
 	get_minimap_img(cub, map);
 	get_player_img(cub, 7);
-	init_player_pos(cub, map);
 	ft_put_img_to_img(cub);
 }
 

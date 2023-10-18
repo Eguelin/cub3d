@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/17 17:42:52 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 14:21:17 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,11 @@
 
 typedef enum e_error
 {
-	WRONG_FORMAT,
+	WRONG_FORMAT = 1,
 	WRONG_FORMAT_BIS,
 	WRONG_ARGUMENTS,
 	OPEN_ERROR,
+	MAP_ERROR,
 	MALLOC_ERROR,
 	ENV_ERROR,
 	SORT_ERROR,
@@ -117,15 +118,11 @@ typedef enum e_view
 	WEST,
 }	t_view;
 
-
-typedef struct s_player
+typedef struct s_point
 {
-	float	angle;
-	float	x_start;
-	float	y_start;
-	float	x_end;
-	float	y_end;
-}	t_player;
+	double	x;
+	double	y;
+}	t_point;
 
 typedef struct s_texture
 {
@@ -138,7 +135,13 @@ typedef struct s_texture
 	int		endian;
 }	t_texture;
 
-typedef struct s_cube
+typedef struct s_player
+{
+	t_point	position;
+	double	angle;
+}	t_player;
+
+typedef struct s_cub3d
 {
 	t_texture	texture[4];
 	t_texture	minimap_img;
@@ -150,26 +153,32 @@ typedef struct s_cube
 	int			c_colors;
 	void		*mlx_win;
 	void		*mlx;
-}	t_cube;
+}	t_cub3d;
 
 /////// [parsing] ///////
-int		parsing(t_cube *cub, char **argv);
-int		init_texture(t_cube *cub, char **file);
-int		get_colors(t_cube *cub, char *str, int view);
+int		ft_check_map(t_cub3d *cub, char **start_map);
+void	ft_get_map(t_cub3d *cub, char **file);
 char	**ft_open_file(char const *file);
 /////// [MAPPING] ///////
-void	cube_manager(t_cube *cub);
+void	cub3d_manager(t_cub3d *cub);
 int		ft_count_map_len(char **map);
 int		ft_count_map_line(char **map);
-void	ft_minimap(t_cube *cub, char **map);
-void	ft_move_direction(t_cube *cub, int keycode);
-void	ft_angle_direction(t_cube *cub, int keycode);
-void	ft_put_img_to_img(t_cube *cub);
+void	ft_minimap(t_cub3d *cub, char **map);
+void	ft_move_direction(t_cub3d *cub, int keycode);
+void	ft_angle_direction(t_cub3d *cub, int keycode);
+void	ft_put_img_to_img(t_cub3d *cub);
 void	my_mlx_pixel_put(t_texture *txr, int x, int y, int color);
+void	ft_parser(t_cub3d *cub, char **argv);
+int		init_texture(t_cub3d *cub, char **file);
+int		get_colors(t_cub3d *cub, char *str, int view);
+
 /////// [utils] ///////
-int		ft_perror(const char *s, int error);
+void	ft_exit(t_cub3d *cub, char const *s, int exit);
+int		ft_close_win(t_cub3d *cub);
+void	ft_init_cub3d(t_cub3d	*cub);
+int		ft_perror(char const *s, int error);
 char	*ft_strndup(const char *s, int len);
-void	ft_destroy_texture(t_cube *cub);
+void	ft_destroy_texture(t_cub3d *cub);
 void	ft_free_bat(void **tab, size_t size);
 
 #endif

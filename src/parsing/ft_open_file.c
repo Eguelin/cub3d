@@ -3,111 +3,104 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/12 12:45:33 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/17 19:39:10 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_check_file_name(char const *name);
+static char		*ft_fill_file(int fd);
 static size_t	ft_count_line(char const *file);
-static int		ft_open(char const *file, int flag);
-static size_t	ft_char_occurrences(char const c, char const *str);
+static size_t	ft_char_occurrences(char const c, char const *str, size_t size);
 
-char	**ft_open_file(char const *file)
+char	**ft_open_file(char const *name)
 {
 	int		fd;
-	char	**line;
-	size_t	i;
+	char	**file;
 	size_t	n_line;
+	size_t	i;
 
-	i = 0;
-	if (ft_check_file_name(file))
-		return (NULL);
-	fd = ft_open(file, O_RDONLY);
+	if (ft_strncmp(name + ft_strlen(name) - 4, ".cub", 5))
+		ft_exit(NULL, name, WRONG_ARGUMENTS);
+	fd = open(name, O_RDONLY);
 	if (fd == -1)
-		return (NULL);
-	n_line = ft_count_line(file) + 1;
-	line = ft_calloc(sizeof(char *), n_line);
-	if (!line)
-		return (ft_perror(NULL, MALLOC_ERROR), NULL);
-	line[i] = get_next_line(fd);
-	while (line[i])
-		line[++i] = get_next_line(fd);
+		ft_exit(NULL, name, OPEN_ERROR);
+	n_line = ft_count_line(name);
+	file = ft_calloc(sizeof(char *), n_line + 1);
+	if (!file)
+		ft_exit(NULL, NULL, MALLOC_ERROR);
+	i = 0;
+	file[i] = ft_fill_file(fd);
+	while (file[i])
+		file[++i] = ft_fill_file(fd);
 	close(fd);
-	// if (i != n_line - 1)
-	// {
-	// 	ft_free_bat((void **)line, n_line);
-	// 	return (ft_perror(NULL, MALLOC_ERROR), NULL);
-	// }
-	return (line);
+	if (i != n_line)
+	{
+		ft_free_tab(file);
+		ft_exit(NULL, NULL, MALLOC_ERROR);
+	}
+	return (file);
 }
 
-static int	ft_check_file_name(char const *name)
+static char	*ft_fill_file(int fd)
 {
-	if (ft_strncmp(name + ft_strlen(name) - 4, ".cub", 5))
-	{
-		ft_perror(name, WRONG_ARGUMENTS);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+	char	*line;
+	size_t	size;
+
+	line = get_next_line(fd);
+	if (!line)
+		return (NULL);
+	size = ft_strlen(line);
+	if (!size)
+		return (line);
+	size--;
+	while (size && line[size] == ' ')
+		size--;
+	if (line[size] == ' ')
+		line[size] = 0;
+	else
+		line[size + 1] = 0;
+	return (line);
 }
 
 static size_t	ft_count_line(char const *file)
 {
-	char	buf[65];
+	char	buf[64];
 	int		fd;
 	size_t	count;
 	size_t	n_char;
 
 	count = 0;
 	n_char = 1;
-	fd = ft_open(file, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (count);
-	ft_memset(buf, 0, 65);
+		ft_exit(NULL, file, OPEN_ERROR);
+	n_char = read(fd, buf, 64);
 	while (n_char)
 	{
-		n_char = read(fd, buf, 64);
-		if (!(n_char + 1))
-			return (close(fd), 0);
-		count += ft_char_occurrences('\n', buf);
+		count += ft_char_occurrences('\n', buf, n_char);
 		if (n_char && n_char != 64 && buf[n_char - 1] != '\n')
 			count++;
-		ft_memset(buf, 0, 65);
+		n_char = read(fd, buf, 64);
 	}
 	close(fd);
 	return (count);
 }
 
-static int	ft_open(char const *file, int flag)
+static size_t	ft_char_occurrences(char const c, char const *str, size_t size)
 {
-	int		fd;
-
-	fd = open(file, flag);
-	if (fd == -1)
-	{
-		ft_perror(file, OPEN_ERROR);
-		return (-1);
-	}
-	return (fd);
-}
-
-static size_t	ft_char_occurrences(char const c, char const *str)
-{
-	size_t	i;
 	size_t	count;
 
-	i = 0;
 	count = 0;
-	while (str && str[i])
+	size--;
+	while (str && size + 1)
 	{
-		if (str[i] == c)
+		if (str[size] == c)
 			count++;
-		i++;
+		size--;
 	}
 	return (count);
 }

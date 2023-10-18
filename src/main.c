@@ -6,11 +6,21 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/14 10:53:57 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 13:58:58 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
+
+void	ft_printf_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+		printf("%s\n", tab[i++]);
+}
 
 static int	check_init(int argc, char **env)
 {
@@ -29,17 +39,17 @@ static int	check_init(int argc, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_cube	cub;
+	t_cub3d	cub;
 
-	cub.mlx = mlx_init();
-	cub.f_colors = -1;
-	cub.c_colors = -1;
+	ft_init_cub3d(&cub);
 	if (check_init(argc, env) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
-	if (parsing(&cub, argv) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
-	cube_manager(&cub);
-	ft_destroy_texture(&cub);
-	free(cub.mlx);
+	ft_parser(&cub, argv);
+	ft_printf_tab(cub.map);
+	printf("x = %lf, y = %lf\n", cub.player.position.x, cub.player.position.y);
+	ft_printf_fd(2, "Fcolors : %d\n", cub.f_colors);
+	ft_printf_fd(2, "Ccolors : %d\n", cub.c_colors);
+	cub3d_manager(&cub);
+	ft_exit(&cub, NULL, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }

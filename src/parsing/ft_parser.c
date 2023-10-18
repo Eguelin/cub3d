@@ -1,16 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 13:46:19 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/13 00:48:01 by acarlott         ###   ########lyon.fr   */
+/*   Created: 2023/10/14 18:39:14 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/18 11:16:29 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	content_condition(char *file, int *tab);
+static int	check_content(char **file);
+
+void	ft_parser(t_cub3d *cub, char **argv)
+{
+	char	**file;
+
+	file = ft_open_file(argv[1]);
+	if (check_content(file))
+	{
+		ft_free_tab(file);
+		ft_exit(cub, "Duplicate or wrong input path", SORT_ERROR);
+	}
+	if (init_texture(cub, file))
+	{
+		ft_free_tab(file);
+		ft_exit(cub, NULL, MALLOC_ERROR);
+	}
+	ft_get_map(cub, file);
+	ft_free_tab(file);
+}
 
 static int	content_condition(char *file, int *tab)
 {
@@ -40,7 +62,7 @@ static int	check_content(char **file)
 	ft_memset(tab, 0, sizeof(tab));
 	while (file[i] && value != 6)
 	{
-		while (file[i][0] == '\n')
+		while (file[i][0] == '\0')
 			i++;
 		if (!file[i])
 			break ;
@@ -52,21 +74,5 @@ static int	check_content(char **file)
 	}
 	if (value != 6)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-int	parsing(t_cube *cub, char **argv)
-{
-	char	**file;
-
-	file = ft_open_file(argv[1]);
-	if (!file)
-		return (EXIT_FAILURE);
-	if (check_content(file) == EXIT_FAILURE)
-		return (ft_free_split(file),  \
-		ft_perror("Duplicate or wrong input path", SORT_ERROR));
-	if (init_texture(cub, file) == EXIT_FAILURE)
-		return (ft_free_split(file), EXIT_FAILURE);
-	ft_free_split(file);
 	return (EXIT_SUCCESS);
 }

@@ -1,9 +1,0 @@
-Faire une fonction qui fais un ratio d'une texture, exemple la texture est en 16x16
-on veut que la fonction la convertisse en 32x32;
-
-
-----
-
-implentez vecteur et my_mlx_pixel pour les deplacements du joueur !
-faire marcher mlx_hook pour vire le key_hook de mort qui prend pas en charge l'appui continu d'une touche
-modifier la struct player pour la rendre clean et chopper toute les coordonnés
