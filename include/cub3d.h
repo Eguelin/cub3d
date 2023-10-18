@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/17 19:40:35 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 15:12:52 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ typedef struct s_point
 	double	y;
 }	t_point;
 
-typedef struct s_texture
+typedef struct s_image
 {
-	char	*addr;
 	void	*img;
-	int		w;
-	int		h;
+	char	*addr;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_texture;
+}	t_image;
 
 typedef struct s_player
 {
@@ -68,8 +68,8 @@ typedef struct s_player
 
 typedef struct s_cub3d
 {
-	t_texture	texture[4];
-	t_texture	windows;
+	t_image		texture[4];
+	t_image		windows;
 	char		**map;
 	t_player	player;
 	int			f_colors;
