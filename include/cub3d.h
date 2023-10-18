@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 14:21:17 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 15:21:31 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,16 @@ typedef struct s_point
 	double	y;
 }	t_point;
 
-typedef struct s_texture
+typedef struct s_image
 {
-	char	*addr;
 	void	*img;
-	int		w;
-	int		h;
+	char	*addr;
+	int		width;
+	int		height;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_texture;
+}	t_image;
 
 typedef struct s_player
 {
@@ -143,10 +143,10 @@ typedef struct s_player
 
 typedef struct s_cub3d
 {
-	t_texture	texture[4];
-	t_texture	minimap_img;
-	t_texture	player_img;
-	t_texture	windows;
+	t_image		texture[4];
+	t_image		minimap_img;
+	t_image		player_img;
+	t_image		windows;
 	t_player	player;
 	char		**map;
 	int			f_colors;
@@ -167,7 +167,7 @@ void	ft_minimap(t_cub3d *cub, char **map);
 void	ft_move_direction(t_cub3d *cub, int keycode);
 void	ft_angle_direction(t_cub3d *cub, int keycode);
 void	ft_put_img_to_img(t_cub3d *cub);
-void	my_mlx_pixel_put(t_texture *txr, int x, int y, int color);
+void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);
 void	ft_parser(t_cub3d *cub, char **argv);
 int		init_texture(t_cub3d *cub, char **file);
 int		get_colors(t_cub3d *cub, char *str, int view);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapping.c                                          :+:      :+:    :+:   */
+/*   mapping_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:49:34 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/18 12:49:36 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 15:21:31 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_texture *txr, int x, int y, int color)
+void	my_mlx_pixel_put(t_image *txr, int x, int y, int color)
 {
 	char	*dst;
 
