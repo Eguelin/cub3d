@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_close_win.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 14:15:17 by nibernar          #+#    #+#             */
-/*   Updated: 2023/10/18 15:55:21 by eguelin          ###   ########lyon.fr   */
+/*   Created: 2023/10/18 15:48:10 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/18 15:54:59 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*ft_strndup(const char *s, int len)
+int	ft_close_win(t_cub3d *cub)
 {
-	char	*str;
-	int		i;
-
-	i = 0;
-	str = (char *)ft_calloc(sizeof(char), (len + 1));
-	if (!str)
-		return (0);
-	while (i < len)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	return (str);
+	ft_exit(cub, NULL, EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

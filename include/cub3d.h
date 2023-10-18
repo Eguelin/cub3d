@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 15:21:31 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 15:50:00 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,15 +159,6 @@ typedef struct s_cub3d
 int		ft_check_map(t_cub3d *cub, char **start_map);
 void	ft_get_map(t_cub3d *cub, char **file);
 char	**ft_open_file(char const *file);
-/////// [MAPPING] ///////
-void	cub3d_manager(t_cub3d *cub);
-int		ft_count_map_len(char **map);
-int		ft_count_map_line(char **map);
-void	ft_minimap(t_cub3d *cub, char **map);
-void	ft_move_direction(t_cub3d *cub, int keycode);
-void	ft_angle_direction(t_cub3d *cub, int keycode);
-void	ft_put_img_to_img(t_cub3d *cub);
-void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);
 void	ft_parser(t_cub3d *cub, char **argv);
 int		init_texture(t_cub3d *cub, char **file);
 int		get_colors(t_cub3d *cub, char *str, int view);
@@ -178,7 +169,5 @@ int		ft_close_win(t_cub3d *cub);
 void	ft_init_cub3d(t_cub3d	*cub);
 int		ft_perror(char const *s, int error);
 char	*ft_strndup(const char *s, int len);
-void	ft_destroy_texture(t_cub3d *cub);
-void	ft_free_bat(void **tab, size_t size);
 
 #endif
