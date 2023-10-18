@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/17 19:39:41 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 11:13:01 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv, char **env)
 	cub.mlx = mlx_init();
 	cub.f_colors = -1;
 	cub.c_colors = -1;
+	ft_init_cub3d(&cub);
 	if (check_init(argc, env) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	ft_parser(&cub, argv);

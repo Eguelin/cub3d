@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:39:14 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/17 19:39:04 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 11:16:29 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	check_content(char **file)
 	ft_memset(tab, 0, sizeof(tab));
 	while (file[i] && value != 6)
 	{
-		while (file[i][0] == '\n')
+		while (file[i][0] == '\0')
 			i++;
 		if (!file[i])
 			break ;
