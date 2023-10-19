@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 12:50:09 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 13:33:43 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,5 @@ int		ft_close_win(t_cub3d *cub);
 void	ft_init_cub3d(t_cub3d	*cub);
 int		ft_perror(char const *s, int error);
 char	*ft_strndup(const char *s, int len);
-void	ft_destroy_texture(t_cub3d *cub);
 
 #endif

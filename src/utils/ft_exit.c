@@ -3,22 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 14:20:49 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/18 15:55:02 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	ft_free_cub(t_cub3d *cub);
-
-int	ft_close_win(t_cub3d *cub)
-{
-	ft_exit(cub, NULL, EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
-}
+static void	ft_destroy_texture(t_cub3d *cub);
 
 void	ft_exit(t_cub3d *cub, char const *s, int return_value)
 {
@@ -28,7 +23,21 @@ void	ft_exit(t_cub3d *cub, char const *s, int return_value)
 	exit(return_value);
 }
 
-void	ft_destroy_texture(t_cub3d *cub)
+static void	ft_free_cub(t_cub3d *cub)
+{
+	if (!cub)
+		return ;
+	ft_free_tab(cub->map);
+	ft_destroy_texture(cub);
+	if (cub->mlx_win)
+		mlx_destroy_window(cub->mlx, cub->mlx_win);
+	if (cub->mlx)
+		mlx_destroy_display(cub->mlx);
+	free(cub->mlx);
+
+}
+
+static void	ft_destroy_texture(t_cub3d *cub)
 {
 	int	i;
 
@@ -45,18 +54,4 @@ void	ft_destroy_texture(t_cub3d *cub)
 			mlx_destroy_image(cub->mlx, cub->texture[i].img);
 		i++;
 	}
-}
-
-static void	ft_free_cub(t_cub3d *cub)
-{
-	if (!cub)
-		return ;
-	ft_free_tab(cub->map);
-	ft_destroy_texture(cub);
-	if (cub->mlx_win)
-		mlx_destroy_window(cub->mlx, cub->mlx_win);
-	if (cub->mlx)
-		mlx_destroy_display(cub->mlx);
-	free(cub->mlx);
-	
 }

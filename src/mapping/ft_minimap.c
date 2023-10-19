@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/19 12:53:36 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 14:57:28 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	get_minimap_img(t_cub3d *cub, char **map)
 	int	y;
 
 	y = -1;
-	cub->minimap_img.img = mlx_new_image(cub->mlx, 1920, 1080);
+	cub->minimap_img.img = mlx_new_image(cub->mlx, cub->minimap_img.width * 17, cub->minimap_img.height * 17);
 	cub->minimap_img.addr = mlx_get_data_addr(cub->minimap_img.img, \
 	&cub->minimap_img.bits_per_pixel, &cub->minimap_img.line_length, \
 	&cub->minimap_img.endian);
@@ -83,46 +83,43 @@ int get_pixel_color(t_image *img, int x, int y)
 
 void set_pixel_color(t_image *img, int x, int y, int color) 
 {
-	char	*pixel;
+	char *pixel;
+	// y * img.width + x
 	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*((unsigned int*)img->addr) = color;
+	*((unsigned int*)pixel) = color;
 }
 
 void	ft_put_img_to_img(t_cub3d *cub, t_image *img, int x, int y)
 {
-	(void)img;
-	(void)x;
-	(void)y;
-	int	combined_pixel;
-	int	x_start;
+	unsigned int	combined_pixel;
+	int				x_start;
 
 	combined_pixel = 0;
 	x_start = x;
-	ft_printf("Height = %d\n", img->height);
-	ft_printf("Width = %d\n", img->width);
 	while (y < img->height)
 	{
+		ft_printf("Height = %d\n", img->height);
+		ft_printf("Width = %d\n", img->height);
 		x = x_start;
-		combined_pixel = 0;
 		while (x < img->width)
 		{
 			combined_pixel += get_pixel_color(img, x, y);
-			combined_pixel += get_pixel_color(cub->windows.img, x, y);
-			set_pixel_color(cub->windows.img, x, y, combined_pixel);
+			combined_pixel += get_pixel_color(&cub->windows, x, y);
+			set_pixel_color(&cub->windows, 0, 0, combined_pixel);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows.img, 0, 0);
-	// mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->minimap_img.img, 0, 0);
-	// mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
+	// mlx_put_image_to_window(cub->mlx, cub->mlx_win, &cub->windows.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->minimap_img.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
 }
 
 void	ft_minimap(t_cub3d *cub, char **map)
 {
 	get_minimap_img(cub, map);
 	get_player_img(cub, 7);
-	ft_put_img_to_img(cub, cub->minimap_img.img, 0, 0);
+	ft_put_img_to_img(cub, &cub->minimap_img, 0, 0);
 	//ft_put_img_to_img(cub, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
 }
 

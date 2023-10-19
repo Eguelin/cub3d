@@ -23,8 +23,8 @@ static int ft_handle_keypress(int keycode, t_cub3d *cub)
 		ft_move_east_west(cub, keycode);
 	else if (keycode == KEY_LEFT_ARROW || keycode == KEY_RIGHT_ARROW)
 		ft_angle_direction(cub, keycode);
-	ft_put_img_to_img(cub, cub->minimap_img.img, 0, 0);
-	ft_put_img_to_img(cub, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
+	ft_put_img_to_img(cub, &cub->minimap_img, 0, 0);
+	ft_put_img_to_img(cub, &cub->player_img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
 	return (EXIT_SUCCESS);
 }
 

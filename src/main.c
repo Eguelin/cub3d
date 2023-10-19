@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 15:30:44 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 13:58:58 by acarlott         ###   ########lyon.fr   */
+/*   Created: 2023/10/18 15:55:39 by eguelin           #+#    #+#             */
+/*   Updated: 2023/10/19 13:10:01 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int	main(int argc, char **argv, char **env)
 	ft_printf_fd(2, "Fcolors : %d\n", cub.f_colors);
 	ft_printf_fd(2, "Ccolors : %d\n", cub.c_colors);
 	cub3d_manager(&cub);
-	ft_exit(&cub, NULL, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }

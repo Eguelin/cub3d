@@ -1,4 +1,4 @@
-SO ./texture/metal_box.xpm
+SO ./texture/metal_box.xp
 WE ./texture/white_floor.xpm
 EA ./texture/light_2.xpm
 NO ./texture/Floor1.xpm

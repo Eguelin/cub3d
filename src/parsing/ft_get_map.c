@@ -6,32 +6,31 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:07:55 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/17 19:24:45 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 12:29:36 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static size_t	ft_get_index(char **file, int flag);
-static int		ft_fill_map(char **start_map, char **map, size_t size);
+static int		ft_fill_map(char **start_map, t_cub3d *cub);
 static size_t	ft_map_len(char **start_map);
 static int		ft_is_subset_of(char const *line, char const *set);
 
 void	ft_get_map(t_cub3d *cub, char **file)
 {
-	size_t	size;
 	char	**start_map;
 
-	size = ft_get_index(file, 0);
-	start_map = file + size;
-	size = ft_get_index(start_map, 1);
-	if (!size)
+	cub->minimap_img.height = ft_get_index(file, 0);
+	start_map = file + cub->minimap_img.height;
+	cub->minimap_img.height = ft_get_index(start_map, 1);
+	if (!cub->minimap_img.height)
 	{
 		ft_free_tab(file);
 		ft_exit(NULL, NULL, MAP_ERROR);
 	}
-	cub->map = ft_calloc((size + 1), sizeof(char *));
-	if (!cub->map || ft_fill_map(start_map, cub->map, size))
+	cub->map = ft_calloc((cub->minimap_img.height + 1), sizeof(char *));
+	if (!cub->map || ft_fill_map(start_map, cub))
 	{
 		ft_free_tab(file);
 		ft_exit(NULL, NULL, MALLOC_ERROR);
@@ -69,23 +68,22 @@ static size_t	ft_get_index(char **file, int flag)
 	return (i);
 }
 
-static int	ft_fill_map(char **start_map, char **map, size_t size)
+static int	ft_fill_map(char **start_map, t_cub3d *cub)
 {
 	size_t	i;
 	size_t	j;
-	size_t	len;
 
 	i = 0;
-	len = ft_map_len(start_map);
-	while (i < size)
+	cub->minimap_img.width = ft_map_len(start_map);
+	while (i < (size_t)cub->minimap_img.height)
 	{
-		map[i] = ft_calloc(len + 1, sizeof(char));
-		if (!map[i])
+		cub->map[i] = ft_calloc(cub->minimap_img.width + 1, sizeof(char));
+		if (!cub->map[i])
 			return (EXIT_FAILURE);
 		j = 0;
-		while (start_map[i][j] && j < len)
+		while (start_map[i][j] && j < (size_t)cub->minimap_img.width)
 		{
-			map[i][j] = start_map[i][j];
+			cub->map[i][j] = start_map[i][j];
 			j++;
 		}
 		i++;
