@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/19 14:57:28 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 17:02:37 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 		x++;
 	}
 }
+
 static void	get_minimap_img(t_cub3d *cub, char **map)
 {
 	int	x;
@@ -73,53 +74,32 @@ static void	get_player_img(t_cub3d *cub, int size)
 	}
 }
 
-int get_pixel_color(t_image *img, int x, int y) 
+void	ft_put_img_to_img(t_img *img_1, t_img *img_2, int x, int y)
 {
-	char *pixel;
-	
-	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	return *((unsigned int*)pixel);
-}
+	int		*start;
+	int		i;
+	int		j;
 
-void set_pixel_color(t_image *img, int x, int y, int color) 
-{
-	char *pixel;
-	// y * img.width + x
-	pixel = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*((unsigned int*)pixel) = color;
-}
-
-void	ft_put_img_to_img(t_cub3d *cub, t_image *img, int x, int y)
-{
-	unsigned int	combined_pixel;
-	int				x_start;
-
-	combined_pixel = 0;
-	x_start = x;
-	while (y < img->height)
+	i = 0;
+	while (i < (img_1->height - y) && i < img_2->height)
 	{
-		ft_printf("Height = %d\n", img->height);
-		ft_printf("Width = %d\n", img->height);
-		x = x_start;
-		while (x < img->width)
+		j = 0;
+		start = ((int *)img_1->data) + (img_1->width * (y + i)+ x);
+		while (j < (img_1->width - x) && j < img_2->width)
 		{
-			combined_pixel += get_pixel_color(img, x, y);
-			combined_pixel += get_pixel_color(&cub->windows, x, y);
-			set_pixel_color(&cub->windows, 0, 0, combined_pixel);
-			x++;
+			start[j] = ((int *)img_2->data)[i * img_2->width + j];
+			j++;
 		}
-		y++;
+		i++;
 	}
-	// mlx_put_image_to_window(cub->mlx, cub->mlx_win, &cub->windows.img, 0, 0);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->minimap_img.img, 0, 0);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
 }
 
 void	ft_minimap(t_cub3d *cub, char **map)
 {
 	get_minimap_img(cub, map);
 	get_player_img(cub, 7);
-	ft_put_img_to_img(cub, &cub->minimap_img, 0, 0);
-	//ft_put_img_to_img(cub, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
+	ft_put_img_to_img(cub->windows.img, cub->minimap_img.img, 0, 0);
+	ft_put_img_to_img(cub->windows.img, cub->player_img.img, (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows.img, 0, 0);
 }
 

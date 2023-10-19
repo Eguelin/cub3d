@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 13:33:43 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 17:01:07 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include "mylib.h"
 # include "mlx.h"
+# include "mlx_int.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
@@ -167,7 +168,7 @@ void	ft_minimap(t_cub3d *cub, char **map);
 void	ft_move_north_south(t_cub3d *cub, int keycode);
 void	ft_move_east_west(t_cub3d *cub, int keycode);
 void	ft_angle_direction(t_cub3d *cub, int keycode);
-void	ft_put_img_to_img(t_cub3d *cub, t_image *img, int x, int y);
+void	ft_put_img_to_img(t_img *img_1, t_img *img_2, int x, int y);
 void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);
 void	ft_parser(t_cub3d *cub, char **argv);
 int		init_texture(t_cub3d *cub, char **file);
