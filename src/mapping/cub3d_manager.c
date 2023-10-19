@@ -31,13 +31,16 @@ static int ft_handle_keypress(int keycode, t_cub3d *cub)
 
 void	cub3d_manager(t_cub3d *cub)
 {
-	cub->windows.img = mlx_new_image(cub->mlx, 1920, 1080);
-	cub->windows.addr = mlx_get_data_addr(cub->windows.img, \
-	&cub->windows.bits_per_pixel, &cub->windows.line_length, \
-	&cub->windows.endian);
-	cub->mlx_win = mlx_new_window(cub->mlx, 1920, 1080, "Cub3d");
+	cub->mlx_win = mlx_new_window(cub->mlx, 860, 620, "Cub3d");
 	mlx_hook(cub->mlx_win, 2, 1L<<0, ft_handle_keypress, cub);
 	mlx_hook(cub->mlx_win, 17, 0, ft_close_win, cub);
-	ft_minimap(cub, cub->map);
+	// set_window_img(cub, 1920, 1080);
+	// set_minimap_img(cub, cub->map);
+	//  set_player_img(cub, 7);
+	// ft_put_img_to_img(cub->windows.img, cub->minimap_img.img, 0, 0);
+	// ft_put_img_to_img(cub->windows.img, cub->player_img.img, 
+	// (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
+	ft_resize_img(cub, &cub->texture[0], 420);
+	// mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows.img, 0, 0);
 	mlx_loop(cub->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:04:52 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 15:54:42 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 17:13:24 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_check_map(t_cub3d *cub, char **start_map)
 
 static void	ft_diffusion(char **map, size_t x, size_t y)
 {
-	if (y < 0 || !map[y] || x < 0 || x >= ft_strlen(map[y]))
+	if (!map[y] || x >= ft_strlen(map[y]))
 		return ;
 	if (map[y][x] != ' ')
 		map[y][x] = ' ';

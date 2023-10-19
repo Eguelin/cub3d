@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 17:01:07 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 20:09:41 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,19 +160,24 @@ typedef struct s_cub3d
 int		ft_check_map(t_cub3d *cub, char **start_map);
 void	ft_get_map(t_cub3d *cub, char **file);
 char	**ft_open_file(char const *file);
-/////// [MAPPING] ///////
-void	cub3d_manager(t_cub3d *cub);
-int		ft_count_map_len(char **map);
-int		ft_count_map_line(char **map);
-void	ft_minimap(t_cub3d *cub, char **map);
-void	ft_move_north_south(t_cub3d *cub, int keycode);
-void	ft_move_east_west(t_cub3d *cub, int keycode);
-void	ft_angle_direction(t_cub3d *cub, int keycode);
-void	ft_put_img_to_img(t_img *img_1, t_img *img_2, int x, int y);
-void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);
 void	ft_parser(t_cub3d *cub, char **argv);
 int		init_texture(t_cub3d *cub, char **file);
 int		get_colors(t_cub3d *cub, char *str, int view);
+/////// [MAPPING] ///////
+void	cub3d_manager(t_cub3d *cub);
+// [IMG] //
+void	set_player_img(t_cub3d *cub, int size);
+void	set_minimap_img(t_cub3d *cub, char **map);
+void	set_window_img(t_cub3d *cub, int width, int height);
+void	ft_put_img_to_img(t_img *img_1, t_img *img_2, int x, int y);
+void	ft_resize_img(t_cub3d *cub, t_image *img, int len);
+// [PIXEL] //
+void	ft_put_element(t_cub3d *cub, float x, float y, int size);
+void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);
+// [MOVE] //
+void	ft_move_north_south(t_cub3d *cub, int keycode);
+void	ft_move_east_west(t_cub3d *cub, int keycode);
+void	ft_angle_direction(t_cub3d *cub, int keycode);
 
 /////// [utils] ///////
 void	ft_exit(t_cub3d *cub, char const *s, int exit);

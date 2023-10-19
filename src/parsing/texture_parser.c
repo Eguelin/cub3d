@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/19 14:01:42 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 21:11:32 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static int	set_texture_to_img(t_cub3d *cub, char *str, int i)
 	&cub->texture[i].width, &cub->texture[i].height);
 	if (!cub->texture[i].img)
 		return (EXIT_FAILURE);
+	cub->texture[i].addr = mlx_get_data_addr(cub->texture[i].img, \
+	&cub->texture[i].bits_per_pixel, &cub->texture[i].line_length, \
+	&cub->texture[i].endian);
 	return (EXIT_SUCCESS);
 }
 
