@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/18 15:53:29 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/19 18:08:18 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,10 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 
 #Sources
 ALL_FILES = main.c
+
+MLX-P_DIR		= mlx-plug-in/
+MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c
+ALL_FILES		+= $(addprefix $(MLX-P_DIR), $(MLX-P_FILES))
 
 PARS_DIR		= parsing/
 PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c

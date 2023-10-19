@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/18 15:54:55 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 17:51:13 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 static int	set_texture_to_img(t_cub3d *cub, char *str, int i)
 {
 	int	len;
+	int	w;
+	int	h;
 
 	len = ft_strlen(str);
 	if (len > 0 && str[len - 1] == '\n')
 		str[len -1] = '\0';
-	cub->texture[i].img = mlx_xpm_file_to_image(cub->mlx, str, \
-	&cub->texture[i].width, &cub->texture[i].height);
-	if (!cub->texture[i].img)
+	cub->texture[i]= mlx_xpm_file_to_image(cub->mlx, str, \
+	&w, &h);
+	if (!cub->texture[i])
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

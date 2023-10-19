@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 11:48:23 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/19 18:06:56 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 # include "mylib.h"
 # include "mlx.h"
+# include "mlx_int.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
@@ -124,17 +125,6 @@ typedef struct s_point
 	double	y;
 }	t_point;
 
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_image;
-
 typedef struct s_player
 {
 	t_point	position;
@@ -143,17 +133,21 @@ typedef struct s_player
 
 typedef struct s_cub3d
 {
-	t_image		texture[4];
-	t_image		minimap_img;
-	t_image		player_img;
-	t_image		windows;
+	void		*mlx;
+	void		*mlx_win;
 	t_player	player;
-	char		**map;
+	t_img		*windows;
+	t_img		*minimap_img;
+	t_img		*player_img;
+	t_img		*texture[4];
 	int			f_colors;
 	int			c_colors;
-	void		*mlx_win;
-	void		*mlx;
+	char		**map;
 }	t_cub3d;
+
+/////// [parsing] ///////
+void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
+void	ft_put_pixel_to_image(t_img *img, int x, int y, int color);
 
 /////// [parsing] ///////
 int		ft_check_map(t_cub3d *cub, char **start_map);
