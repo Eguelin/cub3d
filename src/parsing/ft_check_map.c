@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:04:52 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 15:54:42 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/20 19:08:31 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_check_map(t_cub3d *cub, char **start_map)
 	i = 0;
 	j = 0;
 	n_player = 0;
-	while (start_map[1][j] == ' ')
+	while (start_map[0][j] == ' ')
 		j++;
 	ft_diffusion(start_map, j, i);
 	while (cub->map[i])
@@ -47,16 +47,17 @@ int	ft_check_map(t_cub3d *cub, char **start_map)
 
 static void	ft_diffusion(char **map, size_t x, size_t y)
 {
-	if (y < 0 || !map[y] || x < 0 || x >= ft_strlen(map[y]))
+	if (y < 0 || !map[y] || x < 0 || (size_t)x >= ft_strlen(map[y]))
 		return ;
-	if (map[y][x] != ' ')
-		map[y][x] = ' ';
-	else
+	if (map[y][x] == ' ')
 		return ;
+	map[y][x] = ' ';
 	ft_diffusion(map, x + 1, y);
 	ft_diffusion(map, x, y + 1);
-	ft_diffusion(map, x - 1, y);
-	ft_diffusion(map, x, y - 1);
+	if (x != 0)
+		ft_diffusion(map, x - 1, y);
+	if (y != 0)
+		ft_diffusion(map, x, y - 1);
 }
 
 static int	ft_get_player(t_player *player, char **map, size_t i, int n_player)

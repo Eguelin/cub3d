@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 17:51:23 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/20 15:49:11 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	ft_init_cub3d(t_cub3d	*cub)
 		i++;
 	}
 	cub->mlx = mlx_init();
-	if (cub->mlx)
+	if (!cub->mlx)
 		ft_exit(cub, NULL, MALLOC_ERROR);
 }
