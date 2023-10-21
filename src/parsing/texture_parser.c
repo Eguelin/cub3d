@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/21 16:14:29 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	set_texture_to_img(t_cub3d *cub, char *str, int i)
 {

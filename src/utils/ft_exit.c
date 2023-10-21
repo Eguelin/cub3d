@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 16:16:09 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:59 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static void	ft_free_cub(t_cub3d *cub);
 static void	ft_destroy_texture(t_cub3d *cub);

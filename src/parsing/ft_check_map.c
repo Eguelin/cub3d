@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:04:52 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 16:28:54 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	ft_diffusion(char **map);
 static int	ft_get_player(t_player *player, char **map, size_t i, int n_player);

@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:36:37 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 15:55:11 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 int	ft_perror(char const *s, int error)
 {

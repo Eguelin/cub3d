@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:33:00 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 19:26:48 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:38 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	ft_put_pixel_to_image(t_img *img, int x, int y, int color)
 {

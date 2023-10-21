@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:05:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/20 17:25:58 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:47 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static char		*ft_fill_file(int fd);
 static size_t	ft_count_line(char const *file);

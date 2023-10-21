@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:33:00 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/20 13:31:14 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y)
 {

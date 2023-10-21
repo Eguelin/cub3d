@@ -6,11 +6,11 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:39:14 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 16:15:48 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	content_condition(char *file, int *tab);
 static int	check_content(char **file);
