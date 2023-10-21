@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:07:55 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/20 19:10:32 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 16:14:52 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static size_t	ft_get_index(char **file, int flag);
 static int		ft_fill_map(char **start_map, t_cub3d *cub, size_t size);
 static size_t	ft_map_len(char **start_map);
 static int		ft_is_subset_of(char const *line, char const *set);
-
 
 void	ft_get_map(t_cub3d *cub, char **file)
 {

@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/19 18:08:18 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/21 16:12:57 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INC_DIR	= include/
 LIB_DIR	= lib/
 NAME	= cub3d
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR) -g3# -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR) -g3# -march=native -flto -O3# -fsanitize=address
 MLX		= -Lmlx_linux -lmlx_Linux -L $(LIB_DIR)$(MLX_DIR) -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -88,8 +88,8 @@ all: $(NAME)
 $(NAME): $(OUT_DIR) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $(NAME)
 	@echo $(COMP_MSG)
-#	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
-#	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@

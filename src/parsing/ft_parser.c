@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:39:14 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/20 17:26:58 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 16:15:48 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	check_content(char **file)
 {
 	int	value;
 	int	i;
-	int tab[6];
+	int	tab[6];
 
 	value = 0;
 	i = 0;
