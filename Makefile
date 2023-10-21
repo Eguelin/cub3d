@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/21 16:12:57 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/21 17:16:40 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ OUT_DIR	= build/
 SRC_DIR	= src/
 INC_DIR	= include/
 LIB_DIR	= lib/
-NAME	= cub3d
+NAME	= cub3D
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR) -g3# -march=native -flto -O3# -fsanitize=address
 MLX		= -Lmlx_linux -lmlx_Linux -L $(LIB_DIR)$(MLX_DIR) -Imlx_linux -lXext -lX11 -lm -lz
