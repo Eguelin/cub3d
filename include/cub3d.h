@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/20 12:37:28 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/23 19:43:51 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	set_player_img(t_cub3d *cub, int size);
 void	set_minimap_img(t_cub3d *cub, char **map);
 void	set_window_img(t_cub3d *cub, int width, int height);
 void    ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
-void	ft_resize_img(t_cub3d *cub, t_image *img, int len);
+void	ft_resize_img(t_cub3d *cub, t_image *img, float len);
 // [PIXEL] //
 void	ft_put_element(t_cub3d *cub, float x, float y, int size);
 void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);

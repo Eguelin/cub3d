@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/20 13:56:57 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/23 19:45:33 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,7 @@ void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y)
 	}
 }
 
-// void	ft_put_img_to_img(t_img *img_1, t_img *img_2, int x, int y)
-// {
-// 	int		*start;
-// 	int		i;
-// 	int		j;
-
-// 	i = 0;
-// 	while (i < (img_1->height - y) && i < img_2->height)
-// 	{
-// 		j = 0;
-// 		start = ((int *)img_1->data) + (img_1->width * (y + i)+ x);
-// 		while (j < (img_1->width - x) && j < img_2->width)
-// 		{
-// 			start[j] = ((int *)img_2->data)[i * img_2->width + j];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-void	ft_resize_img(t_cub3d *cub, t_image *img, int len)
+void	ft_resize_img(t_cub3d *cub, t_image *img, float len)
 {
 	int		x;
 	int		y;
@@ -70,20 +51,20 @@ void	ft_resize_img(t_cub3d *cub, t_image *img, int len)
 	int		src_offset;
 	t_image	new_img;
 
-	new_img.img = mlx_new_image(cub->mlx, (len * img->height), (len * img->width));
-	new_img.addr = mlx_get_data_addr(new_img.img, \
-	&new_img.bits_per_pixel, &new_img.line_length, \
+	new_img.img = mlx_new_image(cub->mlx, (len * img->width), (len * img->height));
+	new_img.addr = mlx_get_data_addr(new_img.img, 
+	&new_img.bits_per_pixel, &new_img.line_length, 
 	&new_img.endian);
-	new_img.height = (len * img->height);
-	new_img.width = (len * img->width);
+	new_img.height = (int)(len * img->height);
+	new_img.width = (int)(len * img->width);
 	y = 0;
 	while (y < new_img.height)
 	{
 		x = 0;
 		while(x < new_img.width)
 		{
-			src_x = (x / len);
-			src_y = (y / len);
+			src_x = x / len;
+			src_y = y / len;
 			dest_offset = (y * new_img.width) + x;
 			src_offset = (src_y * img->width) + src_x;
 			((int *)new_img.addr)[dest_offset] = ((int *)img->addr)[src_offset];
@@ -96,6 +77,7 @@ void	ft_resize_img(t_cub3d *cub, t_image *img, int len)
 	img = &new_img;
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, img->img, 0, 0);
 }
+
 void	set_minimap_img(t_cub3d *cub, char **map)
 {
 	int	x;
@@ -106,6 +88,8 @@ void	set_minimap_img(t_cub3d *cub, char **map)
 	cub->minimap_img.addr = mlx_get_data_addr(cub->minimap_img.img, \
 	&cub->minimap_img.bits_per_pixel, &cub->minimap_img.line_length, \
 	&cub->minimap_img.endian);
+	cub->minimap_img.width *= 17;
+	cub->minimap_img.height *= 17; 
 	while (map[++y])
 	{
 		x = -1;
