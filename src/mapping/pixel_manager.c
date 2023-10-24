@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapping_utils.c                                    :+:      :+:    :+:   */
+/*   pixel_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:49:34 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/19 18:58:39 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/24 15:15:02 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 {
@@ -25,7 +25,7 @@ void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 		j = -1;
 		while (++j <= size)
 		{
-			my_mlx_pixel_put(&cub->minimap_img, x, y, 0xFFFFFF);
+			my_mlx_pixel_put(cub->minimap_img, x, y, 0xFFFFFF);
 			y++;
 		}
 		y = (y - size - 1);
@@ -33,11 +33,11 @@ void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 	}
 }
 
-void	my_mlx_pixel_put(t_image *txr, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = txr->addr + (y * txr->line_length + \
-	x * (txr->bits_per_pixel / 8));
+	dst = img->data + (y * img->size_line + \
+	x * (img->bpp / 8));
 	*(unsigned int*)dst = color;
 }

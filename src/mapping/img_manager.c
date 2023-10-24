@@ -6,11 +6,11 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/23 19:45:33 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/24 16:22:56 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y)
 {
@@ -41,7 +41,7 @@ void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y)
 	}
 }
 
-void	ft_resize_img(t_cub3d *cub, t_image *img, float len)
+void	ft_resize_img(t_cub3d *cub, t_img **img, float len)
 {
 	int		x;
 	int		y;
@@ -49,33 +49,27 @@ void	ft_resize_img(t_cub3d *cub, t_image *img, float len)
 	int		src_y;
 	int		dest_offset;
 	int		src_offset;
-	t_image	new_img;
+	t_img	*new_img;
 
-	new_img.img = mlx_new_image(cub->mlx, (len * img->width), (len * img->height));
-	new_img.addr = mlx_get_data_addr(new_img.img, 
-	&new_img.bits_per_pixel, &new_img.line_length, 
-	&new_img.endian);
-	new_img.height = (int)(len * img->height);
-	new_img.width = (int)(len * img->width);
+	new_img = mlx_new_image(cub->mlx, (len * (*img)->width), (len * (*img)->height));
 	y = 0;
-	while (y < new_img.height)
+	while (y < new_img->height)
 	{
 		x = 0;
-		while(x < new_img.width)
+		while(x < new_img->width)
 		{
 			src_x = x / len;
 			src_y = y / len;
-			dest_offset = (y * new_img.width) + x;
-			src_offset = (src_y * img->width) + src_x;
-			((int *)new_img.addr)[dest_offset] = ((int *)img->addr)[src_offset];
+			dest_offset = (y * new_img->width) + x;
+			src_offset = (src_y * (*img)->width) + src_x;
+			((int *)new_img->data)[dest_offset] = ((int *)(*img)->data)[src_offset];
 			x++;
 		}
 		y++;
 	}
-	//mlx_destroy_image(cub->mlx, img->img);
+	mlx_destroy_image(cub->mlx, *img);
 	//mlx_put_image_to_window(cub->mlx, cub->mlx_win, img->img, 0, 0);
-	img = &new_img;
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, img->img, 0, 0);
+	*img = new_img;
 }
 
 void	set_minimap_img(t_cub3d *cub, char **map)
@@ -84,12 +78,7 @@ void	set_minimap_img(t_cub3d *cub, char **map)
 	int	y;
 
 	y = -1;
-	cub->minimap_img.img = mlx_new_image(cub->mlx, cub->minimap_img.width * 17, cub->minimap_img.height * 17);
-	cub->minimap_img.addr = mlx_get_data_addr(cub->minimap_img.img, \
-	&cub->minimap_img.bits_per_pixel, &cub->minimap_img.line_length, \
-	&cub->minimap_img.endian);
-	cub->minimap_img.width *= 17;
-	cub->minimap_img.height *= 17; 
+	//cub->minimap_img = mlx_new_image(cub->mlx, cub->minimap_img->width * 17, cub->minimap_img->height * 17);
 	while (map[++y])
 	{
 		x = -1;
@@ -104,19 +93,14 @@ void	set_player_img(t_cub3d *cub, int size)
 	int	x;
 	int	y;
 
-	cub->player_img.img = mlx_new_image(cub->mlx, size, size);
-	cub->player_img.addr = mlx_get_data_addr(cub->player_img.img, \
-	&cub->player_img.bits_per_pixel, &cub->player_img.line_length, \
-	&cub->player_img.endian);
-	cub->player_img.width = size;
-	cub->player_img.height = size; 
+	cub->player_img = mlx_new_image(cub->mlx, size, size);
 	y = 0;
 	while (y < size)
 	{
 		x = 0;
 		while (x < size)
 		{
-			my_mlx_pixel_put(&cub->player_img, x, y, 0xFFF000);
+			my_mlx_pixel_put(cub->player_img, x, y, 0xFFF000);
 			x++;
 		}
 		y++;
@@ -125,11 +109,5 @@ void	set_player_img(t_cub3d *cub, int size)
 
 void	set_window_img(t_cub3d *cub, int width, int height)
 {
-	cub->windows.img = mlx_new_image(cub->mlx, width, height);
-	cub->windows.addr = mlx_get_data_addr(cub->windows.img, \
-	&cub->windows.bits_per_pixel, &cub->windows.line_length, \
-	&cub->windows.endian);
+	cub->windows = mlx_new_image(cub->mlx, width, height);
 }
-
-
-

@@ -6,17 +6,17 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:36:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/18 15:54:36 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	check_colors_range(char **tab)
 {
 	int	i;
 	int	j;
-	int rgb[3];
+	int	rgb[3];
 
 	i = 0;
 	while (tab[i] && i <= 2)
@@ -58,7 +58,7 @@ static int	set_colors(t_cub3d *cub, char **tab, int view)
 
 int	get_colors(t_cub3d *cub, char *str, int view)
 {
-	int	i;
+	int		i;
 	char	**tab;
 
 	i = 1;

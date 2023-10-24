@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/23 19:43:51 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/24 16:21:45 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,6 @@ typedef struct s_point
 	double	y;
 }	t_point;
 
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_image;
-
 typedef struct s_player
 {
 	t_point	position;
@@ -144,17 +133,21 @@ typedef struct s_player
 
 typedef struct s_cub3d
 {
-	t_image		texture[4];
-	t_image		minimap_img;
-	t_image		player_img;
-	t_image		windows;
+	void		*mlx;
+	void		*mlx_win;
 	t_player	player;
-	char		**map;
+	t_img		*windows;
+	t_img		*minimap_img;
+	t_img		*player_img;
+	t_img		*texture[4];
 	int			f_colors;
 	int			c_colors;
-	void		*mlx_win;
-	void		*mlx;
+	char		**map;
 }	t_cub3d;
+
+/////// [parsing] ///////
+void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
+void	ft_put_pixel_to_image(t_img *img, int x, int y, int color);
 
 /////// [parsing] ///////
 int		ft_check_map(t_cub3d *cub, char **start_map);
@@ -170,10 +163,10 @@ void	set_player_img(t_cub3d *cub, int size);
 void	set_minimap_img(t_cub3d *cub, char **map);
 void	set_window_img(t_cub3d *cub, int width, int height);
 void    ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
-void	ft_resize_img(t_cub3d *cub, t_image *img, float len);
+void	ft_resize_img(t_cub3d *cub, t_img **img, float len);
 // [PIXEL] //
 void	ft_put_element(t_cub3d *cub, float x, float y, int size);
-void	my_mlx_pixel_put(t_image *txr, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *txr, int x, int y, int color);
 // [MOVE] //
 void	ft_move_north_south(t_cub3d *cub, int keycode);
 void	ft_move_east_west(t_cub3d *cub, int keycode);

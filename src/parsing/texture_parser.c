@@ -6,26 +6,25 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/19 21:11:32 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/24 16:17:12 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static int	set_texture_to_img(t_cub3d *cub, char *str, int i)
 {
 	int	len;
+	int	w;
+	int	h;
 
 	len = ft_strlen(str);
 	if (len > 0 && str[len - 1] == '\n')
 		str[len -1] = '\0';
-	cub->texture[i].img = mlx_xpm_file_to_image(cub->mlx, str, \
-	&cub->texture[i].width, &cub->texture[i].height);
-	if (!cub->texture[i].img)
+	cub->texture[i] = mlx_xpm_file_to_image(cub->mlx, str, \
+	&w, &h);
+	if (!cub->texture[i])
 		return (EXIT_FAILURE);
-	cub->texture[i].addr = mlx_get_data_addr(cub->texture[i].img, \
-	&cub->texture[i].bits_per_pixel, &cub->texture[i].line_length, \
-	&cub->texture[i].endian);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 #    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/19 19:09:33 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/24 14:53:34 by acarlott         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ OUT_DIR	= build/
 SRC_DIR	= src/
 INC_DIR	= include/
 LIB_DIR	= lib/
-NAME	= cub3d
+NAME	= cub3D
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR) -g3# -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR) -g3# -march=native -flto -O3# -fsanitize=address
 MLX		= -Lmlx_linux -lmlx_Linux -L $(LIB_DIR)$(MLX_DIR) -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -45,6 +45,10 @@ ALL_FILES = main.c
 MAP_DIR		= mapping/
 MAP_FILES		= cub3d_manager.c img_manager.c move_manager.c pixel_manager.c
 ALL_FILES		+= $(addprefix $(MAP_DIR), $(MAP_FILES))
+
+MLX-P_DIR		= mlx-plug-in/
+MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c
+ALL_FILES		+= $(addprefix $(MLX-P_DIR), $(MLX-P_FILES))
 
 PARS_DIR		= parsing/
 PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
@@ -88,8 +92,8 @@ all: $(NAME)
 $(NAME): $(OUT_DIR) $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $(NAME)
 	@echo $(COMP_MSG)
-#	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
-#	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
+	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@

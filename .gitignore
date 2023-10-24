@@ -5,4 +5,4 @@ a.out*
 *.a
 build
 .nfs*
-cub3d
+cub3D

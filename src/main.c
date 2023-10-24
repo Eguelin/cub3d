@@ -6,12 +6,11 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:55:39 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/19 13:10:01 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/24 14:53:20 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include <stdio.h>
+#include "cub3D.h"
 
 void	ft_printf_tab(char **tab)
 {

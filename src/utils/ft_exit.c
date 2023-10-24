@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/18 15:55:02 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/24 16:14:22 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3D.h"
 
 static void	ft_free_cub(t_cub3d *cub);
 static void	ft_destroy_texture(t_cub3d *cub);
@@ -34,7 +34,6 @@ static void	ft_free_cub(t_cub3d *cub)
 	if (cub->mlx)
 		mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
-
 }
 
 static void	ft_destroy_texture(t_cub3d *cub)
@@ -42,16 +41,15 @@ static void	ft_destroy_texture(t_cub3d *cub)
 	int	i;
 
 	i = 0;
-	if (cub->windows.img)
-		mlx_destroy_image(cub->mlx, cub->windows.img);
-	if (cub->minimap_img.img)
-		mlx_destroy_image(cub->mlx, cub->minimap_img.img);
-	if (cub->player_img.img)
-		mlx_destroy_image(cub->mlx, cub->player_img.img);
+	if (cub->windows)
+		mlx_destroy_image(cub->mlx, cub->windows);
+	mlx_destroy_image(cub->mlx, cub->minimap_img);
+	if (cub->player_img)
+		mlx_destroy_image(cub->mlx, cub->player_img);
 	while (i < 4)
 	{
-		if (cub->texture[i].img)
-			mlx_destroy_image(cub->mlx, cub->texture[i].img);
+		if (cub->texture[i])
+			mlx_destroy_image(cub->mlx, cub->texture[i]);
 		i++;
 	}
 }
