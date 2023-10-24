@@ -40,7 +40,7 @@ void	cub3d_manager(t_cub3d *cub)
 	// ft_put_image_to_image(cub->windows.img, cub->minimap_img.img, 0, 0);
 	// ft_put_image_to_image(cub->windows.img, cub->player_img.img, 
 	// (cub->player.position.x * 17) - 4, (cub->player.position.y * 17) - 4);
-	ft_resize_img(cub, &cub->minimap_img, 0.099);
+	ft_resize_img(cub, &cub->minimap_img, 0.8);
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->minimap_img, 0, 0);
 	//mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->minimap_img.img, 0, 0);
 	mlx_loop(cub->mlx);
