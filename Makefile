@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/21 17:16:40 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/23 12:32:10 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,10 @@ ALL_FILES		+= $(addprefix $(MLX-P_DIR), $(MLX-P_FILES))
 PARS_DIR		= parsing/
 PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
 ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
+
+RAY-C_DIR		= ray-casting/
+RAY-C_FILES		= ft_calculate_angle_array.c
+ALL_FILES		+= $(addprefix $(RAY-C_DIR), $(RAY-C_FILES))
 
 UTILS_DIR		= utils/
 UTILS_FILES		= ft_close_win.c ft_exit.c ft_init_cub3d.c ft_perror.c ft_strndup.c

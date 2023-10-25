@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 17:58:59 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/23 12:25:15 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,18 @@ static void	ft_free_cub(t_cub3d *cub)
 
 static void	ft_destroy_texture(t_cub3d *cub)
 {
-	int	i;
-
-	i = 0;
 	if (cub->windows)
 		mlx_destroy_image(cub->mlx, cub->windows);
 	if (cub->minimap_img)
 		mlx_destroy_image(cub->mlx, cub->minimap_img);
 	if (cub->player_img)
 		mlx_destroy_image(cub->mlx, cub->player_img);
-	while (i < 4)
-	{
-		if (cub->texture[i])
-			mlx_destroy_image(cub->mlx, cub->texture[i]);
-		i++;
-	}
+	if (cub->texture[0])
+		mlx_destroy_image(cub->mlx, cub->texture[0]);
+	if (cub->texture[1])
+		mlx_destroy_image(cub->mlx, cub->texture[1]);
+	if (cub->texture[2])
+		mlx_destroy_image(cub->mlx, cub->texture[2]);
+	if (cub->texture[3])
+		mlx_destroy_image(cub->mlx, cub->texture[3]);
 }

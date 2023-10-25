@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:54:43 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/15 14:56:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/22 19:01:15 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdint.h>
 # include <stdarg.h>
 
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 1024
 
 typedef struct s_list
 {

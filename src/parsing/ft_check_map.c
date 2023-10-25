@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:04:52 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/25 16:46:36 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static int	ft_get_player(t_player *player, char **map, size_t i, int n_player)
 			player->position.x = j + 0.5;
 			player->position.y = i + 0.5;
 			if (map[i][j] == 'N')
-				player->angle = -M_PI_2;
+				player->angle = 3 * M_PI_2;
 			else if (map[i][j] == 'S')
 				player->angle = M_PI_2;
 			else if (map[i][j] == 'W')
