@@ -6,64 +6,32 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/25 12:45:03 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 00:58:12 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y)
+void	set_miniborder_img(t_cub3d *cub)
 {
-	int	*data_1;
-	int	*data_2;
-	int	i;
-	int	j;
+	int	x;
+	int	y;
 
-	i = 0;
-	if (y < 0)
-		i = -y;
-	data_1 = ((int *)img_1->data) + (img_1->width * (y + i) + x);
-	data_2 = ((int *)img_2->data) + (img_2->width * i);
-	while (i < (img_1->height - y) && i < img_2->height)
-	{
-		if (x < 0)
-			j = -x;
-		else
-			j = 0;
-		while (j < (img_1->width - x) && j < img_2->width)
-		{
-			data_1[j] = data_2[j];
-			j++;
-		}
-		data_1 += img_1->width;
-		data_2 += img_2->width;
-		i++;
-	}
-}
-
-void	ft_resize_img(t_cub3d *cub, t_img **img, float len)
-{
-	int		x;
-	int		y;
-	int		dest_offset;
-	int		src_offset;
-	t_img	*new_img;
-
-	new_img = mlx_new_image(cub->mlx, (len * (*img)->width), (len * (*img)->height));
-	y = -1;
-	while (++y < new_img->height)
+	cub->border = mlx_new_image(cub->mlx, (cub->minimap_img->width + 8), (cub->minimap_img->height + 8));
+	if (!cub->border)
+		ft_exit(cub, NULL, IMG_ERROR);
+	y = 0;
+	while (y < cub->border->height)
 	{
 		x = 0;
-		while(x < new_img->width)
+		while (x < cub->border->width)
 		{
-			dest_offset = (y * new_img->width) + x;
-			src_offset = ((int)(y / len) * (*img)->width) + (x / len);
-			((int *)new_img->data)[dest_offset] = ((int *)(*img)->data)[src_offset];
+			if (y < 3 || y > cub->border->height - 4 || x < 3 || x > cub->border->width - 4)
+				my_mlx_pixel_put(cub->border, x, y, 0x808080);
 			x++;
 		}
+		y++;
 	}
-	mlx_destroy_image(cub->mlx, *img);
-	*img = new_img;
 }
 
 void	set_minimap_img(t_cub3d *cub, char **map)
@@ -72,7 +40,6 @@ void	set_minimap_img(t_cub3d *cub, char **map)
 	int	y;
 
 	y = -1;
-	//cub->minimap_img = mlx_new_image(cub->mlx, cub->minimap_img->width * 17, cub->minimap_img->height * 17);
 	while (map[++y])
 	{
 		x = -1;
@@ -88,6 +55,8 @@ void	set_player_img(t_cub3d *cub, int size)
 	int	y;
 
 	cub->player_img = mlx_new_image(cub->mlx, size, size);
+	if (!cub->player_img)
+		ft_exit(cub, NULL, IMG_ERROR);
 	y = 0;
 	while (y < size)
 	{
@@ -104,4 +73,6 @@ void	set_player_img(t_cub3d *cub, int size)
 void	set_window_img(t_cub3d *cub, int width, int height)
 {
 	cub->windows = mlx_new_image(cub->mlx, width, height);
+	if (!cub->windows)
+		ft_exit(cub, NULL, IMG_ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/25 17:55:00 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 00:50:39 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ typedef enum e_error
 	MALLOC_ERROR,
 	ENV_ERROR,
 	SORT_ERROR,
-	COLORS_ERROR
+	COLORS_ERROR,
+	IMG_ERROR
 }	t_error;
 
 typedef enum e_view
@@ -137,10 +138,11 @@ typedef struct s_cub3d
 	void		*mlx_win;
 	t_player	player;
 	t_img		*windows;
+	t_img		*border;
 	t_img		*minimap_img;
 	t_img		*player_img;
 	t_img		*texture[4];
-	int			resize_len;
+	float		resize_len;
 	int			f_colors;
 	int			c_colors;
 	char		**map;
@@ -161,11 +163,13 @@ int		get_colors(t_cub3d *cub, char *str, int view);
 void	cub3d_manager(t_cub3d *cub);
 // [IMG] //
 void	set_player_img(t_cub3d *cub, int size);
+void	set_miniborder_img(t_cub3d *cub);
 void	set_minimap_img(t_cub3d *cub, char **map);
 void	set_window_img(t_cub3d *cub, int width, int height);
 void    ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
 void	ft_resize_img(t_cub3d *cub, t_img **img, float len);
 // [PIXEL] //
+void	ft_put_inset(t_cub3d *cub, float x, float y, int size);
 void	ft_put_element(t_cub3d *cub, float x, float y, int size);
 void	my_mlx_pixel_put(t_img *txr, int x, int y, int color);
 // [MOVE] //
