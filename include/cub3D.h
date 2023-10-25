@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/24 16:21:45 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/25 17:55:00 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct s_cub3d
 	t_img		*minimap_img;
 	t_img		*player_img;
 	t_img		*texture[4];
+	int			resize_len;
 	int			f_colors;
 	int			c_colors;
 	char		**map;
