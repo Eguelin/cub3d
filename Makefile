@@ -6,7 +6,7 @@
 #    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/26 00:48:50 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/26 19:24:31 by acarlott         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ MAP_FILES		= cub3d_manager.c img_manager.c move_manager.c pixel_manager.c
 ALL_FILES		+= $(addprefix $(MAP_DIR), $(MAP_FILES))
 
 MLX-P_DIR		= mlx-plug-in/
-MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c ft_resize_image.c
+MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c ft_resize_image.c ft_clear_image.c
 ALL_FILES		+= $(addprefix $(MLX-P_DIR), $(MLX-P_FILES))
 
 PARS_DIR		= parsing/

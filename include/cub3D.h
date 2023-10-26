@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 13:54:21 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 20:49:50 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	set_window_img(t_cub3d *cub, int width, int height);
 void	set_miniborder_img(t_cub3d *cub, int height, int width);
 void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
 void	ft_resize_img(t_cub3d *cub, t_img **img, float len);
+void	ft_clear_image(t_img *img);
 // [PIXEL] //
 void	ft_put_inset(t_cub3d *cub, float x, float y, int size);
 void	ft_put_element(t_cub3d *cub, float x, float y, int size);

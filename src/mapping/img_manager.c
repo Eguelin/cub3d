@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/26 17:44:34 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 21:40:37 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_miniborder_img(t_cub3d *cub, int height, int width)
 	int	x;
 	int	y;
 
-	cub->minimap[BORDER] = mlx_new_image(cub->mlx, (width + 8), (height + 8));
+	cub->minimap[BORDER] = mlx_new_image(cub->mlx, width, height);
 	if (!cub->minimap[BORDER])
 		ft_exit(cub, NULL, IMG_ERROR);
 	y = 0;
