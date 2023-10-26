@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:55:39 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 19:33:55 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 20:01:22 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,43 @@ void	ft_impact_y(t_cub3d *cub, t_point *impact, double angle)
 	impact->x = cub->player.position.x + delta.x * \
 	fabs(impact->y - cub->player.position.y);
 	while (impact->x > 0 && (size_t)impact->x < cub->map_width && \
-	cub->map[(size_t)impact->y - (sin_a  < 0)][(size_t)impact->x] == '0')
+	cub->map[(size_t)impact->y - (sin_a < 0)][(size_t)impact->x] == '0')
 	{
 		impact->x += delta.x;
 		impact->y += delta.y;
 	}
 }
 
-void	ft(t_cub3d *cub, double a, double a2)
+double	ft_get_distance(t_point point_1, t_point point_2)
+{
+	t_point	delta;
+
+	delta.x = point_1.x - point_2.x;
+	delta.y = point_1.y - point_2.y;
+	return (sqrt(delta.x * delta.x + delta.y * delta.y));
+}
+
+void	ft(t_cub3d *cub, double angle)
 {
 	t_point	impact_x;
 	t_point	impact_y;
+	double	distance_x;
+	double	distance_y;
 
 	impact_x.x = -1;
 	impact_x.y = -1;
 	impact_y.x = -1;
 	impact_y.y = -1;
-	if (cos(a))
-		ft_impact_x(cub, &impact_x, a);
-	if (sin(a))
-		ft_impact_y(cub, &impact_y, a);
-	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", impact_x.x, impact_x.y, sqrt((cub->player.position.x - impact_x.x) * (cub->player.position.x - impact_x.x) + (cub->player.position.y - impact_x.y) * (cub->player.position.y - impact_x.y)), cos(a2) * sqrt((cub->player.position.x - impact_x.x) * (cub->player.position.x - impact_x.x) + (cub->player.position.y - impact_x.y) * (cub->player.position.y - impact_x.y)));
-	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", impact_y.x, impact_y.y, sqrt((cub->player.position.x - impact_y.x) * (cub->player.position.x - impact_y.x) + (cub->player.position.y - impact_y.y) * (cub->player.position.y - impact_y.y)), cos(a2) * sqrt((cub->player.position.x - impact_y.x) * (cub->player.position.x - impact_y.x) + (cub->player.position.y - impact_y.y) * (cub->player.position.y - impact_y.y)));
+	if (cos(cub->player.angle - angle))
+		ft_impact_x(cub, &impact_x, cub->player.angle - angle);
+	if (sin(cub->player.angle - angle))
+		ft_impact_y(cub, &impact_y, cub->player.angle - angle);
+	distance_x = ft_get_distance(cub->player.position, impact_x);
+	distance_y = ft_get_distance(cub->player.position, impact_y);
+	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", \
+	impact_x.x, impact_x.y, distance_x, cos(angle) * distance_x);
+	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", \
+	impact_y.x, impact_y.y, distance_y, cos(angle) * distance_y);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -119,8 +134,7 @@ int	main(int argc, char **argv, char **env)
 		return (EXIT_FAILURE);
 	ft_parser(&cub, argv);
 	ft_calculate_angle_array(&cub);
-	ft(&cub, cub.player.angle - cub.angle[0], -cub.angle[0]);
-	// ft2(&cub, -cub.angle[0]);
+	ft(&cub, -cub.angle[0]);
 	ft_exit(&cub, NULL, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
