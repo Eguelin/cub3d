@@ -6,13 +6,13 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:49:34 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/25 21:25:14 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 18:11:52 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	ft_put_inset(t_cub3d *cub, float x, float y, int size)
+void	ft_put_border(t_cub3d *cub, float x, float y, int size)
 {
 	int	i;
 	int	j;
@@ -25,7 +25,7 @@ void	ft_put_inset(t_cub3d *cub, float x, float y, int size)
 		j = -1;
 		while (++j <= size)
 		{
-			my_mlx_pixel_put(cub->minimap_img, x, y, 0xF00000);
+			my_mlx_pixel_put(cub->minimap[BORDER], x, y, 0xF00000);
 			y++;
 		}
 		y = (y - size - 1);
@@ -46,7 +46,7 @@ void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 		j = -1;
 		while (++j <= size)
 		{
-			my_mlx_pixel_put(cub->minimap_img, x, y, 0xFFFFFF);
+			my_mlx_pixel_put(cub->minimap[WALL], x, y, 0xFFFFFF);
 			y++;
 		}
 		y = (y - size - 1);
@@ -60,5 +60,5 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	dst = img->data + (y * img->size_line + \
 	x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }

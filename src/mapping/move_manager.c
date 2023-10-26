@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_player.c                                        :+:      :+:    :+:   */
+/*   move_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 08:54:38 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/19 11:24:27 by acarlott         ###   ####.####lyon.fr   */
+/*   Updated: 2023/10/26 17:39:49 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_move_north_south(t_cub3d *cub, int keycode)
 {
 	float	x;
 	float	y;
-	
+
 	if (keycode == KEY_W)
 	{
 		y = cub->player.position.y + (sin(cub->player.angle) * 0.20);
@@ -41,7 +41,7 @@ void	ft_move_east_west(t_cub3d *cub, int keycode)
 {
 	float	x;
 	float	y;
-	
+
 	if (keycode == KEY_A)
 	{
 		y = cub->player.position.y - (cos(cub->player.angle) * 0.20);

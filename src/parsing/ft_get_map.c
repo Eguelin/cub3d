@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:07:55 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 13:47:34 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static int	ft_fill_map(char **start_map, t_cub3d *cub, size_t size)
 
 	i = 0;
 	len = ft_map_len(start_map);
-	cub->minimap_img = mlx_new_image(cub->mlx, len * 17, size * 17);
-	if (!cub->minimap_img)
+	cub->minimap[WALL] = mlx_new_image(cub->mlx, len * 17, size * 17);
+	if (!cub->minimap[WALL])
 		return (EXIT_FAILURE);
 	while (i < size)
 	{

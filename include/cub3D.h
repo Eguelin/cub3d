@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 00:50:39 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 13:54:21 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <math.h>
 
+# define FLOOR 0
+# define CEILING 1
 # define KEY_ESC 65307
 # define KEY_F1 65470
 # define KEY_F2 65471
@@ -110,15 +112,13 @@ typedef enum e_error
 	IMG_ERROR
 }	t_error;
 
-typedef enum e_view
+typedef enum e_minimap
 {
-	FLOOR,
-	CEILING,
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST,
-}	t_view;
+	MINIMAP,
+	WALL,
+	PLAYER,
+	BORDER
+}	t_minimap;
 
 typedef struct s_point
 {
@@ -137,11 +137,9 @@ typedef struct s_cub3d
 	void		*mlx;
 	void		*mlx_win;
 	t_player	player;
-	t_img		*windows;
-	t_img		*border;
-	t_img		*minimap_img;
-	t_img		*player_img;
+	t_img		*minimap[4];
 	t_img		*texture[4];
+	t_img		*windows;
 	float		resize_len;
 	int			f_colors;
 	int			c_colors;
@@ -163,10 +161,10 @@ int		get_colors(t_cub3d *cub, char *str, int view);
 void	cub3d_manager(t_cub3d *cub);
 // [IMG] //
 void	set_player_img(t_cub3d *cub, int size);
-void	set_miniborder_img(t_cub3d *cub);
 void	set_minimap_img(t_cub3d *cub, char **map);
 void	set_window_img(t_cub3d *cub, int width, int height);
-void    ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
+void	set_miniborder_img(t_cub3d *cub, int height, int width);
+void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
 void	ft_resize_img(t_cub3d *cub, t_img **img, float len);
 // [PIXEL] //
 void	ft_put_inset(t_cub3d *cub, float x, float y, int size);
