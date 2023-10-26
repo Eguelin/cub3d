@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/23 12:30:23 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 16:21:34 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_cub3d
 	int			f_colors;
 	int			c_colors;
 	char		**map;
+	size_t		map_width;
+	size_t		map_height;
 	double		angle[(LENGTH >> 1) + 1];
 }	t_cub3d;
 

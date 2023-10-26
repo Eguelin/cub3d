@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:55:39 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/25 17:19:37 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 19:33:55 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,54 +46,69 @@ static int	check_init(int argc, char **env)
 // 	}
 // }
 
-void	ft2(t_cub3d *cub, double a)
+void	ft_impact_x(t_cub3d *cub, t_point *impact, double angle)
 {
-	t_point	impact;
-	t_point	tmp;
+	t_point	delta;
+	double	cos_a;
 
-	tmp.y = tan(cub->player.angle + a);
-	impact.x = (int)cub->player.position.x + (cos(a) > 0);;
-	impact.y = cub->player.position.y + (tmp.y * (1.0 - modf(cub->player.position.x, &tmp.x)));
-	tmp.x = 1;
-	while (cub->map[(int)impact.y][(int)impact.x] == '0')
+	cos_a = cos(angle);
+	delta.x = 1;
+	impact->x = (int)cub->player.position.x + 1;
+	if (cos_a < 0)
 	{
-		impact.x += tmp.x;
-		impact.y += tmp.y;
+		delta.x = -1;
+		impact->x--;
 	}
-	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", impact.x, impact.y,sqrt((cub->player.position.x - impact.x) * (cub->player.position.x - impact.x) + (cub->player.position.y - impact.y) * (cub->player.position.y - impact.y)), cos(a) * sqrt((cub->player.position.x - impact.x) * (cub->player.position.x - impact.x) + (cub->player.position.y - impact.y) *(cub->player.position.y - impact.y)));
+	delta.y = delta.x * tan(angle);
+	impact->y = cub->player.position.y + delta.y * \
+	fabs(impact->x - cub->player.position.x);
+	while (impact->y > 0 && (size_t)impact->y < cub->map_height && \
+	cub->map[(size_t)impact->y][(size_t)impact->x - (cos_a < 0)] == '0')
+	{
+		impact->x += delta.x;
+		impact->y += delta.y;
+	}
+}
+
+void	ft_impact_y(t_cub3d *cub, t_point *impact, double angle)
+{
+	t_point	delta;
+	double	sin_a;
+
+	sin_a = sin(angle);
+	delta.y = 1;
+	impact->y = (int)cub->player.position.y + 1;
+	if (sin_a < 0)
+	{
+		delta.y = -1;
+		impact->y--;
+	}
+	delta.x = delta.y / tan(angle);
+	impact->x = cub->player.position.x + delta.x * \
+	fabs(impact->y - cub->player.position.y);
+	while (impact->x > 0 && (size_t)impact->x < cub->map_width && \
+	cub->map[(size_t)impact->y - (sin_a  < 0)][(size_t)impact->x] == '0')
+	{
+		impact->x += delta.x;
+		impact->y += delta.y;
+	}
 }
 
 void	ft(t_cub3d *cub, double a, double a2)
 {
-	t_point	impact;
-	t_point	tmp;
+	t_point	impact_x;
+	t_point	impact_y;
 
-	if (fabs(cos(a)) > fabs(sin(a)))
-	{
-		tmp.x = 1 * (cos(a) > 0) + -1 * (cos(a) < 0);
-		tmp.y = tmp.x * tan(a);
-		impact.x = (int)cub->player.position.x + (cos(a) > 0);
-		impact.y = cub->player.position.y + tmp.y * fabs(impact.x - cub->player.position.x);
-		impact.x -= (cos(a) < 0);
-	}
-	else
-	{
-		tmp.y = 1 * (sin(a) > 0) + -1 * (sin(a) < 0);
-		tmp.x = tmp.y / tan(a);
-		impact.y = (int)cub->player.position.y + (sin(a) > 0);
-		impact.x = cub->player.position.x + tmp.x * fabs(impact.y - cub->player.position.y);
-		impact.y -= (sin(a) < 0);
-	}
-	while (cub->map[(int)impact.y][(int)impact.x] == '0')
-	{
-		impact.x += tmp.x;
-		impact.y += tmp.y;
-	}
-	if (fabs(cos(a)) > fabs(sin(a)))
-		impact.x += (cos(a) < 0);
-	else
-		impact.y += (sin(a) < 0);
-	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", impact.x, impact.y, sqrt((cub->player.position.x - impact.x) * (cub->player.position.x - impact.x) + (cub->player.position.y - impact.y) * (cub->player.position.y - impact.y)), cos(a2) * sqrt((cub->player.position.x - impact.x) * (cub->player.position.x - impact.x) + (cub->player.position.y - impact.y) * (cub->player.position.y - impact.y)));
+	impact_x.x = -1;
+	impact_x.y = -1;
+	impact_y.x = -1;
+	impact_y.y = -1;
+	if (cos(a))
+		ft_impact_x(cub, &impact_x, a);
+	if (sin(a))
+		ft_impact_y(cub, &impact_y, a);
+	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", impact_x.x, impact_x.y, sqrt((cub->player.position.x - impact_x.x) * (cub->player.position.x - impact_x.x) + (cub->player.position.y - impact_x.y) * (cub->player.position.y - impact_x.y)), cos(a2) * sqrt((cub->player.position.x - impact_x.x) * (cub->player.position.x - impact_x.x) + (cub->player.position.y - impact_x.y) * (cub->player.position.y - impact_x.y)));
+	printf("x = %lf y = %lf d1 = %lf d2 = %lf\n", impact_y.x, impact_y.y, sqrt((cub->player.position.x - impact_y.x) * (cub->player.position.x - impact_y.x) + (cub->player.position.y - impact_y.y) * (cub->player.position.y - impact_y.y)), cos(a2) * sqrt((cub->player.position.x - impact_y.x) * (cub->player.position.x - impact_y.x) + (cub->player.position.y - impact_y.y) * (cub->player.position.y - impact_y.y)));
 }
 
 int	main(int argc, char **argv, char **env)
