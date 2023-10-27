@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 13:42:00 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/27 13:36:53 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@ void	ft_init_cub3d(t_cub3d	*cub)
 	cub->c_colors = -1;
 	cub->mlx_win = NULL;
 	cub->windows = NULL;
-	// cub->minimap = NULL;
-	// cub->minimap_wall = NULL;
-	// cub->player_img = NULL;
-	// cub->border = NULL;
 	cub->map = NULL;
 	i = 0;
 	while (i < 4)

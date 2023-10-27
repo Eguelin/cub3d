@@ -6,11 +6,23 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/26 21:38:15 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/27 11:08:52 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+static void	refresh_image(t_cub3d *cub)
+{
+	ft_clear_image(cub->minimap[MINIMAP]);
+	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
+	150 - cub->player.position.x * 17, 100 - cub->player.position.y * 17);
+	ft_put_image_to_image(cub->minimap[MINIMAP], \
+	cub->minimap[PLAYER], 150, 100);
+	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);
+	ft_put_image_to_image(cub->windows, cub->minimap[MINIMAP], 14, 14);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows, 0, 0);
+}
 
 static int	ft_handle_keypress(int keycode, t_cub3d *cub)
 {
@@ -23,15 +35,7 @@ static int	ft_handle_keypress(int keycode, t_cub3d *cub)
 		ft_move_east_west(cub, keycode);
 	else if (keycode == KEY_LEFT_ARROW || keycode == KEY_RIGHT_ARROW)
 		ft_angle_direction(cub, keycode);
-	ft_clear_image(cub->minimap[MINIMAP]);
-	//ft_clear_image(cub->minimap[BORDER]);
-	//set_minimap_img(cub, cub->map);
-	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
-	150 - cub->player.position.x * 17, 100 - cub->player.position.y * 17);
-	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[PLAYER], 150, 100);
-	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 0, 0);
-	ft_put_image_to_image(cub->windows, cub->minimap[MINIMAP], 4, 4);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows, 0, 0);
+	refresh_image(cub);
 	return (EXIT_SUCCESS);
 }
 
@@ -49,8 +53,8 @@ static void	set_minimap(t_cub3d *cub)
 	150 - cub->player.position.x * 17, 100 - cub->player.position.y * 17);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[PLAYER], \
 	150, 100);
-	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 0, 0);
-	ft_put_image_to_image(cub->windows, cub->minimap[MINIMAP], 4, 4);
+	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);
+	ft_put_image_to_image(cub->windows, cub->minimap[MINIMAP], 14, 14);
 }
 
 void	cub3d_manager(t_cub3d *cub)
