@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/23 12:32:10 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/27 19:22:44 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,20 +42,32 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 #Sources
 ALL_FILES = main.c
 
+DISPLAY_DIR		= display/
+DISPLAY_FILES	= ft_visual_field.c
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR), $(DISPLAY_FILES))
+
 MLX-P_DIR		= mlx-plug-in/
 MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c
-ALL_FILES		+= $(addprefix $(MLX-P_DIR), $(MLX-P_FILES))
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(MLX-P_DIR), $(MLX-P_FILES))
+
+RAY-C_DIR		= ray-casting/
+RAY-C_FILES		= ft_ray_casting.c
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(RAY-C_DIR), $(RAY-C_FILES))
+
+EXIT_DIR		= exit/
+EXIT_FILES		= ft_close_win.c ft_exit.c
+ALL_FILES		+= $(addprefix $(EXIT_DIR), $(EXIT_FILES))
+
+INIT_DIR		= init/
+INIT_FILES		= ft_init.c
+ALL_FILES		+= $(addprefix $(INIT_DIR), $(INIT_FILES))
 
 PARS_DIR		= parsing/
 PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
-ALL_FILES		+= $(addprefix $(PARS_DIR), $(PARS_FILES))
-
-RAY-C_DIR		= ray-casting/
-RAY-C_FILES		= ft_calculate_angle_array.c
-ALL_FILES		+= $(addprefix $(RAY-C_DIR), $(RAY-C_FILES))
+ALL_FILES		+= $(addprefix $(INIT_DIR)$(PARS_DIR), $(PARS_FILES))
 
 UTILS_DIR		= utils/
-UTILS_FILES		= ft_close_win.c ft_exit.c ft_init_cub3d.c ft_perror.c ft_strndup.c
+UTILS_FILES		= ft_perror.c ft_strndup.c
 ALL_FILES		+= $(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 INC_FILES		= $(NAME).h

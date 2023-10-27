@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 16:21:34 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/27 19:26:57 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,22 @@ typedef struct s_cub3d
 	double		angle[(LENGTH >> 1) + 1];
 }	t_cub3d;
 
+/////// [display] ///////
+void	ft_visual_field(t_cub3d *cub);
+
 /////// [mlx-plug-in] ///////
 void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
 void	ft_put_pixel_to_image(t_img *img, int x, int y, int color);
+
+/////// [ray-casting] ///////
+double	ft_ray_casting(t_cub3d *cub, double angle, t_point *impact);
+
+/////// [exit] ///////
+int		ft_close_win(t_cub3d *cub);
+void	ft_exit(t_cub3d *cub, char const *s, int exit);
+
+/////// [init] ///////
+void	ft_init(t_cub3d	*cub, char **argv);
 
 /////// [parsing] ///////
 int		ft_check_map(t_cub3d *cub, char **start_map);
@@ -87,13 +100,7 @@ void	ft_parser(t_cub3d *cub, char **argv);
 int		init_texture(t_cub3d *cub, char **file);
 int		get_colors(t_cub3d *cub, char *str, int view);
 
-/////// [ray-casting] ///////
-void	ft_calculate_angle_array(t_cub3d *cub);
-
 /////// [utils] ///////
-void	ft_exit(t_cub3d *cub, char const *s, int exit);
-int		ft_close_win(t_cub3d *cub);
-void	ft_init_cub3d(t_cub3d	*cub);
 int		ft_perror(char const *s, int error);
 char	*ft_strndup(const char *s, int len);
 
