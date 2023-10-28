@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/27 19:17:50 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/28 20:12:39 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_calculate_angle_array(t_cub3d *cub)
 
 	i = 0;
 	size = (LENGTH >> 1) + 1;
-	adjacent = (double)LENGTH / (2 * tan(FOV / 2));
+	adjacent = (double)LENGTH / (2 * tan(FOV_2));
 	opposite = (double)LENGTH / 2;
 	while (i < size)
 	{

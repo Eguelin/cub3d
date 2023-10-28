@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/27 19:26:57 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/28 20:09:48 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # include <stdio.h>
 # include <math.h>
 
-# define FOV 1.0472
+# define FOV_2 0.5235987756
 # define HEIGHT 2058
 # define LENGTH 3840
+# define LENGTH_2 1920
+# define WALL_SIZE 1108
 
 typedef enum e_error
 {
@@ -72,7 +74,7 @@ typedef struct s_cub3d
 	char		**map;
 	size_t		map_width;
 	size_t		map_height;
-	double		angle[(LENGTH >> 1) + 1];
+	double		angle[LENGTH_2 + 1];
 }	t_cub3d;
 
 /////// [display] ///////
