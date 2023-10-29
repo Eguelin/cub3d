@@ -6,61 +6,105 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:20:54 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/28 20:28:15 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/29 19:32:20 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	ft_get_texture_ratio(\
-int length, t_cub3d *cub, t_point impact, double distance);
+static void	ft_get_texture_ratio(t_cub3d *cub, t_display *display);
+static void	ft_get_column(t_cub3d *cub, t_display display, int x_win);
+static void	ft_get_color(t_cub3d *cub, int wall_size, int wall_sart, int x_win);
 
 void	ft_visual_field(t_cub3d *cub)
 {
-	int		i;
-	int		j;
-	t_point	impact;
-	double	distance;
+	int			i;
+	int			j;
+	t_display	display;
 
 	i = 0;
 	j = 0;
 	while (i < LENGTH)
 	{
 		if (i < LENGTH_2)
-			distance = ft_ray_casting(cub, -cub->angle[j++], &impact);
+			ft_ray_casting(cub, -cub->angle[j++], &display);
 		else if (i == LENGTH_2 && LENGTH & 1)
-			distance = ft_ray_casting(cub, -cub->angle[j], &impact);
+			ft_ray_casting(cub, -cub->angle[j], &display);
 		else
-			distance = ft_ray_casting(cub, cub->angle[j--], &impact);
-		ft_get_texture_ratio(i, cub, impact, distance);
+			ft_ray_casting(cub, cub->angle[j--], &display);
+		ft_get_texture_ratio(cub, &display);
+		ft_get_column(cub, display, i);
 		i++;
+	}
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows, 0, 0);
+}
+
+static void	ft_get_texture_ratio(t_cub3d *cub, t_display *display)
+{
+	display->texture = cub->texture[0];
+	display->ratio_x = display->impact.x - (size_t)display->impact.x;
+	if (!display->ratio_x)
+	{
+		display->texture = cub->texture[3];
+		display->ratio_x = display->impact.y - (size_t)display->impact.y;
+		if (cub->player.position.x > display->impact.x)
+		{
+			display->texture = cub->texture[2];
+			display->ratio_x = 1 - display->ratio_x;
+		}
+	}
+	else if (cub->player.position.y < display->impact.y)
+	{
+		display->texture = cub->texture[1];
+		display->ratio_x = 1 - display->ratio_x;
+	}
+	display->ratio_y = (double)display->texture->height / \
+	(double)display->wall_size;
+}
+
+static void	ft_get_column(t_cub3d *cub, t_display display, int x_win)
+{
+	int		i;
+	int		j;
+	int		index_1;
+
+	i = 0;
+	j = 0;
+	if (HEIGHT > display.wall_size)
+		i = (HEIGHT - display.wall_size) >> 1;
+	else
+		j = (display.wall_size - HEIGHT) >> 1;
+	ft_get_color(cub, display.wall_size, i, x_win);
+	index_1 = cub->windows->width * i + x_win;
+	while (i < HEIGHT && j < display.wall_size)
+	{
+		((int *)cub->windows->data)[index_1] = \
+		((int *)display.texture->data)[(display.texture->width * (int)(j * \
+		display.ratio_y)) + (int)(display.texture->width * display.ratio_x)];
+		i++;
+		j++;
+		index_1 += cub->windows->width;
 	}
 }
 
-static void	ft_get_texture_ratio(\
-int length, t_cub3d *cub, t_point impact, double distance)
+static void	ft_get_color(t_cub3d *cub, int wall_size, int wall_sart, int x_win)
 {
 	int		i;
-	double	ratio;
+	int		index_1;
 
 	i = 0;
-	ratio = impact.x - (size_t)impact.x;
-	if (!ratio)
+	index_1 = x_win;
+	while (i < wall_sart)
 	{
-		i = 3;
-		ratio = impact.y - (size_t)impact.y;
-		if (cub->player.position.x > impact.x)
-		{
-			i = 2;
-			ratio = 1 - ratio;
-		}
+		((int *)cub->windows->data)[index_1] = cub->c_colors;
+		index_1 += cub->windows->width;
+		i++;
 	}
-	else if (cub->player.position.y < impact.y)
+	i += wall_size * cub->windows->width;
+	while (i < HEIGHT)
 	{
-		i = 1;
-		ratio = 1 - ratio;
+		((int *)cub->windows->data)[index_1] = cub->f_colors;
+		index_1 += cub->windows->width;
+		i++;
 	}
-	printf("x = %lf y = %lf d = %lf\n", impact.x, impact.y, distance);
-	printf("i = %d ratio = %lf\n", i, ratio);
-	(void)length;
 }

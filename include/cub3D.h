@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/28 20:09:48 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/29 18:40:58 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define HEIGHT 2058
 # define LENGTH 3840
 # define LENGTH_2 1920
-# define WALL_SIZE 1108
+# define WALL 3325
 
 typedef enum e_error
 {
@@ -60,6 +60,15 @@ typedef struct s_player
 	double	angle;
 }	t_player;
 
+typedef struct s_display
+{
+	t_img	*texture;
+	t_point	impact;
+	int		wall_size;
+	double	ratio_x;
+	double	ratio_y;
+}	t_display;
+
 typedef struct s_cub3d
 {
 	void		*mlx;
@@ -85,7 +94,7 @@ void	ft_put_image_to_image(t_img *img_1, t_img *img_2, int x, int y);
 void	ft_put_pixel_to_image(t_img *img, int x, int y, int color);
 
 /////// [ray-casting] ///////
-double	ft_ray_casting(t_cub3d *cub, double angle, t_point *impact);
+void	ft_ray_casting(t_cub3d *cub, double angle, t_display *display);
 
 /////// [exit] ///////
 int		ft_close_win(t_cub3d *cub);

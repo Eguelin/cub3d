@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/27 18:59:34 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/29 16:19:33 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ static int	check_texture(t_cub3d *cub, char **file, char *to_find, char c)
 
 int	init_texture(t_cub3d *cub, char **file)
 {
-	cub->mlx = mlx_init();
-	if (!cub->mlx)
-		ft_exit(cub, NULL, MALLOC_ERROR);
 	if (check_texture(cub, file, "NO", 'N') == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_texture(cub, file, "SO", 'S') == EXIT_FAILURE)

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:46:13 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/27 19:18:31 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/29 18:37:27 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		ft_impact_x(t_cub3d *cub, t_point *impact, double angle);
 static void		ft_impact_y(t_cub3d *cub, t_point *impact, double angle);
 static double	ft_get_distance(t_point point_1, t_point point_2);
 
-double	ft_ray_casting(t_cub3d *cub, double angle, t_point *impact)
+void	ft_ray_casting(t_cub3d *cub, double angle, t_display *display)
 {
 	t_point	impact_x;
 	t_point	impact_y;
@@ -33,15 +33,15 @@ double	ft_ray_casting(t_cub3d *cub, double angle, t_point *impact)
 	distance_y = ft_get_distance(cub->player.position, impact_y);
 	if (distance_x < distance_y)
 	{
-		impact->x = impact_x.x;
-		impact->y = impact_x.y;
-		return (cos(angle) * distance_x);
+		display->impact.x = impact_x.x;
+		display->impact.y = impact_x.y;
+		display->wall_size = WALL / (cos(angle) * distance_x);
 	}
 	else
 	{
-		impact->x = impact_y.x;
-		impact->y = impact_y.y;
-		return (cos(angle) * distance_y);
+		display->impact.x = impact_y.x;
+		display->impact.y = impact_y.y;
+		display->wall_size = WALL / (cos(angle) * distance_y);
 	}
 }
 
