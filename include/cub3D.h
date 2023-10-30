@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/29 18:40:58 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 15:13:32 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define HEIGHT 2058
 # define LENGTH 3840
 # define LENGTH_2 1920
-# define WALL 3325
+# define WALL_SIZE 3325
 
 typedef enum e_error
 {
@@ -64,6 +64,7 @@ typedef struct s_display
 {
 	t_img	*texture;
 	t_point	impact;
+	double	distance;
 	int		wall_size;
 	double	ratio_x;
 	double	ratio_y;

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:46:13 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/29 18:37:27 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 13:36:52 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	ft_ray_casting(t_cub3d *cub, double angle, t_display *display)
 	{
 		display->impact.x = impact_x.x;
 		display->impact.y = impact_x.y;
-		display->wall_size = WALL / (cos(angle) * distance_x);
+		display->distance = cos(angle) * distance_x;
 	}
 	else
 	{
 		display->impact.x = impact_y.x;
 		display->impact.y = impact_y.y;
-		display->wall_size = WALL / (cos(angle) * distance_y);
+		display->distance = cos(angle) * distance_y;
 	}
 }
 

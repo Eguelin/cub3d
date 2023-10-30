@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:20:54 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/29 19:32:20 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 15:13:52 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	ft_get_texture_ratio(t_cub3d *cub, t_display *display);
 static void	ft_get_column(t_cub3d *cub, t_display display, int x_win);
-static void	ft_get_color(t_cub3d *cub, int wall_size, int wall_sart, int x_win);
+static void	ft_get_ceiling_floor(\
+t_cub3d *cub, int wall_size, int wall_sart, int x_win);
 
 void	ft_visual_field(t_cub3d *cub)
 {
@@ -41,6 +42,8 @@ void	ft_visual_field(t_cub3d *cub)
 
 static void	ft_get_texture_ratio(t_cub3d *cub, t_display *display)
 {
+	display->wall_size = ((size_t)WALL_SIZE * 10000) / \
+	(size_t)(display->distance * 10000);
 	display->texture = cub->texture[0];
 	display->ratio_x = display->impact.x - (size_t)display->impact.x;
 	if (!display->ratio_x)
@@ -74,20 +77,21 @@ static void	ft_get_column(t_cub3d *cub, t_display display, int x_win)
 		i = (HEIGHT - display.wall_size) >> 1;
 	else
 		j = (display.wall_size - HEIGHT) >> 1;
-	ft_get_color(cub, display.wall_size, i, x_win);
+	ft_get_ceiling_floor(cub, display.wall_size, i, x_win);
 	index_1 = cub->windows->width * i + x_win;
 	while (i < HEIGHT && j < display.wall_size)
 	{
 		((int *)cub->windows->data)[index_1] = \
 		((int *)display.texture->data)[(display.texture->width * (int)(j * \
 		display.ratio_y)) + (int)(display.texture->width * display.ratio_x)];
+		index_1 += cub->windows->width;
 		i++;
 		j++;
-		index_1 += cub->windows->width;
 	}
 }
 
-static void	ft_get_color(t_cub3d *cub, int wall_size, int wall_sart, int x_win)
+static void	ft_get_ceiling_floor(\
+t_cub3d *cub, int wall_size, int wall_sart, int x_win)
 {
 	int		i;
 	int		index_1;
@@ -100,7 +104,8 @@ static void	ft_get_color(t_cub3d *cub, int wall_size, int wall_sart, int x_win)
 		index_1 += cub->windows->width;
 		i++;
 	}
-	i += wall_size * cub->windows->width;
+	index_1 += wall_size * cub->windows->width;
+	i += wall_size;
 	while (i < HEIGHT)
 	{
 		((int *)cub->windows->data)[index_1] = cub->f_colors;
