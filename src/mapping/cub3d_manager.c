@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/30 14:47:58 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 16:45:49 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	refresh_image(t_cub3d *cub)
 {
 	ft_clear_image(cub->minimap[MINIMAP]);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
-	154.5 - cub->player.position.x * 17, 104.5 - cub->player.position.y * 17);
+	154 - cub->player.position.x * 17, 104 - cub->player.position.y * 17);
 	ft_put_image_to_image(cub->minimap[MINIMAP], \
 	cub->minimap[PLAYER], 150, 100);
 	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);
@@ -49,7 +49,7 @@ static void	set_minimap(t_cub3d *cub)
 	//ft_resize_img(cub, &cub->minimap[WALL], cub->resize_len);
 	//ft_resize_img(cub, &cub->minimap[PLAYER], cub->resize_len);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
-	154.5 - cub->player.position.x * 17, 104.5 - cub->player.position.y * 17);
+	154 - cub->player.position.x * 17, 104 - cub->player.position.y * 17);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[PLAYER], \
 	150, 100);
 	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:49:34 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/26 18:11:52 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 16:29:11 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	ft_put_border(t_cub3d *cub, float x, float y, int size)
 	int	i;
 	int	j;
 
-	x = (x) * 17;
-	y = (y) * 17;
 	i = -1;
 	while (++i <= size)
 	{
