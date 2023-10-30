@@ -6,7 +6,7 @@
 #    By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/26 19:24:31 by acarlott         ###   ########lyon.fr    #
+#    Updated: 2023/10/30 10:19:53 by acarlott         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 ALL_FILES = main.c
 
 MAP_DIR		= mapping/
-MAP_FILES		= cub3d_manager.c img_manager.c move_manager.c pixel_manager.c
+MAP_FILES		= cub3d_manager.c img_manager.c move_manager.c pixel_manager.c ft_hitbox.c
 ALL_FILES		+= $(addprefix $(MAP_DIR), $(MAP_FILES))
 
 MLX-P_DIR		= mlx-plug-in/

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 20:49:50 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 13:49:43 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <math.h>
 
+# define X 0
+# define Y 1
 # define FLOOR 0
 # define CEILING 1
 # define KEY_ESC 65307
@@ -120,6 +122,22 @@ typedef enum e_minimap
 	BORDER
 }	t_minimap;
 
+typedef enum e_view
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_view;
+
+typedef enum e_hitbox
+{
+	TOP_L,
+	TOP_R,
+	BOTTOM_L,
+	BOTTOM_R
+}	t_hitbox;
+
 typedef struct s_point
 {
 	double	x;
@@ -129,6 +147,7 @@ typedef struct s_point
 typedef struct s_player
 {
 	t_point	position;
+	t_point	hitbox[4];
 	double	angle;
 }	t_player;
 
@@ -172,6 +191,8 @@ void	ft_put_inset(t_cub3d *cub, float x, float y, int size);
 void	ft_put_element(t_cub3d *cub, float x, float y, int size);
 void	my_mlx_pixel_put(t_img *txr, int x, int y, int color);
 // [MOVE] //
+void	init_hitbox_player(t_cub3d *cub);
+int		ft_hitbox(t_cub3d *cub, int keycode, int point);
 void	ft_move_north_south(t_cub3d *cub, int keycode);
 void	ft_move_east_west(t_cub3d *cub, int keycode);
 void	ft_angle_direction(t_cub3d *cub, int keycode);

@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/27 11:08:52 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 14:47:58 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	refresh_image(t_cub3d *cub)
 {
 	ft_clear_image(cub->minimap[MINIMAP]);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
-	150 - cub->player.position.x * 17, 100 - cub->player.position.y * 17);
+	154.5 - cub->player.position.x * 17, 104.5 - cub->player.position.y * 17);
 	ft_put_image_to_image(cub->minimap[MINIMAP], \
 	cub->minimap[PLAYER], 150, 100);
 	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);
@@ -26,7 +26,6 @@ static void	refresh_image(t_cub3d *cub)
 
 static int	ft_handle_keypress(int keycode, t_cub3d *cub)
 {
-	ft_printf("Keycode: %d\n", keycode);
 	if (keycode == KEY_ESC)
 		ft_exit(cub, NULL, EXIT_SUCCESS);
 	else if (keycode == KEY_W || keycode == KEY_S)
@@ -50,7 +49,7 @@ static void	set_minimap(t_cub3d *cub)
 	//ft_resize_img(cub, &cub->minimap[WALL], cub->resize_len);
 	//ft_resize_img(cub, &cub->minimap[PLAYER], cub->resize_len);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
-	150 - cub->player.position.x * 17, 100 - cub->player.position.y * 17);
+	154.5 - cub->player.position.x * 17, 104.5 - cub->player.position.y * 17);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[PLAYER], \
 	150, 100);
 	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);
@@ -59,6 +58,7 @@ static void	set_minimap(t_cub3d *cub)
 
 void	cub3d_manager(t_cub3d *cub)
 {
+	init_hitbox_player(cub);
 	cub->resize_len = 1;
 	cub->mlx_win = mlx_new_window(cub->mlx, 860, 620, "Cub3d");
 	mlx_hook(cub->mlx_win, 2, 1L << 0, ft_handle_keypress, cub);
