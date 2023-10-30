@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/27 19:22:44 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/30 19:32:30 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ INIT_FILES		= ft_init.c
 ALL_FILES		+= $(addprefix $(INIT_DIR), $(INIT_FILES))
 
 PARS_DIR		= parsing/
-PARS_FILES		= ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
+PARS_FILES		= ft_diffusion.c ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
 ALL_FILES		+= $(addprefix $(INIT_DIR)$(PARS_DIR), $(PARS_FILES))
 
 UTILS_DIR		= utils/

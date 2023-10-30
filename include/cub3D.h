@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/30 15:13:32 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 19:31:03 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_exit(t_cub3d *cub, char const *s, int exit);
 void	ft_init(t_cub3d	*cub, char **argv);
 
 /////// [parsing] ///////
+int		ft_diffusion(char **map);
 int		ft_check_map(t_cub3d *cub, char **start_map);
 void	ft_get_map(t_cub3d *cub, char **file);
 char	**ft_open_file(char const *file);
