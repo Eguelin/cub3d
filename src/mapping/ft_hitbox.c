@@ -6,7 +6,7 @@
 /*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:13:18 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/30 16:57:19 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/10/30 17:44:15 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	init_hitbox_player(t_cub3d *cub)
 {
-	cub->player.hitbox[TOP_L].x = cub->player.position.x - 0.2;
-	cub->player.hitbox[TOP_L].y = cub->player.position.y - 0.2;
-	cub->player.hitbox[TOP_R].x = cub->player.position.x + 0.2;
-	cub->player.hitbox[TOP_R].y = cub->player.position.y - 0.2;
-	cub->player.hitbox[BOTTOM_L].x = cub->player.position.x - 0.2;
-	cub->player.hitbox[BOTTOM_L].y = cub->player.position.y + 0.2;
-	cub->player.hitbox[BOTTOM_R].x = cub->player.position.x + 0.2;
-	cub->player.hitbox[BOTTOM_R].y = cub->player.position.y + 0.2;
+	cub->player.hitbox[TOP_L].x = cub->player.position.x - 0.15;
+	cub->player.hitbox[TOP_L].y = cub->player.position.y - 0.15;
+	cub->player.hitbox[TOP_R].x = cub->player.position.x + 0.15;
+	cub->player.hitbox[TOP_R].y = cub->player.position.y - 0.15;
+	cub->player.hitbox[BOTTOM_L].x = cub->player.position.x - 0.15;
+	cub->player.hitbox[BOTTOM_L].y = cub->player.position.y + 0.15;
+	cub->player.hitbox[BOTTOM_R].x = cub->player.position.x + 0.15;
+	cub->player.hitbox[BOTTOM_R].y = cub->player.position.y + 0.15;
 }
 
 static void	ft_hitbox_move(t_cub3d *cub, t_point *direction, int keycode)
