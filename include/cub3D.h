@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/30 19:31:03 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 13:47:55 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_cub3d
 	int			f_colors;
 	int			c_colors;
 	char		**map;
+	char		**infile;
 	size_t		map_width;
 	size_t		map_height;
 	double		angle[LENGTH_2 + 1];
@@ -108,7 +109,7 @@ void	ft_init(t_cub3d	*cub, char **argv);
 int		ft_diffusion(char **map);
 int		ft_check_map(t_cub3d *cub, char **start_map);
 void	ft_get_map(t_cub3d *cub, char **file);
-char	**ft_open_file(char const *file);
+void	ft_open_file(t_cub3d *cub, char const *name);
 void	ft_parser(t_cub3d *cub, char **argv);
 int		init_texture(t_cub3d *cub, char **file);
 int		get_colors(t_cub3d *cub, char *str, int view);

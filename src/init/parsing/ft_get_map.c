@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:07:55 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/26 16:24:29 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 15:30:49 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,12 @@ void	ft_get_map(t_cub3d *cub, char **file)
 	start_map = file + cub->map_height;
 	cub->map_height = ft_get_index(start_map, 1);
 	if (!cub->map_height)
-	{
-		ft_free_tab(file);
-		ft_exit(NULL, NULL, MAP_ERROR);
-	}
+		ft_exit(cub, NULL, MAP_ERROR);
 	cub->map = ft_calloc((cub->map_height + 1), sizeof(char *));
 	if (!cub->map || ft_fill_map(start_map, cub))
-	{
-		ft_free_tab(file);
-		ft_exit(NULL, NULL, MALLOC_ERROR);
-	}
+		ft_exit(cub, NULL, MALLOC_ERROR);
 	if (ft_check_map(cub, start_map))
-	{
-		ft_free_tab(file);
 		ft_exit(cub, NULL, MAP_ERROR);
-	}
 }
 
 static size_t	ft_get_index(char **file, int flag)

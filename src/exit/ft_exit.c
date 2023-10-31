@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:47:15 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/23 12:25:15 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 13:51:20 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	ft_free_cub(t_cub3d *cub)
 	if (cub->mlx)
 		mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
+	ft_free_tab(cub->infile);
 }
 
 static void	ft_destroy_texture(t_cub3d *cub)

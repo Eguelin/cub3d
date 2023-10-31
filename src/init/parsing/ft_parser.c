@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 18:39:14 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/27 18:57:30 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 13:55:22 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,14 @@ static int	check_content(char **file);
 
 void	ft_parser(t_cub3d *cub, char **argv)
 {
-	char	**file;
-
-	file = ft_open_file(argv[1]);
-	if (check_content(file))
-	{
-		ft_free_tab(file);
+	ft_open_file(cub, argv[1]);
+	if (check_content(cub->infile))
 		ft_exit(cub, "Duplicate or wrong input path", SORT_ERROR);
-	}
-	if (init_texture(cub, file))
-	{
-		ft_free_tab(file);
+	if (init_texture(cub, cub->infile))
 		ft_exit(cub, NULL, MALLOC_ERROR);
-	}
-	ft_get_map(cub, file);
-	ft_free_tab(file);
+	ft_get_map(cub, cub->infile);
+	ft_free_tab(cub->infile);
+	cub->infile = NULL;
 }
 
 static int	content_condition(char *file, int *tab)
