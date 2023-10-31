@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 16:03:27 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 17:45:46 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define HEIGHT 2058
 # define LENGTH 3840
 # define LENGTH_2 1920
-# define WALL_SIZE 3325
 # define X 0
 # define Y 1
 # define FLOOR 0
@@ -105,6 +104,7 @@ typedef struct s_cub3d
 	char		**infile;
 	size_t		map_width;
 	size_t		map_height;
+	int			init_wall;
 	double		angle[LENGTH_2 + 1];
 }	t_cub3d;
 

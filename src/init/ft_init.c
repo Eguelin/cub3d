@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 16:05:28 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 16:46:13 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	ft_init_struct(t_cub3d	*cub)
 	cub->c_colors = -1;
 	cub->map = NULL;
 	cub->infile = NULL;
+	cub->init_wall = LENGTH_2 / tan(FOV_2);
 	ft_calculate_angle_array(cub);
 }
 

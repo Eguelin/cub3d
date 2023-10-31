@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 10:13:18 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/31 16:09:47 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 16:29:55 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ void	init_hitbox_player(t_cub3d *cub)
 
 static void	ft_hitbox_move(t_cub3d *cub, t_point *direction, int keycode)
 {
-	if (keycode == XK_W)
+	if (keycode == XK_w)
 	{
 		direction->y = (sin(cub->player.angle) * 0.20);
 		direction->x -= (cos(cub->player.angle) * 0.20);
 	}
-	else if (keycode == XK_S)
+	else if (keycode == XK_s)
 	{
 		direction->y -= (sin(cub->player.angle) * 0.20);
 		direction->x = (cos(cub->player.angle) * 0.20);
 	}
-	else if (keycode == XK_A)
+	else if (keycode == XK_a)
 	{
 		direction->y -= (cos(cub->player.angle) * 0.20);
 		direction->x = (sin(cub->player.angle) * 0.20);
 	}
-	else if (keycode == XK_D)
+	else if (keycode == XK_d)
 	{
 		direction->y = (cos(cub->player.angle) * 0.20);
 		direction->x -= (sin(cub->player.angle) * 0.20);

@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:20:54 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 16:15:55 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 16:46:30 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_visual_field(t_cub3d *cub)
 
 static void	ft_get_texture_ratio(t_cub3d *cub, t_display *display)
 {
-	display->wall_size = ((size_t)WALL_SIZE * 10000) / \
+	display->wall_size = ((size_t)cub->init_wall * 10000) / \
 	(size_t)(display->distance * 10000);
 	display->texture = cub->texture[0];
 	display->ratio_x = display->impact.x - (size_t)display->impact.x;
