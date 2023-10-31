@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_visual_field.c                                  :+:      :+:    :+:   */
+/*   ft_visual.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 19:20:54 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 16:46:30 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 23:59:04 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_get_column(t_cub3d *cub, t_display display, int x_win);
 static void	ft_get_ceiling_floor(\
 t_cub3d *cub, int wall_size, int wall_sart, int x_win);
 
-void	ft_visual_field(t_cub3d *cub)
+void	ft_visual(t_cub3d *cub)
 {
 	int			i;
 	int			j;

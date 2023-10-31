@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_manager.c                                    :+:      :+:    :+:   */
+/*   ft_minimap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 00:10:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/31 17:46:17 by eguelin          ###   ########lyon.fr   */
+/*   Created: 2023/10/13 11:50:44 by acarlott          #+#    #+#             */
+/*   Updated: 2023/11/01 00:41:30 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int	refresh_image(t_cub3d *cub)
+static void	set_miniborder_img(t_cub3d *cub, int height, int width);
+static void	set_minimap_img(t_cub3d *cub, char **map);
+static void	set_player_img(t_cub3d *cub, int size);
+
+void	ft_minimap(t_cub3d *cub)
 {
-	ft_visual_field(cub);
 	ft_clear_image(cub->minimap[MINIMAP]);
 	ft_put_image_to_image(cub->minimap[MINIMAP], cub->minimap[WALL], \
 	154.5 - cub->player.position.x * 17, 104.5 - cub->player.position.y * 17);
@@ -22,24 +25,9 @@ static int	refresh_image(t_cub3d *cub)
 	cub->minimap[PLAYER], 150, 100);
 	ft_put_image_to_image(cub->windows, cub->minimap[BORDER], 10, 10);
 	ft_put_image_to_image(cub->windows, cub->minimap[MINIMAP], 14, 14);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows, 0, 0);
-	return (0);
 }
 
-static int	ft_handle_keypress(int keycode, t_cub3d *cub)
-{
-	if (keycode == XK_Escape)
-		ft_exit(cub, NULL, EXIT_SUCCESS);
-	else if (keycode == XK_w || keycode == XK_s)
-		ft_move_north_south(cub, keycode);
-	else if (keycode == XK_a || keycode == XK_d)
-		ft_move_east_west(cub, keycode);
-	else if (keycode == XK_Left || keycode == XK_Right)
-		ft_angle_direction(cub, keycode);
-	return (EXIT_SUCCESS);
-}
-
-static void	set_minimap(t_cub3d *cub)
+void	set_minimap(t_cub3d *cub)
 {
 	cub->minimap[WALL] = mlx_new_image(cub->mlx, cub->map_width * 17, \
 	cub->map_height * 17);
@@ -59,15 +47,60 @@ static void	set_minimap(t_cub3d *cub)
 	ft_put_image_to_image(cub->windows, cub->minimap[MINIMAP], 14, 14);
 }
 
-void	cub3d_manager(t_cub3d *cub)
+static void	set_miniborder_img(t_cub3d *cub, int height, int width)
 {
-	init_hitbox_player(cub);
-	cub->resize_len = 1;
-	mlx_hook(cub->mlx_win, 2, 1L << 0, ft_handle_keypress, cub);
-	mlx_hook(cub->mlx_win, 17, 0, ft_close_win, cub);
-	ft_visual_field(cub);
-	set_minimap(cub);
-	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->windows, 0, 0);
-	mlx_loop_hook(cub->mlx, refresh_image, cub);
-	mlx_loop(cub->mlx);
+	int	x;
+	int	y;
+
+	cub->minimap[BORDER] = mlx_new_image(cub->mlx, width, height);
+	if (!cub->minimap[BORDER])
+		ft_exit(cub, NULL, IMG_ERROR);
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (y < 3 || y > height - 4 || x < 3 || x > width - 4)
+				ft_put_pixel_to_image(cub->minimap[BORDER], x, y, 0x808080);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	set_minimap_img(t_cub3d *cub, char **map)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+			if (map[y][x] == '1')
+				ft_put_element(cub, x, y, 15);
+	}
+}
+
+static void	set_player_img(t_cub3d *cub, int size)
+{
+	int	x;
+	int	y;
+
+	cub->minimap[PLAYER] = mlx_new_image(cub->mlx, size, size);
+	if (!cub->minimap[PLAYER])
+		ft_exit(cub, NULL, IMG_ERROR);
+	y = 0;
+	while (y < size)
+	{
+		x = 0;
+		while (x < size)
+		{
+			ft_put_pixel_to_image(cub->minimap[PLAYER], x, y, 0xFFF000);
+			x++;
+		}
+		y++;
+	}
 }

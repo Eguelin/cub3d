@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 16:46:13 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/11/01 00:34:48 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ static void	ft_init_struct(t_cub3d	*cub)
 	{
 		cub->texture[i] = NULL;
 		cub->minimap[i] = NULL;
+		cub->hook[i] = 0;
+		i++;
+	}
+	while (i < 6)
+	{
+		cub->hook[i] = 0;
 		i++;
 	}
 	cub->f_colors = -1;

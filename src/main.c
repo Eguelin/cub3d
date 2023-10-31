@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:55:39 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 15:51:37 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/11/01 00:13:37 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	main(int argc, char **argv, char **env)
 	else if (argc < 2)
 		ft_exit(NULL, NULL, WRONG_FORMAT_BIS);
 	ft_init(&cub, argv);
-	cub3d_manager(&cub);
+	ft_display(&cub);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:49:34 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/30 17:00:18 by acarlott         ###   ########lyon.fr   */
+/*   Updated: 2023/11/01 00:41:55 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_put_border(t_cub3d *cub, float x, float y, int size)
 		j = -1;
 		while (++j <= size)
 		{
-			my_mlx_pixel_put(cub->minimap[BORDER], x, y, 0xF00000);
+			ft_put_pixel_to_image(cub->minimap[BORDER], x, y, 0xF00000);
 			y++;
 		}
 		y = (y - size - 1);
@@ -44,19 +44,10 @@ void	ft_put_element(t_cub3d *cub, float x, float y, int size)
 		j = -1;
 		while (++j <= size)
 		{
-			my_mlx_pixel_put(cub->minimap[WALL], x, y, 0xFFFFFF);
+			ft_put_pixel_to_image(cub->minimap[WALL], x, y, 0xFFFFFF);
 			y++;
 		}
 		y = (y - size - 1);
 		x++;
 	}
-}
-
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->data + (y * img->size_line + \
-	x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
 }

@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/31 16:22:23 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/11/01 00:43:13 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,16 +43,28 @@ FULL_CLEAN_MSG	= "$(PURPLE)Full cleaning $(NAME) $(WHITE)done on $(YELLOW)$(shel
 ALL_FILES = main.c
 
 DISPLAY_DIR		= display/
-DISPLAY_FILES	= ft_visual_field.c
+DISPLAY_FILES	= ft_display.c
 ALL_FILES		+= $(addprefix $(DISPLAY_DIR), $(DISPLAY_FILES))
 
+HOOK_DIR		= hook/
+HOOK_FILES		= ft_hitbox.c ft_key.c ft_move.c
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(HOOK_DIR), $(HOOK_FILES))
+
+MAP_DIR			= mapping/
+MAP_FILES		= ft_minimap.c pixel_manager.c
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(MAP_DIR), $(MAP_FILES))
+
 MLX-P_DIR		= mlx-plug-in/
-MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c ft_resize_image.c ft_clear_image.c
+MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c ft_clear_image.c
 ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(MLX-P_DIR), $(MLX-P_FILES))
+
+VISUAL_DIR		= visual/
+VISUAL_FILES	= ft_visual.c
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(VISUAL_DIR), $(VISUAL_FILES))
 
 RAY-C_DIR		= ray-casting/
 RAY-C_FILES		= ft_ray_casting.c
-ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(RAY-C_DIR), $(RAY-C_FILES))
+ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(VISUAL_DIR)$(RAY-C_DIR), $(RAY-C_FILES))
 
 EXIT_DIR		= exit/
 EXIT_FILES		= ft_close_win.c ft_exit.c
@@ -65,10 +77,6 @@ ALL_FILES		+= $(addprefix $(INIT_DIR), $(INIT_FILES))
 PARS_DIR		= parsing/
 PARS_FILES		= ft_diffusion.c ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
 ALL_FILES		+= $(addprefix $(INIT_DIR)$(PARS_DIR), $(PARS_FILES))
-
-MAP_DIR			= mapping/
-MAP_FILES		= cub3d_manager.c img_manager.c move_manager.c pixel_manager.c ft_hitbox.c
-ALL_FILES		+= $(addprefix $(MAP_DIR), $(MAP_FILES))
 
 UTILS_DIR		= utils/
 UTILS_FILES		= ft_perror.c ft_strndup.c
