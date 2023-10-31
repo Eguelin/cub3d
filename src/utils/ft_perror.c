@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_perror.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:36:37 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/25 18:14:40 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	ft_perror(char const *s, int error)
 		ft_printf_fd(STDERR_FILENO, "error with texture/colors path : %s\n", s);
 	else if (error == COLORS_ERROR)
 		ft_printf_fd(STDERR_FILENO, "error with colors : %s\n", s);
+	else if (error == IMG_ERROR)
+		write(STDERR_FILENO, "an error occurred during image creation\n", 41);
 	if (error == WRONG_FORMAT || error == WRONG_FORMAT_BIS)
 		write(STDERR_FILENO, "format: ./cub3d ./path_to_the_map.cub\n", 39);
 	return (1);

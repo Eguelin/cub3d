@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_put_image_to_image.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:33:00 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/26 00:46:28 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

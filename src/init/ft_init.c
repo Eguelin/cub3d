@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 18:50:11 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/31 13:56:19 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 16:05:28 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ void	ft_init(t_cub3d	*cub, char **argv)
 
 static void	ft_init_struct(t_cub3d	*cub)
 {
+	int	i;
+
+	i = 0;
 	cub->mlx = NULL;
 	cub->mlx_win = NULL;
 	cub->windows = NULL;
-	cub->minimap_img = NULL;
-	cub->player_img = NULL;
-	cub->texture[0] = NULL;
-	cub->texture[1] = NULL;
-	cub->texture[2] = NULL;
-	cub->texture[3] = NULL;
+	while (i < 4)
+	{
+		cub->texture[i] = NULL;
+		cub->minimap[i] = NULL;
+		i++;
+	}
 	cub->f_colors = -1;
 	cub->c_colors = -1;
 	cub->map = NULL;

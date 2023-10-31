@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 15:55:39 by eguelin           #+#    #+#             */
-/*   Updated: 2023/10/29 16:37:01 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/10/31 15:51:37 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	main(int argc, char **argv, char **env)
 	else if (argc < 2)
 		ft_exit(NULL, NULL, WRONG_FORMAT_BIS);
 	ft_init(&cub, argv);
-	mlx_hook(cub.mlx_win, 17, 0, ft_close_win, &cub);
-	ft_visual_field(&cub);
-	mlx_loop(cub.mlx);
+	cub3d_manager(&cub);
 	return (EXIT_SUCCESS);
 }

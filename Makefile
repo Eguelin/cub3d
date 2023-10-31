@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/10/30 19:32:30 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/10/31 16:22:23 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ DISPLAY_FILES	= ft_visual_field.c
 ALL_FILES		+= $(addprefix $(DISPLAY_DIR), $(DISPLAY_FILES))
 
 MLX-P_DIR		= mlx-plug-in/
-MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c
+MLX-P_FILES		= ft_put_image_to_image.c ft_put_pixel_to_image.c ft_resize_image.c ft_clear_image.c
 ALL_FILES		+= $(addprefix $(DISPLAY_DIR)$(MLX-P_DIR), $(MLX-P_FILES))
 
 RAY-C_DIR		= ray-casting/
@@ -65,6 +65,10 @@ ALL_FILES		+= $(addprefix $(INIT_DIR), $(INIT_FILES))
 PARS_DIR		= parsing/
 PARS_FILES		= ft_diffusion.c ft_check_map.c ft_get_map.c ft_open_file.c ft_parser.c texture_parser.c colors_parser.c
 ALL_FILES		+= $(addprefix $(INIT_DIR)$(PARS_DIR), $(PARS_FILES))
+
+MAP_DIR			= mapping/
+MAP_FILES		= cub3d_manager.c img_manager.c move_manager.c pixel_manager.c ft_hitbox.c
+ALL_FILES		+= $(addprefix $(MAP_DIR), $(MAP_FILES))
 
 UTILS_DIR		= utils/
 UTILS_FILES		= ft_perror.c ft_strndup.c
