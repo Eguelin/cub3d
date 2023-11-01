@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 13:43:10 by eguelin           #+#    #+#             */
-/*   Updated: 2023/11/01 11:41:20 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/11/01 13:55:10 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	ft_get_map(t_cub3d *cub, char **file);
 void	ft_open_file(t_cub3d *cub, char const *name);
 void	ft_parser(t_cub3d *cub, char **argv);
 void	init_texture(t_cub3d *cub, char **file);
-int		get_colors(t_cub3d *cub, char *str, int view);
+void	get_colors(t_cub3d *cub, char *str, int view);
 
 /////// [utils] ///////
 int		ft_perror(char const *s, int error);

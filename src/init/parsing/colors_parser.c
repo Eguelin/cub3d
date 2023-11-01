@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: acarlott <acarlott@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:36:33 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/21 17:58:17 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/11/01 14:03:26 by acarlott         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_colors_range(char **tab)
 	int	rgb[3];
 
 	i = 0;
-	while (tab[i] && i <= 2)
+	while (tab[i] && i < 3)
 	{
 		j = 0;
 		if (i == 0)
@@ -41,42 +41,56 @@ static int	set_colors(t_cub3d *cub, char **tab, int view)
 	{
 		cub->f_colors = check_colors_range(tab);
 		if (cub->f_colors == -1)
-			return (ft_perror("range", COLORS_ERROR));
+			return (EXIT_FAILURE);
 		else if (cub->f_colors == -2)
-			return (ft_perror("format", COLORS_ERROR));
+			return (EXIT_FAILURE);
 	}
 	else
 	{
 		cub->c_colors = check_colors_range(tab);
 		if (cub->c_colors == -1)
-			return (ft_perror("range", COLORS_ERROR));
+			return (EXIT_FAILURE);
 		else if (cub->c_colors == -2)
-			return (ft_perror("format", COLORS_ERROR));
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	get_colors(t_cub3d *cub, char *str, int view)
+static void	check_colors_format(t_cub3d *cub, char *str)
 {
+	int		j;
 	int		i;
-	char	**tab;
 
+	j = 0;
 	i = 1;
 	while (str[i] && str[i] == ' ')
 		i++;
 	if (str[i] == '\n' && !str[i + 1])
-		return (ft_perror("empty colors", COLORS_ERROR));
-	while (str[i] && str[i + 1])
+		ft_exit(cub, "empty colors", COLORS_ERROR);
+	while (str[i])
 	{
+		if (str[i] == ',')
+			j++;
 		if (!ft_isdigit(str[i]) && str[i] != ',')
-			return (ft_perror("format", COLORS_ERROR));
+			ft_exit(cub, "format", COLORS_ERROR);
 		i++;
 	}
+	if (j != 2)
+		ft_exit(cub, "format", COLORS_ERROR);
+}
+
+void	get_colors(t_cub3d *cub, char *str, int view)
+{
+	char	**tab;
+
+	check_colors_format(cub, str);
 	tab = ft_split(str, ',');
 	if (!tab)
-		return (MALLOC_ERROR);
+		ft_exit(cub, NULL, MALLOC_ERROR);
 	if (set_colors(cub, tab, view) == EXIT_FAILURE)
-		return (ft_free_tab(tab), EXIT_FAILURE);
+	{
+		ft_free_tab(tab);
+		ft_exit(cub, "format", COLORS_ERROR);
+	}
 	ft_free_tab(tab);
-	return (EXIT_SUCCESS);
 }

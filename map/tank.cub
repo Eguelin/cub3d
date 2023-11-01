@@ -3,7 +3,7 @@ WE ./texture/white_floor.xpm
 EA ./texture/light_2.xpm
 NO ./texture/Floor1.xpm
 
-F 224,200,1
+F 224,200,0
 C 233,030,1
 
 
