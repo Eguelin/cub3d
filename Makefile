@@ -6,7 +6,7 @@
 #    By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/27 14:20:28 by eguelin           #+#    #+#              #
-#    Updated: 2023/11/01 00:43:13 by eguelin          ###   ########lyon.fr    #
+#    Updated: 2023/11/01 13:17:07 by eguelin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INC_DIR	= include/
 LIB_DIR	= lib/
 NAME	= cub3D
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR) -g3# -march=native -flto -O3# -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra $(LIB_INC) -I $(INC_DIR)# -g3 -march=native -flto -O3# -fsanitize=address
 MLX		= -Lmlx_linux -lmlx_Linux -L $(LIB_DIR)$(MLX_DIR) -Imlx_linux -lXext -lX11 -lm -lz
 RM		= rm -rf
 ARC		= ar rcs
@@ -87,18 +87,6 @@ INC_FILES		= $(NAME).h
 OBJS			= $(addprefix $(OUT_DIR), $(ALL_FILES:.c=.o))
 HEADERS			= $(addprefix $(INC_DIR), $(INC_FILES))
 
-#Sources bonus
-# ALL_FILES = .c
-
-# ..._DIR			= /
-# ..._FILES		= .c
-# ALL_FILES		+= $(addprefix $(..._DIR), $(..._FILES))
-
-# BNS_INC_FILES	= $(NAME)_bonus.h
-
-# BNS_OBJS	= $(addprefix $(OUT_DIR), $(ALL_BNS_FILES:.c=.o))
-# BNS_HEADERS	= $(addprefix $(INC_DIR), $(BNS_INC_FILES))
-
 #Lib
 MYLIB_DIR		= mylib/
 MYLIB_FILES		= mylib.a
@@ -121,15 +109,6 @@ $(NAME): $(OUT_DIR) $(OBJS) $(LIB)
 
 $(OUT_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-# bonus: $(OUT_DIR) $(BNS_OBJS) $(LIB)
-# 	$(CC) $(CFLAGS) $(BNS_OBJS) $(LIB) $(MLX) -o $(NAME)
-# 	@echo $(COMP_BNS_MSG)
-# 	@norminette $(INC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
-# 	@norminette $(SRC_DIR) | awk '$$NF!="OK!" {print "$(RED)" $$0 "$(WHITE)"}'
-
-# $(OUT_DIR)%.o : $(SRC_DIR)%.c $(BNS_HEADERS)
-# 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(MAKE) clean -sC $(LIB_DIR)$(MYLIB_DIR)

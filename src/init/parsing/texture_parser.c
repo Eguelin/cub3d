@@ -6,7 +6,7 @@
 /*   By: eguelin <eguelin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:39:02 by acarlott          #+#    #+#             */
-/*   Updated: 2023/10/31 15:48:30 by eguelin          ###   ########lyon.fr   */
+/*   Updated: 2023/11/01 11:41:04 by eguelin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	set_texture_to_img(t_cub3d *cub, char *str, int i)
 	return (EXIT_SUCCESS);
 }
 
-static int	get_texture(t_cub3d *cub, char *str, char *to_find)
+static void	get_texture(t_cub3d *cub, char *str, char *to_find)
 {
 	int		i;
 
@@ -39,23 +39,22 @@ static int	get_texture(t_cub3d *cub, char *str, char *to_find)
 	while (str[i] && str[i] == ' ')
 		i++;
 	if (!str[i])
-		return (ft_perror("Is empty !", SORT_ERROR), EXIT_SUCCESS);
+		ft_exit(cub, "Is empty !", SORT_ERROR);
 	if (!ft_strncmp(to_find, "NO", 2))
 		if (set_texture_to_img(cub, &str[i], 0) == EXIT_FAILURE)
-			return (ft_perror("texture not found", SORT_ERROR), EXIT_SUCCESS);
+			ft_exit(cub, "texture not found", SORT_ERROR);
 	if (!ft_strncmp(to_find, "SO", 2))
 		if (set_texture_to_img(cub, &str[i], 1) == EXIT_FAILURE)
-			return (ft_perror("texture not found", SORT_ERROR), EXIT_SUCCESS);
+			ft_exit(cub, "texture not found", SORT_ERROR);
 	if (!ft_strncmp(to_find, "WE", 2))
 		if (set_texture_to_img(cub, &str[i], 2) == EXIT_FAILURE)
-			return (ft_perror("texture not found", SORT_ERROR), EXIT_SUCCESS);
+			ft_exit(cub, "texture not found", SORT_ERROR);
 	if (!ft_strncmp(to_find, "EA", 2))
 		if (set_texture_to_img(cub, &str[i], 3) == EXIT_FAILURE)
-			return (ft_perror("texture not found", SORT_ERROR), EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
+			ft_exit(cub, "texture not found", SORT_ERROR);
 }
 
-static int	check_texture(t_cub3d *cub, char **file, char *to_find, char c)
+static void	check_texture(t_cub3d *cub, char **file, char *to_find, char c)
 {
 	int	i;
 	int	j;
@@ -71,31 +70,23 @@ static int	check_texture(t_cub3d *cub, char **file, char *to_find, char c)
 			if (file[i][j] == c)
 			{
 				if (!ft_strncmp(file[i], to_find, 2) && c == 'F')
-					return (get_colors(cub, &file[i][j + 1], FLOOR));
+					get_colors(cub, &file[i][j + 1], FLOOR);
 				if (!ft_strncmp(file[i], to_find, 2) && c == 'C')
-					return (get_colors(cub, &file[i][j + 1], CEILING));
+					get_colors(cub, &file[i][j + 1], CEILING);
 				if (!ft_strncmp(file[i], to_find, 2))
-					return (get_texture(cub, &file[i][j + 2], to_find));
+					get_texture(cub, &file[i][j + 2], to_find);
 				count++;
 			}
 		}
 	}
-	return (EXIT_FAILURE);
 }
 
-int	init_texture(t_cub3d *cub, char **file)
+void	init_texture(t_cub3d *cub, char **file)
 {
-	if (check_texture(cub, file, "NO", 'N') == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "SO", 'S') == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "WE", 'W') == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "EA", 'E') == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "F ", 'F') == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (check_texture(cub, file, "C ", 'C') == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	check_texture(cub, file, "NO", 'N');
+	check_texture(cub, file, "SO", 'S');
+	check_texture(cub, file, "WE", 'W');
+	check_texture(cub, file, "EA", 'E');
+	check_texture(cub, file, "F ", 'F');
+	check_texture(cub, file, "C ", 'C');
 }
