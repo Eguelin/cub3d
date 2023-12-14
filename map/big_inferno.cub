@@ -1,7 +1,7 @@
-SO ./texture/eguelin.xpm
-WE ./texture/1332402.xpm
-EA ./texture/1311951.xpm
-NO ./texture/742320.xpm
+SO ./texture/Texture_1.xpm
+WE ./texture/Texture_2.xpm
+EA ./texture/Texture_3.xpm
+NO ./texture/Texture_4.xpm
 
 F 80,0,0
 C 80,80,80

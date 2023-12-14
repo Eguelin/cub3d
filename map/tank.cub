@@ -1,7 +1,7 @@
-SO ./texture/metal_box.xpm
-WE ./texture/white_floor.xpm
-EA ./texture/light_2.xpm
-NO ./texture/Floor1.xpm
+SO ./texture/Texture_1.xpm
+WE ./texture/Texture_2.xpm
+EA ./texture/Texture_3.xpm
+NO ./texture/Texture_4.xpm
 
 F 224,200,0
 C 233,030,1
